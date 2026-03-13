@@ -1,14 +1,15 @@
 import { GraduationCap, Calendar, MapPin, Github, Linkedin, Mail, ArrowDown } from 'lucide-react';
+import { useLang } from '../i18n/LangContext';
 
 export default function Hero() {
+  const { t } = useLang();
+
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-blue-950">
-      {/* Animated background elements */}
+      {/* Animated background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 -left-32 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-cyan-600/10 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1s'}}></div>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-500/3 rounded-full blur-3xl"></div>
-        {/* Grid pattern */}
         <div className="absolute inset-0" style={{backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.04) 1px, transparent 0)', backgroundSize: '40px 40px'}}></div>
       </div>
 
@@ -29,7 +30,7 @@ export default function Hero() {
             Trần Hữu Đạt
           </h1>
 
-          {/* Title with gradient */}
+          {/* Title */}
           <p className="text-xl md:text-2xl font-semibold mb-6">
             <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
               Senior Backend Developer
@@ -44,22 +45,23 @@ export default function Hero() {
             </span>
             <span className="inline-flex items-center gap-1.5 px-4 py-2 bg-white/5 border border-white/10 text-slate-300 rounded-full text-sm backdrop-blur-sm">
               <GraduationCap className="w-4 h-4 text-blue-400" />
-              ĐH Bách Khoa TP.HCM
+              {t('hero_university')}
             </span>
             <span className="inline-flex items-center gap-1.5 px-4 py-2 bg-white/5 border border-white/10 text-slate-300 rounded-full text-sm backdrop-blur-sm">
               <MapPin className="w-4 h-4 text-blue-400" />
-              TP. Hồ Chí Minh
+              {t('hero_location')}
             </span>
           </div>
 
           {/* Bio */}
           <p className="text-lg md:text-xl text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed">
-            Backend Developer với{' '}
-            <span className="text-white font-semibold">hơn 5 năm kinh nghiệm</span>{' '}
-            xây dựng hệ thống phức tạp. Chuyên sâu về{' '}
+            {t('hero_bio_1')}{' '}
+            <span className="text-white font-semibold">{t('hero_bio_2')}</span>{' '}
+            {t('hero_bio_3')}{' '}
             <span className="text-blue-400 font-medium">.NET Core</span>,{' '}
             <span className="text-blue-400 font-medium">Java Spring Boot</span>,{' '}
-            <span className="text-blue-400 font-medium">Python</span> và{' '}
+            <span className="text-blue-400 font-medium">Python</span>{' '}
+            {t('hero_bio_end')}{' '}
             <span className="text-blue-400 font-medium">AWS Cloud</span>.
           </p>
 
@@ -70,7 +72,7 @@ export default function Hero() {
               className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-8 py-3.5 rounded-xl font-semibold hover:from-blue-500 hover:to-cyan-500 transition-all shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 hover:-translate-y-0.5 transform"
             >
               <Mail className="w-5 h-5" />
-              Liên hệ ngay
+              {t('hero_contact_btn')}
             </a>
             <a
               href="https://github.com"
@@ -94,7 +96,7 @@ export default function Hero() {
 
           {/* Scroll indicator */}
           <a href="#about" className="inline-flex flex-col items-center gap-2 text-slate-500 hover:text-slate-300 transition-colors">
-            <span className="text-xs uppercase tracking-widest">Scroll down</span>
+            <span className="text-xs uppercase tracking-widest">{t('hero_scroll')}</span>
             <ArrowDown className="w-5 h-5 animate-bounce" />
           </a>
         </div>

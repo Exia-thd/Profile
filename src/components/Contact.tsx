@@ -1,42 +1,33 @@
 import { Mail, Phone, MapPin, Linkedin, Github, Send } from 'lucide-react';
 import { useState } from 'react';
+import { useLang } from '../i18n/LangContext';
 
 export default function Contact() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  });
+  const { t } = useLang();
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    alert('Cảm ơn bạn đã liên hệ! Tôi sẽ phản hồi sớm nhất có thể.');
+    alert(t('contact_alert'));
     setFormData({ name: '', email: '', message: '' });
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   return (
     <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Liên hệ</h2>
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">{t('contact_heading')}</h2>
           <div className="w-24 h-1 bg-blue-600 mx-auto mb-4"></div>
-          <p className="text-xl text-gray-600">
-            Hãy kết nối với tôi để thảo luận về cơ hội hợp tác!
-          </p>
+          <p className="text-xl text-gray-600">{t('contact_sub')}</p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-12">
           <div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-6">Thông tin liên hệ</h3>
-
+            <h3 className="text-2xl font-bold text-gray-900 mb-6">{t('contact_info_heading')}</h3>
             <div className="space-y-6">
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -44,8 +35,8 @@ export default function Contact() {
                 </div>
                 <div>
                   <h4 className="font-semibold text-gray-900 mb-1">Email</h4>
-                  <a href="mailto:tranhuudat@example.com" className="text-blue-600 hover:underline">
-                    tranhuudat@example.com
+                  <a href="mailto:thdat314@gmail.com" className="text-blue-600 hover:underline">
+                    thdat314@gmail.com
                   </a>
                 </div>
               </div>
@@ -55,9 +46,9 @@ export default function Contact() {
                   <Phone className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-gray-900 mb-1">Điện thoại</h4>
-                  <a href="tel:+84123456789" className="text-blue-600 hover:underline">
-                    +84 123 456 789
+                  <h4 className="font-semibold text-gray-900 mb-1">{t('contact_phone_label')}</h4>
+                  <a href="tel:+840969986422" className="text-blue-600 hover:underline">
+                    0969 986 422
                   </a>
                 </div>
               </div>
@@ -67,8 +58,8 @@ export default function Contact() {
                   <MapPin className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-gray-900 mb-1">Địa chỉ</h4>
-                  <p className="text-gray-600">TP. Hồ Chí Minh, Việt Nam</p>
+                  <h4 className="font-semibold text-gray-900 mb-1">{t('contact_address_label')}</h4>
+                  <p className="text-gray-600">{t('contact_location')}</p>
                 </div>
               </div>
 
@@ -78,12 +69,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <h4 className="font-semibold text-gray-900 mb-1">GitHub</h4>
-                  <a
-                    href="https://github.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-600 hover:underline"
-                  >
+                  <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
                     github.com/tranhuudat
                   </a>
                 </div>
@@ -95,12 +81,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <h4 className="font-semibold text-gray-900 mb-1">LinkedIn</h4>
-                  <a
-                    href="https://linkedin.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-600 hover:underline"
-                  >
+                  <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
                     linkedin.com/in/tranhuudat
                   </a>
                 </div>
@@ -109,12 +90,11 @@ export default function Contact() {
           </div>
 
           <div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-6">Gửi tin nhắn</h3>
-
+            <h3 className="text-2xl font-bold text-gray-900 mb-6">{t('contact_form_heading')}</h3>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-2">
-                  Họ và tên
+                  {t('contact_name_label')}
                 </label>
                 <input
                   type="text"
@@ -124,7 +104,7 @@ export default function Contact() {
                   onChange={handleChange}
                   required
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all"
-                  placeholder="Nhập họ và tên của bạn"
+                  placeholder={t('contact_name_placeholder')}
                 />
               </div>
 
@@ -146,7 +126,7 @@ export default function Contact() {
 
               <div>
                 <label htmlFor="message" className="block text-sm font-semibold text-gray-700 mb-2">
-                  Tin nhắn
+                  {t('contact_message_label')}
                 </label>
                 <textarea
                   id="message"
@@ -156,7 +136,7 @@ export default function Contact() {
                   required
                   rows={6}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all resize-none"
-                  placeholder="Nhập nội dung tin nhắn..."
+                  placeholder={t('contact_message_placeholder')}
                 />
               </div>
 
@@ -165,7 +145,7 @@ export default function Contact() {
                 className="w-full bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 flex items-center justify-center gap-2"
               >
                 <Send className="w-5 h-5" />
-                Gửi tin nhắn
+                {t('contact_send_btn')}
               </button>
             </form>
           </div>
