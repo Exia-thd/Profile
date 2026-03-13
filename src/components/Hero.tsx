@@ -1,57 +1,82 @@
-import { GraduationCap, Calendar, MapPin, Github, Linkedin, Mail } from 'lucide-react';
+import { GraduationCap, Calendar, MapPin, Github, Linkedin, Mail, ArrowDown } from 'lucide-react';
 
 export default function Hero() {
   return (
-    <section id="home" className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
+    <section id="home" className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-blue-950">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-cyan-600/10 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1s'}}></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-500/3 rounded-full blur-3xl"></div>
+        {/* Grid pattern */}
+        <div className="absolute inset-0" style={{backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.04) 1px, transparent 0)', backgroundSize: '40px 40px'}}></div>
+      </div>
+
+      <div className="max-w-4xl mx-auto w-full relative z-10 pt-16">
         <div className="text-center">
-          <div className="mb-8 inline-block">
-            <div className="w-40 h-40 mx-auto rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white text-6xl font-bold shadow-2xl">
+          {/* Avatar */}
+          <div className="mb-8 inline-block relative">
+            <div className="w-36 h-36 mx-auto rounded-full bg-gradient-to-br from-blue-500 via-cyan-500 to-blue-600 flex items-center justify-center text-white text-5xl font-bold shadow-2xl shadow-blue-500/30 ring-4 ring-white/10">
               ĐT
+            </div>
+            <div className="absolute -bottom-1 -right-1 w-11 h-11 bg-green-500 rounded-full border-4 border-slate-900 flex items-center justify-center">
+              <div className="w-3 h-3 bg-white rounded-full"></div>
             </div>
           </div>
 
-          <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-4">
+          {/* Name */}
+          <h1 className="text-5xl md:text-7xl font-extrabold text-white mb-3 tracking-tight">
             Trần Hữu Đạt
           </h1>
 
-          <p className="text-2xl md:text-3xl text-blue-600 font-semibold mb-6">
-            Senior Backend Developer
+          {/* Title with gradient */}
+          <p className="text-xl md:text-2xl font-semibold mb-6">
+            <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+              Senior Backend Developer
+            </span>
           </p>
 
-          <div className="flex flex-wrap justify-center gap-4 mb-8 text-gray-600">
-            <div className="flex items-center gap-2">
-              <Calendar className="w-5 h-5" />
-              <span>14/03/1996</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <GraduationCap className="w-5 h-5" />
-              <span>ĐH Bách Khoa TP.HCM</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <MapPin className="w-5 h-5" />
-              <span>TP. Hồ Chí Minh</span>
-            </div>
+          {/* Info chips */}
+          <div className="flex flex-wrap justify-center gap-3 mb-8">
+            <span className="inline-flex items-center gap-1.5 px-4 py-2 bg-white/5 border border-white/10 text-slate-300 rounded-full text-sm backdrop-blur-sm">
+              <Calendar className="w-4 h-4 text-blue-400" />
+              14/03/1996
+            </span>
+            <span className="inline-flex items-center gap-1.5 px-4 py-2 bg-white/5 border border-white/10 text-slate-300 rounded-full text-sm backdrop-blur-sm">
+              <GraduationCap className="w-4 h-4 text-blue-400" />
+              ĐH Bách Khoa TP.HCM
+            </span>
+            <span className="inline-flex items-center gap-1.5 px-4 py-2 bg-white/5 border border-white/10 text-slate-300 rounded-full text-sm backdrop-blur-sm">
+              <MapPin className="w-4 h-4 text-blue-400" />
+              TP. Hồ Chí Minh
+            </span>
           </div>
 
-          <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
-            Backend Developer với hơn 5 năm kinh nghiệm xây dựng các hệ thống phức tạp.
-            Chuyên sâu về .NET Core, Java Spring Boot, Python và AWS Cloud.
+          {/* Bio */}
+          <p className="text-lg md:text-xl text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed">
+            Backend Developer với{' '}
+            <span className="text-white font-semibold">hơn 5 năm kinh nghiệm</span>{' '}
+            xây dựng hệ thống phức tạp. Chuyên sâu về{' '}
+            <span className="text-blue-400 font-medium">.NET Core</span>,{' '}
+            <span className="text-blue-400 font-medium">Java Spring Boot</span>,{' '}
+            <span className="text-blue-400 font-medium">Python</span> và{' '}
+            <span className="text-blue-400 font-medium">AWS Cloud</span>.
           </p>
 
-          <div className="flex justify-center gap-4">
+          {/* CTA Buttons */}
+          <div className="flex flex-wrap justify-center gap-4 mb-16">
             <a
               href="#contact"
-              className="inline-flex items-center gap-2 bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-8 py-3.5 rounded-xl font-semibold hover:from-blue-500 hover:to-cyan-500 transition-all shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 hover:-translate-y-0.5 transform"
             >
               <Mail className="w-5 h-5" />
-              Liên hệ
+              Liên hệ ngay
             </a>
             <a
               href="https://github.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-gray-800 text-white px-8 py-3 rounded-lg hover:bg-gray-900 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+              className="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-white px-8 py-3.5 rounded-xl font-semibold hover:bg-white/15 transition-all backdrop-blur-sm hover:-translate-y-0.5 transform"
             >
               <Github className="w-5 h-5" />
               GitHub
@@ -60,12 +85,18 @@ export default function Hero() {
               href="https://linkedin.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-blue-700 text-white px-8 py-3 rounded-lg hover:bg-blue-800 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+              className="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-white px-8 py-3.5 rounded-xl font-semibold hover:bg-white/15 transition-all backdrop-blur-sm hover:-translate-y-0.5 transform"
             >
               <Linkedin className="w-5 h-5" />
               LinkedIn
             </a>
           </div>
+
+          {/* Scroll indicator */}
+          <a href="#about" className="inline-flex flex-col items-center gap-2 text-slate-500 hover:text-slate-300 transition-colors">
+            <span className="text-xs uppercase tracking-widest">Scroll down</span>
+            <ArrowDown className="w-5 h-5 animate-bounce" />
+          </a>
         </div>
       </div>
     </section>
