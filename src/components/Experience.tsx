@@ -1,4 +1,4 @@
-import { Briefcase, Calendar, MapPin, CheckCircle2, ChevronRight, Star, TrendingUp, Users, Shield, Zap, Database } from 'lucide-react';
+import { Briefcase, Calendar, MapPin, CheckCircle2, Star, TrendingUp, Users, Shield, Zap, Database } from 'lucide-react';
 
 const experiences = [
   {
@@ -8,44 +8,28 @@ const experiences = [
     type: 'Full-time',
     period: '2023 – Hiện tại',
     location: 'TP. Hồ Chí Minh',
-    color: 'from-blue-600 to-cyan-600',
-    badgeColor: 'bg-green-100 text-green-700 border-green-200',
+    stripColor: 'linear-gradient(90deg, #6366f1, #06b6d4)',
+    dotColor: 'linear-gradient(135deg, #6366f1, #3b82f6)',
+    dotShadow: 'rgba(99,102,241,0.4)',
     badge: 'Đang làm',
+    badgeBg: 'rgba(34,197,94,0.1)',
+    badgeBorder: 'rgba(34,197,94,0.25)',
+    badgeText: '#86efac',
     description: 'Phát triển và vận hành hệ thống quản lý y tế & bảo hiểm BestMed – nền tảng số hóa toàn bộ quy trình bảo hiểm y tế doanh nghiệp.',
     modules: [
-      {
-        icon: Shield,
-        name: 'Module Quản lý Bảo hiểm',
-        detail: 'Xây dựng engine xử lý yêu cầu bồi thường (claims), phê duyệt đa cấp, và tích hợp với đối tác bảo hiểm bên ngoài thông qua REST API & Webhook.'
-      },
-      {
-        icon: Database,
-        name: 'Module Hồ sơ Bệnh nhân',
-        detail: 'Thiết kế schema quản lý hồ sơ y tế chuẩn HL7/FHIR, mã hóa dữ liệu nhạy cảm AES-256, đảm bảo tuân thủ quy định bảo mật dữ liệu y tế.'
-      },
-      {
-        icon: Zap,
-        name: 'Module API Gateway & Integration',
-        detail: 'Thiết kế RESTful API chuẩn, rate limiting, API versioning, tích hợp hệ thống HIS (Hospital Information System) và LIS (Lab Information System).'
-      },
-      {
-        icon: TrendingUp,
-        name: 'Tối ưu hiệu năng hệ thống',
-        detail: 'Tối ưu query PostgreSQL (giảm 70% response time), triển khai Redis caching layer cho dữ liệu tra cứu, áp dụng pagination & lazy loading.'
-      },
-      {
-        icon: Users,
-        name: 'Phân quyền & Bảo mật (RBAC)',
-        detail: 'Implement hệ thống RBAC chi tiết theo vai trò: Admin, Bác sĩ, Y tá, Nhân viên bảo hiểm. Tích hợp JWT + OAuth2 với Azure AD.'
-      }
+      { icon: Shield, name: 'Module Quản lý Bảo hiểm', detail: 'Engine xử lý yêu cầu bồi thường (claims), phê duyệt đa cấp, tích hợp đối tác bảo hiểm qua REST API & Webhook.' },
+      { icon: Database, name: 'Module Hồ sơ Bệnh nhân', detail: 'Schema quản lý hồ sơ y tế chuẩn HL7/FHIR, mã hóa AES-256, đảm bảo tuân thủ bảo mật dữ liệu y tế.' },
+      { icon: Zap, name: 'API Gateway & Integration', detail: 'RESTful API chuẩn, rate limiting, API versioning, tích hợp HIS & LIS.' },
+      { icon: TrendingUp, name: 'Tối ưu hiệu năng', detail: 'Tối ưu query PostgreSQL (giảm 70% response time), Redis caching layer, pagination & lazy loading.' },
+      { icon: Users, name: 'Phân quyền RBAC', detail: 'Hệ thống RBAC theo vai trò: Admin, Bác sĩ, Y tá, Nhân viên bảo hiểm. JWT + OAuth2 với Azure AD.' },
     ],
     techStack: ['.NET Core 8', 'PostgreSQL', 'Redis', 'RabbitMQ', 'Docker', 'Azure AD', 'REST API', 'SignalR'],
     achievements: [
       'Giảm 70% response time nhờ tối ưu query và Redis caching',
       'Xử lý 10,000+ yêu cầu bảo hiểm/ngày với zero downtime',
       'Đảm bảo 99.9% uptime cho hệ thống production',
-      'Tích hợp thành công 5 đối tác bảo hiểm và 3 hệ thống bệnh viện'
-    ]
+      'Tích hợp thành công 5 đối tác bảo hiểm và 3 hệ thống bệnh viện',
+    ],
   },
   {
     id: 2,
@@ -54,33 +38,25 @@ const experiences = [
     type: 'Full-time',
     period: '2021 – 2023',
     location: 'TP. Hồ Chí Minh',
-    color: 'from-violet-600 to-purple-600',
-    badgeColor: 'bg-slate-100 text-slate-600 border-slate-200',
+    stripColor: 'linear-gradient(90deg, #7c3aed, #a855f7)',
+    dotColor: 'linear-gradient(135deg, #7c3aed, #a855f7)',
+    dotShadow: 'rgba(124,58,237,0.4)',
     badge: 'Đã hoàn thành',
-    description: 'Phát triển hệ thống HRM (Human Resource Management) và Work Done Report trên nền tảng AWS Serverless cho doanh nghiệp 2,000+ nhân viên.',
+    badgeBg: 'rgba(148,163,184,0.08)',
+    badgeBorder: 'rgba(148,163,184,0.15)',
+    badgeText: '#94a3b8',
+    description: 'Phát triển hệ thống HRM và Work Done Report trên AWS Serverless cho doanh nghiệp 2,000+ nhân viên.',
     modules: [
-      {
-        icon: Briefcase,
-        name: 'HRM Workflow Engine',
-        detail: 'Thiết kế hệ thống phê duyệt đa cấp linh hoạt: nghỉ phép, OT, đề xuất tuyển dụng. Sử dụng Kafka để xử lý async events và thông báo real-time qua SignalR.'
-      },
-      {
-        icon: Zap,
-        name: 'AWS Serverless (WDR)',
-        detail: 'Xây dựng Work Done Report trên AWS Lambda + Aurora Serverless + S3. Tự động hóa báo cáo KPI hàng tuần, export PDF/Excel, gửi email tự động qua SES.'
-      },
-      {
-        icon: TrendingUp,
-        name: 'AI Integration (Savvy Assistant)',
-        detail: 'Tích hợp Llama2 + RAG (Retrieval-Augmented Generation) với FAISS vector database, xây dựng chatbot hỗ trợ nhân viên tra cứu chính sách nội bộ.'
-      }
+      { icon: Briefcase, name: 'HRM Workflow Engine', detail: 'Phê duyệt đa cấp linh hoạt: nghỉ phép, OT, đề xuất tuyển dụng. Kafka async events + SignalR real-time.' },
+      { icon: Zap, name: 'AWS Serverless (WDR)', detail: 'AWS Lambda + Aurora Serverless + S3. Auto báo cáo KPI, export PDF/Excel, email tự động qua SES.' },
+      { icon: TrendingUp, name: 'AI Integration (Savvy)', detail: 'Llama2 + RAG với FAISS vector database — chatbot hỗ trợ nhân viên tra cứu chính sách nội bộ.' },
     ],
     techStack: ['.NET Core', 'Java Spring Boot', 'Kafka', 'SignalR', 'AWS Lambda', 'Aurora', 'Python', 'FAISS'],
     achievements: [
       'Thiết kế workflow engine phục vụ 2,000+ nhân viên',
       'Giảm 80% thời gian xử lý báo cáo với AWS Serverless',
-      'Chatbot AI giảm 40% lượng ticket hỗ trợ nội bộ'
-    ]
+      'Chatbot AI giảm 40% lượng ticket hỗ trợ nội bộ',
+    ],
   },
   {
     id: 3,
@@ -89,90 +65,98 @@ const experiences = [
     type: 'Full-time',
     period: '2019 – 2021',
     location: 'TP. Hồ Chí Minh',
-    color: 'from-emerald-600 to-teal-600',
-    badgeColor: 'bg-slate-100 text-slate-600 border-slate-200',
+    stripColor: 'linear-gradient(90deg, #059669, #0d9488)',
+    dotColor: 'linear-gradient(135deg, #059669, #0d9488)',
+    dotShadow: 'rgba(5,150,105,0.4)',
     badge: 'Đã hoàn thành',
+    badgeBg: 'rgba(148,163,184,0.08)',
+    badgeBorder: 'rgba(148,163,184,0.15)',
+    badgeText: '#94a3b8',
     description: 'Phát triển hệ thống Contact Center omnichannel và Asset Management System cho doanh nghiệp viễn thông.',
     modules: [
-      {
-        icon: Users,
-        name: 'Contact Center Omnichannel',
-        detail: 'Xây dựng hệ thống tổng đài đa kênh (voice, chat, email, social) trên kiến trúc Microservices với Java Spring Boot, tích hợp CRM và phân tích sentiment AI.'
-      },
-      {
-        icon: Database,
-        name: 'Asset Management System',
-        detail: 'Phát triển hệ thống quản lý tài sản IT, tích hợp GLPI API, theo dõi vòng đời thiết bị, QR code scan, báo cáo khấu hao tự động.'
-      }
+      { icon: Users, name: 'Contact Center Omnichannel', detail: 'Hệ thống tổng đài đa kênh (voice, chat, email, social) trên Microservices với Java Spring Boot.' },
+      { icon: Database, name: 'Asset Management System', detail: 'Quản lý tài sản IT, tích hợp GLPI API, theo dõi vòng đời thiết bị, QR code scan, báo cáo khấu hao tự động.' },
     ],
     techStack: ['Java Spring Boot', '.NET Core', 'Microservices', 'GLPI API', 'MySQL', 'Docker', 'Jenkins'],
     achievements: [
       'Xây dựng hệ thống contact center phục vụ 500+ agents',
       'Quản lý 10,000+ tài sản IT với độ chính xác 99%',
-      'CI/CD pipeline giảm 60% thời gian deployment'
-    ]
-  }
+      'CI/CD pipeline giảm 60% thời gian deployment',
+    ],
+  },
 ];
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
-      {/* Background decoration */}
+    <section id="experience" className="py-24 px-4 sm:px-6 lg:px-8 bg-[#07071a] relative overflow-hidden">
+      {/* Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-violet-500/5 rounded-full blur-3xl"></div>
-        <div className="absolute inset-0" style={{backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.03) 1px, transparent 0)', backgroundSize: '40px 40px'}}></div>
+        <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full blur-[120px]" style={{ background: 'rgba(99,102,241,0.05)' }}></div>
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full blur-[120px]" style={{ background: 'rgba(124,58,237,0.05)' }}></div>
+        <div className="absolute inset-0 grid-pattern opacity-40"></div>
       </div>
 
       <div className="max-w-5xl mx-auto relative">
         {/* Header */}
         <div className="text-center mb-16">
-          <span className="inline-block px-4 py-1.5 bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium rounded-full mb-4">
-            Career Journey
-          </span>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Kinh nghiệm làm việc
+          <span className="section-badge">Career Journey</span>
+          <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4">
+            Kinh nghiệm <span className="gradient-text">làm việc</span>
           </h2>
-          <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-cyan-500 mx-auto rounded-full"></div>
+          <p className="text-slate-400 text-lg">
+            Hành trình phát triển qua các hệ thống thực tiễn
+          </p>
         </div>
 
         {/* Timeline */}
         <div className="relative">
           {/* Timeline line */}
-          <div className="absolute left-8 top-0 bottom-0 w-px bg-gradient-to-b from-blue-500 via-violet-500 to-emerald-500 hidden md:block"></div>
+          <div
+            className="absolute left-8 top-0 bottom-0 w-px hidden md:block"
+            style={{ background: 'linear-gradient(to bottom, #6366f1, #8b5cf6, #059669)' }}
+          ></div>
 
-          <div className="space-y-12">
-            {experiences.map((exp, index) => (
+          <div className="space-y-10">
+            {experiences.map((exp) => (
               <div key={exp.id} className="relative md:pl-20">
                 {/* Timeline dot */}
-                <div className={`absolute left-4 top-8 w-9 h-9 rounded-full bg-gradient-to-br ${exp.color} flex items-center justify-center shadow-lg shadow-blue-500/20 z-10 hidden md:flex`}>
+                <div
+                  className="absolute left-[18px] top-8 w-9 h-9 rounded-full flex items-center justify-center z-10 hidden md:flex"
+                  style={{ background: exp.dotColor, boxShadow: `0 0 0 4px rgba(7,7,26,1), 0 0 0 6px ${exp.dotShadow}` }}
+                >
                   <Briefcase className="w-4 h-4 text-white" />
                 </div>
 
                 {/* Card */}
-                <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden hover:border-white/20 hover:bg-white/8 transition-all duration-300 group">
+                <div className="glass-card overflow-hidden">
+                  {/* Colored strip */}
+                  <div className="h-[3px]" style={{ background: exp.stripColor }}></div>
+
                   {/* Card header */}
-                  <div className={`bg-gradient-to-r ${exp.color} p-6`}>
+                  <div className="p-6 pb-4" style={{ background: 'rgba(255,255,255,0.02)' }}>
                     <div className="flex flex-wrap items-start justify-between gap-4">
                       <div>
-                        <h3 className="text-2xl font-bold text-white mb-1">{exp.role}</h3>
-                        <p className="text-white/80 font-semibold text-lg">{exp.company}</p>
+                        <h3 className="text-2xl font-bold text-white mb-0.5">{exp.role}</h3>
+                        <p className="text-slate-300 font-semibold">{exp.company}</p>
                       </div>
-                      <span className={`px-3 py-1 text-sm font-semibold rounded-full border ${exp.badgeColor} bg-white/90`}>
+                      <span
+                        className="px-3 py-1 text-sm font-semibold rounded-full border"
+                        style={{ background: exp.badgeBg, borderColor: exp.badgeBorder, color: exp.badgeText }}
+                      >
                         {exp.badge}
                       </span>
                     </div>
-                    <div className="flex flex-wrap gap-4 mt-4 text-white/70 text-sm">
+                    <div className="flex flex-wrap gap-4 mt-3 text-slate-400 text-sm">
                       <span className="flex items-center gap-1.5">
-                        <Calendar className="w-4 h-4" />
+                        <Calendar className="w-3.5 h-3.5 text-indigo-400" />
                         {exp.period}
                       </span>
                       <span className="flex items-center gap-1.5">
-                        <MapPin className="w-4 h-4" />
+                        <MapPin className="w-3.5 h-3.5 text-violet-400" />
                         {exp.location}
                       </span>
                       <span className="flex items-center gap-1.5">
-                        <Briefcase className="w-4 h-4" />
+                        <Briefcase className="w-3.5 h-3.5 text-cyan-400" />
                         {exp.type}
                       </span>
                     </div>
@@ -184,16 +168,25 @@ export default function Experience() {
 
                     {/* Modules */}
                     <div>
-                      <h4 className="text-white font-bold mb-4 flex items-center gap-2">
-                        <ChevronRight className="w-5 h-5 text-blue-400" />
+                      <h4 className="text-white font-bold mb-4 flex items-center gap-2 text-sm uppercase tracking-wider">
+                        <span className="w-4 h-[2px] rounded-full" style={{ background: exp.stripColor }}></span>
                         Modules & Trách nhiệm chính
                       </h4>
                       <div className="grid sm:grid-cols-2 gap-3">
                         {exp.modules.map((mod, i) => (
-                          <div key={i} className="bg-slate-800/60 rounded-xl p-4 border border-slate-700/50 hover:border-slate-600/50 transition-colors">
+                          <div
+                            key={i}
+                            className="p-4 rounded-xl transition-colors"
+                            style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)' }}
+                            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.10)'; }}
+                            onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.06)'; }}
+                          >
                             <div className="flex items-center gap-2 mb-2">
-                              <div className={`w-8 h-8 bg-gradient-to-br ${exp.color} rounded-lg flex items-center justify-center flex-shrink-0`}>
-                                <mod.icon className="w-4 h-4 text-white" />
+                              <div
+                                className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0"
+                                style={{ background: exp.dotColor }}
+                              >
+                                <mod.icon className="w-3.5 h-3.5 text-white" />
                               </div>
                               <span className="text-white font-semibold text-sm">{mod.name}</span>
                             </div>
@@ -205,15 +198,16 @@ export default function Experience() {
 
                     {/* Tech Stack */}
                     <div>
-                      <h4 className="text-white font-bold mb-3 flex items-center gap-2">
-                        <ChevronRight className="w-5 h-5 text-blue-400" />
+                      <h4 className="text-white font-bold mb-3 text-sm uppercase tracking-wider flex items-center gap-2">
+                        <span className="w-4 h-[2px] rounded-full" style={{ background: exp.stripColor }}></span>
                         Tech Stack
                       </h4>
                       <div className="flex flex-wrap gap-2">
                         {exp.techStack.map((tech) => (
                           <span
                             key={tech}
-                            className="px-3 py-1.5 bg-slate-800 text-slate-300 border border-slate-700 rounded-lg text-sm font-medium hover:border-blue-500/50 hover:text-blue-300 transition-colors"
+                            className="px-3 py-1.5 rounded-lg text-sm font-medium transition-colors"
+                            style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.09)', color: '#cbd5e1' }}
                           >
                             {tech}
                           </span>
@@ -223,8 +217,8 @@ export default function Experience() {
 
                     {/* Achievements */}
                     <div>
-                      <h4 className="text-white font-bold mb-3 flex items-center gap-2">
-                        <Star className="w-5 h-5 text-amber-400" />
+                      <h4 className="text-white font-bold mb-3 text-sm uppercase tracking-wider flex items-center gap-2">
+                        <Star className="w-4 h-4 text-amber-400" />
                         Thành tựu nổi bật
                       </h4>
                       <ul className="space-y-2">
@@ -244,16 +238,19 @@ export default function Experience() {
         </div>
 
         {/* Summary stats */}
-        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4">
           {[
-            { value: '5+', label: 'Năm kinh nghiệm', color: 'text-blue-400' },
-            { value: '6+', label: 'Dự án lớn', color: 'text-violet-400' },
-            { value: '3', label: 'Công ty', color: 'text-emerald-400' },
-            { value: '10+', label: 'Công nghệ', color: 'text-amber-400' },
+            { value: '5+', label: 'Năm kinh nghiệm', color: '#818cf8', strip: 'linear-gradient(90deg, #6366f1, #3b82f6)' },
+            { value: '6+', label: 'Dự án lớn', color: '#a78bfa', strip: 'linear-gradient(90deg, #7c3aed, #a855f7)' },
+            { value: '3', label: 'Công ty', color: '#34d399', strip: 'linear-gradient(90deg, #059669, #0d9488)' },
+            { value: '10+', label: 'Công nghệ', color: '#fbbf24', strip: 'linear-gradient(90deg, #f59e0b, #f97316)' },
           ].map((stat) => (
-            <div key={stat.label} className="bg-white/5 border border-white/10 rounded-xl p-5 text-center hover:bg-white/8 transition-colors">
-              <div className={`text-3xl font-bold ${stat.color} mb-1`}>{stat.value}</div>
-              <div className="text-slate-400 text-sm">{stat.label}</div>
+            <div key={stat.label} className="glass-card overflow-hidden text-center">
+              <div className="h-[2px]" style={{ background: stat.strip, opacity: 0.7 }}></div>
+              <div className="p-5">
+                <div className="text-3xl font-bold mb-1" style={{ color: stat.color }}>{stat.value}</div>
+                <div className="text-slate-400 text-sm">{stat.label}</div>
+              </div>
             </div>
           ))}
         </div>
