@@ -20,7 +20,11 @@ export const translations = {
     hero_scroll: 'Scroll down',
 
     // About
+    about_subtitle: 'Backend developer passionate about building robust, high-performance systems',
+    about_card_body: 'in software development, specializing in complex, high-performance backend systems — from',
+    about_card_to: 'to',
     about_heading: 'Professional Overview',
+
     about_hl1_title: 'Backend Excellence',
     about_hl1_desc: '5+ years building complex backend systems with a diverse tech stack',
     about_hl2_title: 'Multi-Stack Developer',
@@ -38,6 +42,7 @@ export const translations = {
 
     // Experience
     exp_heading: 'Work Experience',
+    exp_subtitle: 'A journey through real-world systems',
     exp_career: 'Career Journey',
     exp_current: 'Current',
     exp_completed: 'Completed',
@@ -53,7 +58,7 @@ export const translations = {
     // Experience – BHS
     bhs_role: 'Backend Developer',
     bhs_company: 'BHS (BestMed)',
-    bhs_period: '2023 – Present',
+    bhs_period: '2026 – Present',
     bhs_desc: 'Building and operating the BestMed healthcare & insurance management system — a platform that digitizes the entire corporate health insurance workflow.',
     bhs_mod1_name: 'Insurance Management Module',
     bhs_mod1_detail: 'Built a claims processing engine, multi-level approval flow, and integrations with external insurance partners via REST API & Webhooks.',
@@ -73,7 +78,7 @@ export const translations = {
     // Experience – XYZ
     xyz_role: 'Senior Backend Developer',
     xyz_company: 'XYZ Software Company',
-    xyz_period: '2021 – 2023',
+    xyz_period: '2022 – 2025',
     xyz_desc: 'Developed HRM (Human Resource Management) system and Work Done Report on AWS Serverless platform for an enterprise with 2,000+ employees.',
     xyz_mod1_name: 'HRM Workflow Engine',
     xyz_mod1_detail: 'Designed a flexible multi-level approval system: leave requests, OT, recruitment proposals. Used Kafka for async event processing and real-time notifications via SignalR.',
@@ -88,7 +93,7 @@ export const translations = {
     // Experience – ABC
     abc_role: 'Backend Developer',
     abc_company: 'ABC Technology Company',
-    abc_period: '2019 – 2021',
+    abc_period: '2021 – 2023',
     abc_desc: 'Developed omnichannel Contact Center system and Asset Management System for a telecommunications enterprise.',
     abc_mod1_name: 'Omnichannel Contact Center',
     abc_mod1_detail: 'Built a multi-channel call center (voice, chat, email, social) on Microservices architecture with Java Spring Boot, integrated CRM and AI sentiment analysis.',
@@ -100,7 +105,8 @@ export const translations = {
 
     // Projects
     proj_heading: 'Featured Projects',
-    proj_current: 'Current project',
+    proj_subtitle: 'Real-world systems from healthcare to AI, cloud-native to enterprise',
+    proj_current: '2026 – Present',
     proj_bhs_desc: 'Healthcare/insurance management system',
     proj_bhs_h1: 'Built and optimized business modules for medical data management',
     proj_bhs_h2: 'Ensured data security and integrity for users',
@@ -136,6 +142,7 @@ export const translations = {
 
     // Skills
     skills_heading: 'Technical Skills',
+    skills_subtitle: 'The tools & technologies I use daily',
     skills_backend: 'Backend',
     skills_cloud: 'Cloud (AWS)',
     skills_database: 'Database',
@@ -149,6 +156,10 @@ export const translations = {
     skills_tech_label: 'Technologies',
 
     // Contact
+    contact_available_label: 'Currently available',
+    contact_available_body1: "I'm currently open to opportunities as",
+    contact_available_body2: 'Response time is usually within',
+    contact_available_time: '24 hours',
     contact_heading: 'Get In Touch',
     contact_sub: "Let's connect to discuss collaboration opportunities!",
     contact_info_heading: 'Contact Information',
@@ -187,6 +198,9 @@ export const translations = {
     hero_scroll: 'Cuộn xuống',
 
     // About
+    about_subtitle: 'Backend developer với đam mê xây dựng hệ thống mạnh mẽ, hiệu năng cao',
+    about_card_body: 'phát triển phần mềm, tôi chuyên xây dựng các hệ thống backend phức tạp, hiệu năng cao — từ',
+    about_card_to: 'đến',
     about_heading: 'Tổng quan kinh nghiệm',
     about_hl1_title: 'Backend Excellence',
     about_hl1_desc: 'Hơn 5 năm kinh nghiệm phát triển hệ thống Backend với tech stack đa dạng',
@@ -205,6 +219,7 @@ export const translations = {
 
     // Experience
     exp_heading: 'Kinh nghiệm làm việc',
+    exp_subtitle: 'Hành trình phát triển qua các hệ thống thực tiễn',
     exp_career: 'Career Journey',
     exp_current: 'Đang làm',
     exp_completed: 'Đã hoàn thành',
@@ -220,7 +235,7 @@ export const translations = {
     // Experience – BHS
     bhs_role: 'Backend Developer',
     bhs_company: 'BHS (BestMed)',
-    bhs_period: '2023 – Hiện tại',
+    bhs_period: '2026 – Hiện tại',
     bhs_desc: 'Phát triển và vận hành hệ thống quản lý y tế & bảo hiểm BestMed – nền tảng số hóa toàn bộ quy trình bảo hiểm y tế doanh nghiệp.',
     bhs_mod1_name: 'Module Quản lý Bảo hiểm',
     bhs_mod1_detail: 'Xây dựng engine xử lý yêu cầu bồi thường (claims), phê duyệt đa cấp, và tích hợp với đối tác bảo hiểm bên ngoài thông qua REST API & Webhook.',
@@ -240,7 +255,7 @@ export const translations = {
     // Experience – XYZ
     xyz_role: 'Senior Backend Developer',
     xyz_company: 'Công ty Phần mềm XYZ',
-    xyz_period: '2021 – 2023',
+    xyz_period: '2022 – 2025',
     xyz_desc: 'Phát triển hệ thống HRM (Human Resource Management) và Work Done Report trên nền tảng AWS Serverless cho doanh nghiệp 2,000+ nhân viên.',
     xyz_mod1_name: 'HRM Workflow Engine',
     xyz_mod1_detail: 'Thiết kế hệ thống phê duyệt đa cấp linh hoạt: nghỉ phép, OT, đề xuất tuyển dụng. Sử dụng Kafka để xử lý async events và thông báo real-time qua SignalR.',
@@ -255,7 +270,7 @@ export const translations = {
     // Experience – ABC
     abc_role: 'Backend Developer',
     abc_company: 'Công ty Công nghệ ABC',
-    abc_period: '2019 – 2021',
+    abc_period: '2021 – 2023',
     abc_desc: 'Phát triển hệ thống Contact Center omnichannel và Asset Management System cho doanh nghiệp viễn thông.',
     abc_mod1_name: 'Contact Center Omnichannel',
     abc_mod1_detail: 'Xây dựng hệ thống tổng đài đa kênh (voice, chat, email, social) trên kiến trúc Microservices với Java Spring Boot, tích hợp CRM và phân tích sentiment AI.',
@@ -267,7 +282,8 @@ export const translations = {
 
     // Projects
     proj_heading: 'Dự án thực chiến',
-    proj_current: 'Dự án hiện tại',
+    proj_subtitle: 'Các hệ thống thực tế từ healthcare đến AI, cloud-native đến enterprise',
+    proj_current: '2026 – Hiện tại',
     proj_bhs_desc: 'Hệ thống quản lý y tế/bảo hiểm',
     proj_bhs_h1: 'Xây dựng và tối ưu hóa các module nghiệp vụ liên quan đến quản lý dữ liệu y tế',
     proj_bhs_h2: 'Đảm bảo tính bảo mật và toàn vẹn dữ liệu cho người dùng',
@@ -303,6 +319,7 @@ export const translations = {
 
     // Skills
     skills_heading: 'Kỹ năng công nghệ',
+    skills_subtitle: 'Bộ công cụ & công nghệ tôi sử dụng hàng ngày',
     skills_backend: 'Backend',
     skills_cloud: 'Cloud (AWS)',
     skills_database: 'Cơ sở dữ liệu',
@@ -316,6 +333,10 @@ export const translations = {
     skills_tech_label: 'Công nghệ',
 
     // Contact
+    contact_available_label: 'Đang available',
+    contact_available_body1: 'Hiện tại tôi đang mở cơ hội với các vị trí',
+    contact_available_body2: 'Thời gian phản hồi thường trong',
+    contact_available_time: '24 giờ',
     contact_heading: 'Liên hệ',
     contact_sub: 'Hãy kết nối với tôi để thảo luận về cơ hội hợp tác!',
     contact_info_heading: 'Thông tin liên hệ',

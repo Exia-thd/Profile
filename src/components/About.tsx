@@ -59,9 +59,7 @@ export default function About() {
           <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4">
             <span className="gradient-text">{t('about_heading')}</span>
           </h2>
-          <p className="text-slate-400 text-lg max-w-2xl mx-auto">
-            Backend developer với đam mê xây dựng hệ thống mạnh mẽ, hiệu năng cao
-          </p>
+          <p className="text-slate-400 text-lg max-w-2xl mx-auto">{t('about_subtitle')}</p>
         </div>
 
         {/* Bento Grid */}
@@ -92,9 +90,11 @@ export default function About() {
               <h3 className="text-2xl font-bold text-white mb-4">Senior Backend Developer</h3>
 
               <p className="text-slate-400 leading-relaxed mb-6">
-                Với hơn <span className="text-white font-semibold">5 năm kinh nghiệm</span> phát triển
-                phần mềm, tôi chuyên xây dựng các hệ thống backend phức tạp, hiệu năng cao — từ{' '}
-                <span className="text-indigo-400">healthcare management</span> đến{' '}
+                {t('hero_bio_1')}{' '}
+                <span className="text-white font-semibold">{t('hero_bio_2')}</span>{' '}
+                {t('about_card_body')}{' '}
+                <span className="text-indigo-400">healthcare management</span>{' '}
+                {t('about_card_to')}{' '}
                 <span className="text-violet-400">AI-powered enterprise systems</span>.
               </p>
 

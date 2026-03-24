@@ -101,9 +101,7 @@ export default function Skills() {
           <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4">
             <span className="gradient-text">{t('skills_heading')}</span>
           </h2>
-          <p className="text-slate-400 text-lg">
-            Bộ công cụ & công nghệ tôi sử dụng hàng ngày
-          </p>
+          <p className="text-slate-400 text-lg">{t('skills_subtitle')}</p>
         </div>
 
         {/* Skill Cards Grid */}
