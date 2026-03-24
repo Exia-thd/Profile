@@ -1,13 +1,15 @@
 import { Mail, Phone, MapPin, Linkedin, Github, Send, MessageSquare } from 'lucide-react';
 import { useState } from 'react';
+import { useLang } from '../i18n/LangContext';
 
 export default function Contact() {
+  const { t } = useLang();
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Form submitted:', formData);
-    alert('Cảm ơn bạn đã liên hệ! Tôi sẽ phản hồi sớm nhất có thể.');
+    alert(t('contact_alert'));
     setFormData({ name: '', email: '', message: '' });
   };
 
@@ -26,7 +28,7 @@ export default function Contact() {
     },
     {
       icon: Phone,
-      label: 'Điện thoại',
+      label: t('contact_phone_label'),
       value: '+84 123 456 789',
       href: 'tel:+84123456789',
       color: 'linear-gradient(135deg, #7c3aed, #a855f7)',
@@ -34,8 +36,8 @@ export default function Contact() {
     },
     {
       icon: MapPin,
-      label: 'Địa chỉ',
-      value: 'TP. Hồ Chí Minh, Việt Nam',
+      label: t('contact_address_label'),
+      value: t('contact_location'),
       href: null,
       color: 'linear-gradient(135deg, #0891b2, #06b6d4)',
       iconShadow: 'rgba(8,145,178,0.3)',
@@ -84,17 +86,14 @@ export default function Contact() {
         <div className="text-center mb-16">
           <span className="section-badge">Get In Touch</span>
           <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4">
-            Hãy <span className="gradient-text">kết nối</span> với tôi
+            <span className="gradient-text">{t('contact_heading')}</span>
           </h2>
-          <p className="text-slate-400 text-lg max-w-2xl mx-auto">
-            Tôi luôn cởi mở với các cơ hội hợp tác thú vị và thách thức mới
-          </p>
+          <p className="text-slate-400 text-lg max-w-2xl mx-auto">{t('contact_sub')}</p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-6">
           {/* Left: contact info */}
           <div className="flex flex-col gap-4">
-            {/* Contact info card */}
             <div className="glass-card p-8">
               <div className="flex items-center gap-3 mb-6">
                 <div
@@ -103,7 +102,7 @@ export default function Contact() {
                 >
                   <MessageSquare className="w-5 h-5 text-white" />
                 </div>
-                <h3 className="text-xl font-bold text-white">Thông tin liên hệ</h3>
+                <h3 className="text-xl font-bold text-white">{t('contact_info_heading')}</h3>
               </div>
 
               <div className="space-y-3">
@@ -148,10 +147,7 @@ export default function Contact() {
             </div>
 
             {/* Availability card */}
-            <div
-              className="glass-card p-6"
-              style={{ borderColor: 'rgba(34,197,94,0.2)' }}
-            >
+            <div className="glass-card p-6" style={{ borderColor: 'rgba(34,197,94,0.2)' }}>
               <div className="flex items-center gap-3 mb-3">
                 <span className="w-2.5 h-2.5 bg-green-400 rounded-full animate-pulse"></span>
                 <span className="text-green-400 font-semibold text-sm">Đang available</span>
@@ -174,13 +170,13 @@ export default function Contact() {
               >
                 <Send className="w-5 h-5 text-white" />
               </div>
-              <h3 className="text-xl font-bold text-white">Gửi tin nhắn</h3>
+              <h3 className="text-xl font-bold text-white">{t('contact_form_heading')}</h3>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-5">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-slate-400 mb-2">
-                  Họ và tên
+                  {t('contact_name_label')}
                 </label>
                 <input
                   type="text"
@@ -190,15 +186,9 @@ export default function Contact() {
                   onChange={handleChange}
                   required
                   style={inputStyle}
-                  placeholder="Nhập họ và tên của bạn"
-                  onFocus={(e) => {
-                    (e.target as HTMLElement).style.borderColor = 'rgba(99,102,241,0.5)';
-                    (e.target as HTMLElement).style.background = 'rgba(255,255,255,0.06)';
-                  }}
-                  onBlur={(e) => {
-                    (e.target as HTMLElement).style.borderColor = 'rgba(255,255,255,0.1)';
-                    (e.target as HTMLElement).style.background = 'rgba(255,255,255,0.04)';
-                  }}
+                  placeholder={t('contact_name_placeholder')}
+                  onFocus={(e) => { (e.target as HTMLElement).style.borderColor = 'rgba(99,102,241,0.5)'; (e.target as HTMLElement).style.background = 'rgba(255,255,255,0.06)'; }}
+                  onBlur={(e) => { (e.target as HTMLElement).style.borderColor = 'rgba(255,255,255,0.1)'; (e.target as HTMLElement).style.background = 'rgba(255,255,255,0.04)'; }}
                 />
               </div>
 
@@ -215,20 +205,14 @@ export default function Contact() {
                   required
                   style={inputStyle}
                   placeholder="email@example.com"
-                  onFocus={(e) => {
-                    (e.target as HTMLElement).style.borderColor = 'rgba(99,102,241,0.5)';
-                    (e.target as HTMLElement).style.background = 'rgba(255,255,255,0.06)';
-                  }}
-                  onBlur={(e) => {
-                    (e.target as HTMLElement).style.borderColor = 'rgba(255,255,255,0.1)';
-                    (e.target as HTMLElement).style.background = 'rgba(255,255,255,0.04)';
-                  }}
+                  onFocus={(e) => { (e.target as HTMLElement).style.borderColor = 'rgba(99,102,241,0.5)'; (e.target as HTMLElement).style.background = 'rgba(255,255,255,0.06)'; }}
+                  onBlur={(e) => { (e.target as HTMLElement).style.borderColor = 'rgba(255,255,255,0.1)'; (e.target as HTMLElement).style.background = 'rgba(255,255,255,0.04)'; }}
                 />
               </div>
 
               <div>
                 <label htmlFor="message" className="block text-sm font-medium text-slate-400 mb-2">
-                  Tin nhắn
+                  {t('contact_message_label')}
                 </label>
                 <textarea
                   id="message"
@@ -238,15 +222,9 @@ export default function Contact() {
                   required
                   rows={5}
                   style={{ ...inputStyle, resize: 'none' }}
-                  placeholder="Nhập nội dung tin nhắn..."
-                  onFocus={(e) => {
-                    (e.target as HTMLElement).style.borderColor = 'rgba(99,102,241,0.5)';
-                    (e.target as HTMLElement).style.background = 'rgba(255,255,255,0.06)';
-                  }}
-                  onBlur={(e) => {
-                    (e.target as HTMLElement).style.borderColor = 'rgba(255,255,255,0.1)';
-                    (e.target as HTMLElement).style.background = 'rgba(255,255,255,0.04)';
-                  }}
+                  placeholder={t('contact_message_placeholder')}
+                  onFocus={(e) => { (e.target as HTMLElement).style.borderColor = 'rgba(99,102,241,0.5)'; (e.target as HTMLElement).style.background = 'rgba(255,255,255,0.06)'; }}
+                  onBlur={(e) => { (e.target as HTMLElement).style.borderColor = 'rgba(255,255,255,0.1)'; (e.target as HTMLElement).style.background = 'rgba(255,255,255,0.04)'; }}
                 />
               </div>
 
@@ -258,7 +236,7 @@ export default function Contact() {
                 onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = '0 4px 20px rgba(99,102,241,0.3)'; }}
               >
                 <Send className="w-4 h-4" />
-                Gửi tin nhắn
+                {t('contact_send_btn')}
               </button>
             </form>
           </div>

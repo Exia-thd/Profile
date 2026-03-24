@@ -1,54 +1,46 @@
 import { Code2, Server, Cloud, Workflow, Sparkles, TrendingUp, Award } from 'lucide-react';
+import { useLang } from '../i18n/LangContext';
 
 export default function About() {
+  const { t } = useLang();
+
   const highlights = [
     {
       icon: Server,
-      title: 'Backend Excellence',
-      description: 'Hơn 5 năm xây dựng hệ thống Backend với tech stack đa dạng',
+      title: t('about_hl1_title'),
+      description: t('about_hl1_desc'),
       color: 'linear-gradient(135deg, #6366f1, #3b82f6)',
       borderColor: 'rgba(99,102,241,0.3)',
-      tagBg: 'rgba(99,102,241,0.1)',
-      tagBorder: 'rgba(99,102,241,0.2)',
-      tagText: '#a5b4fc',
     },
     {
       icon: Code2,
-      title: 'Multi-Stack Dev',
-      description: '.NET Core, Java Spring Boot, Python & Node.js',
+      title: t('about_hl2_title'),
+      description: t('about_hl2_desc'),
       color: 'linear-gradient(135deg, #7c3aed, #a855f7)',
       borderColor: 'rgba(124,58,237,0.3)',
-      tagBg: 'rgba(124,58,237,0.1)',
-      tagBorder: 'rgba(124,58,237,0.2)',
-      tagText: '#c4b5fd',
     },
     {
       icon: Workflow,
-      title: 'System Architecture',
-      description: 'Microservices, Event-driven, Workflow phê duyệt đa cấp',
+      title: t('about_hl3_title'),
+      description: t('about_hl3_desc'),
       color: 'linear-gradient(135deg, #0891b2, #06b6d4)',
       borderColor: 'rgba(8,145,178,0.3)',
-      tagBg: 'rgba(8,145,178,0.1)',
-      tagBorder: 'rgba(8,145,178,0.2)',
-      tagText: '#67e8f9',
     },
     {
       icon: Cloud,
-      title: 'AI Integration',
-      description: 'Tích hợp AI/ML & LLM vào quy trình doanh nghiệp',
+      title: t('about_hl4_title'),
+      description: t('about_hl4_desc'),
       color: 'linear-gradient(135deg, #059669, #10b981)',
       borderColor: 'rgba(5,150,105,0.3)',
-      tagBg: 'rgba(5,150,105,0.1)',
-      tagBorder: 'rgba(5,150,105,0.2)',
-      tagText: '#6ee7b7',
     },
   ];
 
   const strengths = [
-    'Thiết kế và triển khai hệ thống Workflow phê duyệt đa cấp với logic định tuyến linh hoạt',
-    'Kiến trúc Microservices và hệ thống hướng sự kiện (Event-driven Architecture)',
-    'Tích hợp AI và Machine Learning vào quy trình doanh nghiệp',
-    'Cloud Native Development trên AWS với Serverless Architecture',
+    t('about_str1'),
+    t('about_str2'),
+    t('about_str3'),
+    t('about_str4'),
+    t('about_str5'),
   ];
 
   return (
@@ -65,7 +57,7 @@ export default function About() {
         <div className="text-center mb-16">
           <span className="section-badge">About Me</span>
           <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4">
-            Tổng quan <span className="gradient-text">kinh nghiệm</span>
+            <span className="gradient-text">{t('about_heading')}</span>
           </h2>
           <p className="text-slate-400 text-lg max-w-2xl mx-auto">
             Backend developer với đam mê xây dựng hệ thống mạnh mẽ, hiệu năng cao
@@ -80,12 +72,10 @@ export default function About() {
             className="md:col-span-2 md:row-span-2 glass-card p-8 relative overflow-hidden group"
             style={{ borderTop: '1px solid rgba(99,102,241,0.25)' }}
           >
-            {/* Top gradient strip */}
             <div
               className="absolute top-0 left-0 right-0 h-[2px] rounded-t-2xl"
               style={{ background: 'linear-gradient(90deg, #6366f1, #8b5cf6, #06b6d4)' }}
             ></div>
-            {/* Ambient glow */}
             <div
               className="absolute -top-12 -right-12 w-48 h-48 rounded-full blur-2xl transition-all duration-500 group-hover:opacity-80"
               style={{ background: 'rgba(99,102,241,0.08)' }}
@@ -111,9 +101,9 @@ export default function About() {
               {/* Mini stats */}
               <div className="grid grid-cols-3 gap-3 mb-6">
                 {[
-                  { value: '5+', label: 'Năm KN', color: '#818cf8' },
-                  { value: '6+', label: 'Dự án', color: '#a78bfa' },
-                  { value: '10+', label: 'Công nghệ', color: '#67e8f9' },
+                  { value: '5+', label: t('exp_years'), color: '#818cf8' },
+                  { value: '6+', label: t('exp_bigprojects'), color: '#a78bfa' },
+                  { value: '10+', label: t('exp_technologies'), color: '#67e8f9' },
                 ].map((stat) => (
                   <div
                     key={stat.label}
@@ -141,7 +131,7 @@ export default function About() {
             </div>
           </div>
 
-          {/* Feature cards — 2×2 grid on the right */}
+          {/* Feature cards — 2×2 on the right */}
           {highlights.map((item, index) => (
             <div
               key={index}
@@ -171,7 +161,7 @@ export default function About() {
               >
                 <Award className="w-5 h-5 text-white" />
               </div>
-              <h3 className="text-xl font-bold text-white">Điểm mạnh chuyên môn</h3>
+              <h3 className="text-xl font-bold text-white">{t('about_strengths')}</h3>
             </div>
             <div className="grid sm:grid-cols-2 gap-3">
               {strengths.map((strength, index) => (

@@ -1,6 +1,9 @@
 import { GraduationCap, Calendar, MapPin, Github, Linkedin, Mail, ArrowDown } from 'lucide-react';
+import { useLang } from '../i18n/LangContext';
 
 export default function Hero() {
+  const { t } = useLang();
+
   return (
     <section
       id="home"
@@ -36,20 +39,12 @@ export default function Hero() {
             {/* Spinning dashed ring */}
             <div
               className="absolute rounded-full border-2 border-dashed animate-spin-slow"
-              style={{
-                inset: '-10px',
-                borderColor: 'rgba(99,102,241,0.35)',
-              }}
+              style={{ inset: '-10px', borderColor: 'rgba(99,102,241,0.35)' }}
             ></div>
-            {/* Static glow ring */}
+            {/* Glow ring */}
             <div
               className="absolute rounded-full"
-              style={{
-                inset: '-3px',
-                background: 'linear-gradient(135deg, rgba(99,102,241,0.4), rgba(139,92,246,0.4), rgba(6,182,212,0.4))',
-                borderRadius: '9999px',
-                filter: 'blur(6px)',
-              }}
+              style={{ inset: '-3px', background: 'linear-gradient(135deg, rgba(99,102,241,0.4), rgba(139,92,246,0.4), rgba(6,182,212,0.4))', borderRadius: '9999px', filter: 'blur(6px)' }}
             ></div>
             <div className="relative w-36 h-36 mx-auto rounded-full bg-gradient-to-br from-indigo-500 via-violet-500 to-cyan-500 flex items-center justify-center text-white text-5xl font-bold shadow-2xl" style={{ boxShadow: '0 0 40px rgba(99,102,241,0.35)' }}>
               ĐT
@@ -78,8 +73,8 @@ export default function Hero() {
           <div className="flex flex-wrap justify-center gap-3 mb-8">
             {[
               { icon: Calendar, label: '14/03/1996' },
-              { icon: GraduationCap, label: 'ĐH Bách Khoa TP.HCM' },
-              { icon: MapPin, label: 'TP. Hồ Chí Minh' },
+              { icon: GraduationCap, label: t('hero_university') },
+              { icon: MapPin, label: t('hero_location') },
             ].map(({ icon: Icon, label }) => (
               <span
                 key={label}
@@ -94,12 +89,13 @@ export default function Hero() {
 
           {/* Bio */}
           <p className="text-lg md:text-xl text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed">
-            Backend Developer với{' '}
-            <span className="text-white font-semibold">hơn 5 năm kinh nghiệm</span>{' '}
-            xây dựng hệ thống phức tạp. Chuyên sâu về{' '}
+            {t('hero_bio_1')}{' '}
+            <span className="text-white font-semibold">{t('hero_bio_2')}</span>{' '}
+            {t('hero_bio_3')}{' '}
             <span className="text-indigo-400 font-medium">.NET Core</span>,{' '}
             <span className="text-violet-400 font-medium">Java Spring Boot</span>,{' '}
-            <span className="text-cyan-400 font-medium">Python</span> và{' '}
+            <span className="text-cyan-400 font-medium">Python</span>{' '}
+            {t('hero_bio_end')}{' '}
             <span className="text-indigo-400 font-medium">AWS Cloud</span>.
           </p>
 
@@ -113,7 +109,7 @@ export default function Hero() {
               onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = '0 4px 24px rgba(99,102,241,0.3)'; }}
             >
               <Mail className="w-5 h-5" />
-              Liên hệ ngay
+              {t('hero_contact_btn')}
             </a>
             <a
               href="https://github.com"
@@ -145,7 +141,7 @@ export default function Hero() {
             onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = '#94a3b8'; }}
             onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = '#475569'; }}
           >
-            <span className="text-xs uppercase tracking-widest">Scroll</span>
+            <span className="text-xs uppercase tracking-widest">{t('hero_scroll')}</span>
             <ArrowDown className="w-4 h-4 animate-bounce" />
           </a>
         </div>

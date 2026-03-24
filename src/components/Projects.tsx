@@ -1,30 +1,29 @@
 import { CheckCircle2, Layers, Bot, BarChart3, Package, Phone, Activity } from 'lucide-react';
+import { useLang } from '../i18n/LangContext';
 
 export default function Projects() {
+  const { t } = useLang();
+
   const projects = [
     {
-      title: 'BHS (BestMed)',
-      subtitle: 'Healthcare Management',
-      description: 'Hệ thống quản lý y tế/bảo hiểm doanh nghiệp',
+      title: t('bhs_company'),
+      subtitle: t('proj_bhs_desc'),
+      description: t('proj_bhs_desc'),
       tech: ['.NET Core', 'PostgreSQL', 'Redis', 'RabbitMQ'],
       icon: Activity,
       color: 'linear-gradient(135deg, #3b82f6, #06b6d4)',
       stripColor: 'linear-gradient(90deg, #3b82f6, #06b6d4)',
       iconShadow: 'rgba(59,130,246,0.3)',
-      badge: 'Hiện tại',
+      badge: t('proj_current'),
       badgeBg: 'rgba(34,197,94,0.1)',
       badgeBorder: 'rgba(34,197,94,0.25)',
       badgeText: '#86efac',
-      highlights: [
-        'Xây dựng & tối ưu các module nghiệp vụ quản lý dữ liệu y tế',
-        'Giảm 70% response time nhờ Redis caching & query optimization',
-        'Đảm bảo tính bảo mật dữ liệu y tế chuẩn HL7/FHIR',
-      ],
+      highlights: [t('proj_bhs_h1'), t('proj_bhs_h2')],
     },
     {
       title: 'HRM System',
-      subtitle: 'Human Resource Management',
-      description: 'Hệ thống quản lý nhân sự với workflow phức tạp cho 2,000+ nhân viên',
+      subtitle: t('proj_hrm_sub'),
+      description: t('proj_hrm_desc'),
       tech: ['C#', '.NET Core', 'PostgreSQL', 'Redis', 'Kafka', 'SignalR'],
       icon: Layers,
       color: 'linear-gradient(135deg, #7c3aed, #a855f7)',
@@ -34,16 +33,12 @@ export default function Projects() {
       badgeBg: 'rgba(148,163,184,0.08)',
       badgeBorder: 'rgba(148,163,184,0.15)',
       badgeText: '#94a3b8',
-      highlights: [
-        'Workflow phê duyệt đa bước với logic định tuyến linh hoạt theo vai trò',
-        'Hệ thống RBAC chi tiết + thông báo real-time với SignalR',
-        'Xử lý tác vụ ngầm với Hangfire và Quartz.NET',
-      ],
+      highlights: [t('proj_hrm_h1'), t('proj_hrm_h2'), t('proj_hrm_h3'), t('proj_hrm_h4')],
     },
     {
       title: 'Work Done Report',
-      subtitle: 'Cloud-Native Reporting',
-      description: 'Hệ thống báo cáo cloud-native trên AWS Serverless',
+      subtitle: t('proj_wdr_sub'),
+      description: t('proj_wdr_desc'),
       tech: ['AWS Lambda', 'Node.js', 'Aurora PostgreSQL', 'API Gateway', 'Cognito'],
       icon: BarChart3,
       color: 'linear-gradient(135deg, #f59e0b, #f97316)',
@@ -53,16 +48,12 @@ export default function Projects() {
       badgeBg: 'rgba(148,163,184,0.08)',
       badgeBorder: 'rgba(148,163,184,0.15)',
       badgeText: '#94a3b8',
-      highlights: [
-        'Kiến trúc Serverless hoàn toàn trên AWS — giảm 80% chi phí hạ tầng',
-        'Tích hợp AWS Cognito với MFA, CSP & audit trail',
-        'Dashboard analytics real-time + auto export PDF/Excel',
-      ],
+      highlights: [t('proj_wdr_h1'), t('proj_wdr_h2'), t('proj_wdr_h3'), t('proj_wdr_h4')],
     },
     {
       title: 'Savvy Assistant',
-      subtitle: 'AI-Powered Business Chatbot',
-      description: 'Chatbot thông minh tích hợp LLM & RAG cho doanh nghiệp',
+      subtitle: t('proj_savvy_sub'),
+      description: t('proj_savvy_desc'),
       tech: ['Python', 'Llama2', 'FAISS', 'RAG', 'FastAPI'],
       icon: Bot,
       color: 'linear-gradient(135deg, #059669, #0d9488)',
@@ -72,16 +63,12 @@ export default function Projects() {
       badgeBg: 'rgba(148,163,184,0.08)',
       badgeBorder: 'rgba(148,163,184,0.15)',
       badgeText: '#94a3b8',
-      highlights: [
-        'Tích hợp Llama2 + RAG với FAISS vector database tốc độ cao',
-        'Giảm 40% lượng ticket hỗ trợ nội bộ',
-        'Image-based search với Machine Learning',
-      ],
+      highlights: [t('proj_savvy_h1'), t('proj_savvy_h2'), t('proj_savvy_h3'), t('proj_savvy_h4')],
     },
     {
       title: 'Asset Management',
-      subtitle: 'IT Asset Management System',
-      description: 'Quản lý tài sản thiết bị IT toàn diện cho doanh nghiệp',
+      subtitle: t('proj_asset_sub'),
+      description: t('proj_asset_desc'),
       tech: ['.NET Core', 'PostgreSQL', 'GLPI API', 'Docker'],
       icon: Package,
       color: 'linear-gradient(135deg, #e11d48, #ec4899)',
@@ -91,16 +78,12 @@ export default function Projects() {
       badgeBg: 'rgba(148,163,184,0.08)',
       badgeBorder: 'rgba(148,163,184,0.15)',
       badgeText: '#94a3b8',
-      highlights: [
-        'Quản lý 10,000+ tài sản IT với độ chính xác 99%',
-        'Thiết kế cấu trúc cây sơ đồ tổ chức + QR code scan',
-        'Tích hợp đồng bộ với GLPI qua REST API',
-      ],
+      highlights: [t('proj_asset_h1'), t('proj_asset_h2'), t('proj_asset_h3')],
     },
     {
       title: 'Contact Center',
-      subtitle: 'Omnichannel Contact Solution',
-      description: 'Hệ thống tổng đài đa kênh phục vụ 500+ agents',
+      subtitle: t('proj_cc_sub'),
+      description: t('proj_cc_desc'),
       tech: ['Java', 'Spring Boot', 'Microservices', 'MySQL', 'Docker'],
       icon: Phone,
       color: 'linear-gradient(135deg, #6366f1, #3b82f6)',
@@ -110,11 +93,7 @@ export default function Projects() {
       badgeBg: 'rgba(148,163,184,0.08)',
       badgeBorder: 'rgba(148,163,184,0.15)',
       badgeText: '#94a3b8',
-      highlights: [
-        'Kiến trúc Microservices xử lý voice, chat, email, SMS đồng thời',
-        'CI/CD pipeline với Jenkins — giảm 60% deployment time',
-        'Automation Testing với Java Selenium',
-      ],
+      highlights: [t('proj_cc_h1'), t('proj_cc_h2'), t('proj_cc_h3'), t('proj_cc_h4')],
     },
   ];
 
@@ -132,7 +111,7 @@ export default function Projects() {
         <div className="text-center mb-16">
           <span className="section-badge">Portfolio</span>
           <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4">
-            Dự án <span className="gradient-text">thực chiến</span>
+            <span className="gradient-text">{t('proj_heading')}</span>
           </h2>
           <p className="text-slate-400 text-lg max-w-2xl mx-auto">
             Các hệ thống thực tế từ healthcare đến AI, cloud-native đến enterprise
@@ -141,10 +120,7 @@ export default function Projects() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
           {projects.map((project, index) => (
-            <div
-              key={index}
-              className="glass-card overflow-hidden group flex flex-col"
-            >
+            <div key={index} className="glass-card overflow-hidden group flex flex-col">
               {/* Colored top strip */}
               <div className="h-[3px] flex-shrink-0" style={{ background: project.stripColor }}></div>
 
@@ -179,7 +155,7 @@ export default function Projects() {
                   {project.tech.map((tech) => (
                     <span
                       key={tech}
-                      className="px-2.5 py-1 rounded-md text-xs font-medium transition-colors"
+                      className="px-2.5 py-1 rounded-md text-xs font-medium"
                       style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.09)', color: '#cbd5e1' }}
                     >
                       {tech}

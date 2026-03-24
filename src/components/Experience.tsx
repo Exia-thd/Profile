@@ -1,92 +1,82 @@
 import { Briefcase, Calendar, MapPin, CheckCircle2, Star, TrendingUp, Users, Shield, Zap, Database } from 'lucide-react';
-
-const experiences = [
-  {
-    id: 1,
-    role: 'Backend Developer',
-    company: 'BHS (BestMed)',
-    type: 'Full-time',
-    period: '2023 – Hiện tại',
-    location: 'TP. Hồ Chí Minh',
-    stripColor: 'linear-gradient(90deg, #6366f1, #06b6d4)',
-    dotColor: 'linear-gradient(135deg, #6366f1, #3b82f6)',
-    dotShadow: 'rgba(99,102,241,0.4)',
-    badge: 'Đang làm',
-    badgeBg: 'rgba(34,197,94,0.1)',
-    badgeBorder: 'rgba(34,197,94,0.25)',
-    badgeText: '#86efac',
-    description: 'Phát triển và vận hành hệ thống quản lý y tế & bảo hiểm BestMed – nền tảng số hóa toàn bộ quy trình bảo hiểm y tế doanh nghiệp.',
-    modules: [
-      { icon: Shield, name: 'Module Quản lý Bảo hiểm', detail: 'Engine xử lý yêu cầu bồi thường (claims), phê duyệt đa cấp, tích hợp đối tác bảo hiểm qua REST API & Webhook.' },
-      { icon: Database, name: 'Module Hồ sơ Bệnh nhân', detail: 'Schema quản lý hồ sơ y tế chuẩn HL7/FHIR, mã hóa AES-256, đảm bảo tuân thủ bảo mật dữ liệu y tế.' },
-      { icon: Zap, name: 'API Gateway & Integration', detail: 'RESTful API chuẩn, rate limiting, API versioning, tích hợp HIS & LIS.' },
-      { icon: TrendingUp, name: 'Tối ưu hiệu năng', detail: 'Tối ưu query PostgreSQL (giảm 70% response time), Redis caching layer, pagination & lazy loading.' },
-      { icon: Users, name: 'Phân quyền RBAC', detail: 'Hệ thống RBAC theo vai trò: Admin, Bác sĩ, Y tá, Nhân viên bảo hiểm. JWT + OAuth2 với Azure AD.' },
-    ],
-    techStack: ['.NET Core 8', 'PostgreSQL', 'Redis', 'RabbitMQ', 'Docker', 'Azure AD', 'REST API', 'SignalR'],
-    achievements: [
-      'Giảm 70% response time nhờ tối ưu query và Redis caching',
-      'Xử lý 10,000+ yêu cầu bảo hiểm/ngày với zero downtime',
-      'Đảm bảo 99.9% uptime cho hệ thống production',
-      'Tích hợp thành công 5 đối tác bảo hiểm và 3 hệ thống bệnh viện',
-    ],
-  },
-  {
-    id: 2,
-    role: 'Senior Backend Developer',
-    company: 'Công ty Phần mềm XYZ',
-    type: 'Full-time',
-    period: '2021 – 2023',
-    location: 'TP. Hồ Chí Minh',
-    stripColor: 'linear-gradient(90deg, #7c3aed, #a855f7)',
-    dotColor: 'linear-gradient(135deg, #7c3aed, #a855f7)',
-    dotShadow: 'rgba(124,58,237,0.4)',
-    badge: 'Đã hoàn thành',
-    badgeBg: 'rgba(148,163,184,0.08)',
-    badgeBorder: 'rgba(148,163,184,0.15)',
-    badgeText: '#94a3b8',
-    description: 'Phát triển hệ thống HRM và Work Done Report trên AWS Serverless cho doanh nghiệp 2,000+ nhân viên.',
-    modules: [
-      { icon: Briefcase, name: 'HRM Workflow Engine', detail: 'Phê duyệt đa cấp linh hoạt: nghỉ phép, OT, đề xuất tuyển dụng. Kafka async events + SignalR real-time.' },
-      { icon: Zap, name: 'AWS Serverless (WDR)', detail: 'AWS Lambda + Aurora Serverless + S3. Auto báo cáo KPI, export PDF/Excel, email tự động qua SES.' },
-      { icon: TrendingUp, name: 'AI Integration (Savvy)', detail: 'Llama2 + RAG với FAISS vector database — chatbot hỗ trợ nhân viên tra cứu chính sách nội bộ.' },
-    ],
-    techStack: ['.NET Core', 'Java Spring Boot', 'Kafka', 'SignalR', 'AWS Lambda', 'Aurora', 'Python', 'FAISS'],
-    achievements: [
-      'Thiết kế workflow engine phục vụ 2,000+ nhân viên',
-      'Giảm 80% thời gian xử lý báo cáo với AWS Serverless',
-      'Chatbot AI giảm 40% lượng ticket hỗ trợ nội bộ',
-    ],
-  },
-  {
-    id: 3,
-    role: 'Backend Developer',
-    company: 'Công ty Công nghệ ABC',
-    type: 'Full-time',
-    period: '2019 – 2021',
-    location: 'TP. Hồ Chí Minh',
-    stripColor: 'linear-gradient(90deg, #059669, #0d9488)',
-    dotColor: 'linear-gradient(135deg, #059669, #0d9488)',
-    dotShadow: 'rgba(5,150,105,0.4)',
-    badge: 'Đã hoàn thành',
-    badgeBg: 'rgba(148,163,184,0.08)',
-    badgeBorder: 'rgba(148,163,184,0.15)',
-    badgeText: '#94a3b8',
-    description: 'Phát triển hệ thống Contact Center omnichannel và Asset Management System cho doanh nghiệp viễn thông.',
-    modules: [
-      { icon: Users, name: 'Contact Center Omnichannel', detail: 'Hệ thống tổng đài đa kênh (voice, chat, email, social) trên Microservices với Java Spring Boot.' },
-      { icon: Database, name: 'Asset Management System', detail: 'Quản lý tài sản IT, tích hợp GLPI API, theo dõi vòng đời thiết bị, QR code scan, báo cáo khấu hao tự động.' },
-    ],
-    techStack: ['Java Spring Boot', '.NET Core', 'Microservices', 'GLPI API', 'MySQL', 'Docker', 'Jenkins'],
-    achievements: [
-      'Xây dựng hệ thống contact center phục vụ 500+ agents',
-      'Quản lý 10,000+ tài sản IT với độ chính xác 99%',
-      'CI/CD pipeline giảm 60% thời gian deployment',
-    ],
-  },
-];
+import { useLang } from '../i18n/LangContext';
 
 export default function Experience() {
+  const { t } = useLang();
+
+  const experiences = [
+    {
+      id: 1,
+      role: t('bhs_role'),
+      company: t('bhs_company'),
+      type: t('exp_fulltime'),
+      period: t('bhs_period'),
+      location: t('hero_location'),
+      stripColor: 'linear-gradient(90deg, #6366f1, #06b6d4)',
+      dotColor: 'linear-gradient(135deg, #6366f1, #3b82f6)',
+      dotShadow: 'rgba(99,102,241,0.4)',
+      badge: t('exp_current'),
+      badgeBg: 'rgba(34,197,94,0.1)',
+      badgeBorder: 'rgba(34,197,94,0.25)',
+      badgeText: '#86efac',
+      description: t('bhs_desc'),
+      modules: [
+        { icon: Shield,      name: t('bhs_mod1_name'), detail: t('bhs_mod1_detail') },
+        { icon: Database,    name: t('bhs_mod2_name'), detail: t('bhs_mod2_detail') },
+        { icon: Zap,         name: t('bhs_mod3_name'), detail: t('bhs_mod3_detail') },
+        { icon: TrendingUp,  name: t('bhs_mod4_name'), detail: t('bhs_mod4_detail') },
+        { icon: Users,       name: t('bhs_mod5_name'), detail: t('bhs_mod5_detail') },
+      ],
+      techStack: ['.NET Core 8', 'PostgreSQL', 'Redis', 'RabbitMQ', 'Docker', 'Azure AD', 'REST API', 'SignalR'],
+      achievements: [t('bhs_ach1'), t('bhs_ach2'), t('bhs_ach3'), t('bhs_ach4')],
+    },
+    {
+      id: 2,
+      role: t('xyz_role'),
+      company: t('xyz_company'),
+      type: t('exp_fulltime'),
+      period: t('xyz_period'),
+      location: t('hero_location'),
+      stripColor: 'linear-gradient(90deg, #7c3aed, #a855f7)',
+      dotColor: 'linear-gradient(135deg, #7c3aed, #a855f7)',
+      dotShadow: 'rgba(124,58,237,0.4)',
+      badge: t('exp_completed'),
+      badgeBg: 'rgba(148,163,184,0.08)',
+      badgeBorder: 'rgba(148,163,184,0.15)',
+      badgeText: '#94a3b8',
+      description: t('xyz_desc'),
+      modules: [
+        { icon: Briefcase,  name: t('xyz_mod1_name'), detail: t('xyz_mod1_detail') },
+        { icon: Zap,        name: t('xyz_mod2_name'), detail: t('xyz_mod2_detail') },
+        { icon: TrendingUp, name: t('xyz_mod3_name'), detail: t('xyz_mod3_detail') },
+      ],
+      techStack: ['.NET Core', 'Java Spring Boot', 'Kafka', 'SignalR', 'AWS Lambda', 'Aurora', 'Python', 'FAISS'],
+      achievements: [t('xyz_ach1'), t('xyz_ach2'), t('xyz_ach3')],
+    },
+    {
+      id: 3,
+      role: t('abc_role'),
+      company: t('abc_company'),
+      type: t('exp_fulltime'),
+      period: t('abc_period'),
+      location: t('hero_location'),
+      stripColor: 'linear-gradient(90deg, #059669, #0d9488)',
+      dotColor: 'linear-gradient(135deg, #059669, #0d9488)',
+      dotShadow: 'rgba(5,150,105,0.4)',
+      badge: t('exp_completed'),
+      badgeBg: 'rgba(148,163,184,0.08)',
+      badgeBorder: 'rgba(148,163,184,0.15)',
+      badgeText: '#94a3b8',
+      description: t('abc_desc'),
+      modules: [
+        { icon: Users,    name: t('abc_mod1_name'), detail: t('abc_mod1_detail') },
+        { icon: Database, name: t('abc_mod2_name'), detail: t('abc_mod2_detail') },
+      ],
+      techStack: ['Java Spring Boot', '.NET Core', 'Microservices', 'GLPI API', 'MySQL', 'Docker', 'Jenkins'],
+      achievements: [t('abc_ach1'), t('abc_ach2'), t('abc_ach3')],
+    },
+  ];
+
   return (
     <section id="experience" className="py-24 px-4 sm:px-6 lg:px-8 bg-[#07071a] relative overflow-hidden">
       {/* Background */}
@@ -99,9 +89,9 @@ export default function Experience() {
       <div className="max-w-5xl mx-auto relative">
         {/* Header */}
         <div className="text-center mb-16">
-          <span className="section-badge">Career Journey</span>
+          <span className="section-badge">{t('exp_career')}</span>
           <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4">
-            Kinh nghiệm <span className="gradient-text">làm việc</span>
+            <span className="gradient-text">{t('exp_heading')}</span>
           </h2>
           <p className="text-slate-400 text-lg">
             Hành trình phát triển qua các hệ thống thực tiễn
@@ -110,7 +100,6 @@ export default function Experience() {
 
         {/* Timeline */}
         <div className="relative">
-          {/* Timeline line */}
           <div
             className="absolute left-8 top-0 bottom-0 w-px hidden md:block"
             style={{ background: 'linear-gradient(to bottom, #6366f1, #8b5cf6, #059669)' }}
@@ -129,7 +118,6 @@ export default function Experience() {
 
                 {/* Card */}
                 <div className="glass-card overflow-hidden">
-                  {/* Colored strip */}
                   <div className="h-[3px]" style={{ background: exp.stripColor }}></div>
 
                   {/* Card header */}
@@ -163,14 +151,13 @@ export default function Experience() {
                   </div>
 
                   <div className="p-6 space-y-6">
-                    {/* Description */}
                     <p className="text-slate-300 leading-relaxed">{exp.description}</p>
 
                     {/* Modules */}
                     <div>
                       <h4 className="text-white font-bold mb-4 flex items-center gap-2 text-sm uppercase tracking-wider">
                         <span className="w-4 h-[2px] rounded-full" style={{ background: exp.stripColor }}></span>
-                        Modules & Trách nhiệm chính
+                        {t('exp_modules')}
                       </h4>
                       <div className="grid sm:grid-cols-2 gap-3">
                         {exp.modules.map((mod, i) => (
@@ -200,13 +187,13 @@ export default function Experience() {
                     <div>
                       <h4 className="text-white font-bold mb-3 text-sm uppercase tracking-wider flex items-center gap-2">
                         <span className="w-4 h-[2px] rounded-full" style={{ background: exp.stripColor }}></span>
-                        Tech Stack
+                        {t('exp_techstack')}
                       </h4>
                       <div className="flex flex-wrap gap-2">
                         {exp.techStack.map((tech) => (
                           <span
                             key={tech}
-                            className="px-3 py-1.5 rounded-lg text-sm font-medium transition-colors"
+                            className="px-3 py-1.5 rounded-lg text-sm font-medium"
                             style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.09)', color: '#cbd5e1' }}
                           >
                             {tech}
@@ -219,7 +206,7 @@ export default function Experience() {
                     <div>
                       <h4 className="text-white font-bold mb-3 text-sm uppercase tracking-wider flex items-center gap-2">
                         <Star className="w-4 h-4 text-amber-400" />
-                        Thành tựu nổi bật
+                        {t('exp_achievements')}
                       </h4>
                       <ul className="space-y-2">
                         {exp.achievements.map((ach, i) => (
@@ -240,10 +227,10 @@ export default function Experience() {
         {/* Summary stats */}
         <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4">
           {[
-            { value: '5+', label: 'Năm kinh nghiệm', color: '#818cf8', strip: 'linear-gradient(90deg, #6366f1, #3b82f6)' },
-            { value: '6+', label: 'Dự án lớn', color: '#a78bfa', strip: 'linear-gradient(90deg, #7c3aed, #a855f7)' },
-            { value: '3', label: 'Công ty', color: '#34d399', strip: 'linear-gradient(90deg, #059669, #0d9488)' },
-            { value: '10+', label: 'Công nghệ', color: '#fbbf24', strip: 'linear-gradient(90deg, #f59e0b, #f97316)' },
+            { value: '5+', label: t('exp_years'), color: '#818cf8', strip: 'linear-gradient(90deg, #6366f1, #3b82f6)' },
+            { value: '6+', label: t('exp_bigprojects'), color: '#a78bfa', strip: 'linear-gradient(90deg, #7c3aed, #a855f7)' },
+            { value: '3', label: t('exp_companies'), color: '#34d399', strip: 'linear-gradient(90deg, #059669, #0d9488)' },
+            { value: '10+', label: t('exp_technologies'), color: '#fbbf24', strip: 'linear-gradient(90deg, #f59e0b, #f97316)' },
           ].map((stat) => (
             <div key={stat.label} className="glass-card overflow-hidden text-center">
               <div className="h-[2px]" style={{ background: stat.strip, opacity: 0.7 }}></div>
