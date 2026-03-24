@@ -93,9 +93,7 @@ export default function Experience() {
           <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4">
             <span className="gradient-text">{t('exp_heading')}</span>
           </h2>
-          <p className="text-slate-400 text-lg">
-            Hành trình phát triển qua các hệ thống thực tiễn
-          </p>
+          <p className="text-slate-400 text-lg">{t('exp_subtitle')}</p>
         </div>
 
         {/* Timeline */}

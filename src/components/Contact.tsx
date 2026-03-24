@@ -150,13 +150,13 @@ export default function Contact() {
             <div className="glass-card p-6" style={{ borderColor: 'rgba(34,197,94,0.2)' }}>
               <div className="flex items-center gap-3 mb-3">
                 <span className="w-2.5 h-2.5 bg-green-400 rounded-full animate-pulse"></span>
-                <span className="text-green-400 font-semibold text-sm">Đang available</span>
+                <span className="text-green-400 font-semibold text-sm">{t('contact_available_label')}</span>
               </div>
               <p className="text-slate-400 text-sm leading-relaxed">
-                Hiện tại tôi đang mở cơ hội với các vị trí{' '}
-                <span className="text-white font-medium">Senior Backend Developer</span>.
-                Thời gian phản hồi thường trong{' '}
-                <span className="text-white font-medium">24 giờ</span>.
+                {t('contact_available_body1')}{' '}
+                <span className="text-white font-medium">Senior Backend Developer</span>.{' '}
+                {t('contact_available_body2')}{' '}
+                <span className="text-white font-medium">{t('contact_available_time')}</span>.
               </p>
             </div>
           </div>
