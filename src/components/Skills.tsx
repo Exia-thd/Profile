@@ -1,10 +1,13 @@
 import { Code2, Database, Cloud, Shield, Settings, Layers } from 'lucide-react';
+import { useLang } from '../i18n/LangContext';
 
 export default function Skills() {
+  const { t } = useLang();
+
   const skillCategories = [
     {
       icon: Code2,
-      category: 'Backend',
+      category: t('skills_backend'),
       color: 'linear-gradient(135deg, #6366f1, #3b82f6)',
       stripColor: 'linear-gradient(90deg, #6366f1, #3b82f6)',
       tagBg: 'rgba(99,102,241,0.1)',
@@ -16,7 +19,7 @@ export default function Skills() {
     },
     {
       icon: Cloud,
-      category: 'Cloud (AWS)',
+      category: t('skills_cloud'),
       color: 'linear-gradient(135deg, #f59e0b, #f97316)',
       stripColor: 'linear-gradient(90deg, #f59e0b, #f97316)',
       tagBg: 'rgba(245,158,11,0.1)',
@@ -28,7 +31,7 @@ export default function Skills() {
     },
     {
       icon: Database,
-      category: 'Database',
+      category: t('skills_database'),
       color: 'linear-gradient(135deg, #059669, #0d9488)',
       stripColor: 'linear-gradient(90deg, #059669, #0d9488)',
       tagBg: 'rgba(5,150,105,0.1)',
@@ -52,7 +55,7 @@ export default function Skills() {
     },
     {
       icon: Settings,
-      category: 'DevOps',
+      category: t('skills_devops'),
       color: 'linear-gradient(135deg, #0891b2, #06b6d4)',
       stripColor: 'linear-gradient(90deg, #0891b2, #06b6d4)',
       tagBg: 'rgba(8,145,178,0.1)',
@@ -64,7 +67,7 @@ export default function Skills() {
     },
     {
       icon: Shield,
-      category: 'Security',
+      category: t('skills_security'),
       color: 'linear-gradient(135deg, #e11d48, #ec4899)',
       stripColor: 'linear-gradient(90deg, #e11d48, #ec4899)',
       tagBg: 'rgba(225,29,72,0.1)',
@@ -77,9 +80,9 @@ export default function Skills() {
   ];
 
   const stats = [
-    { value: '5+', label: 'Năm kinh nghiệm', color: '#818cf8', strip: 'linear-gradient(90deg, #6366f1, #3b82f6)' },
-    { value: '6+', label: 'Dự án lớn', color: '#a78bfa', strip: 'linear-gradient(90deg, #7c3aed, #a855f7)' },
-    { value: '10+', label: 'Công nghệ', color: '#22d3ee', strip: 'linear-gradient(90deg, #0891b2, #06b6d4)' },
+    { value: '5+', label: t('skills_years_label'), color: '#818cf8', strip: 'linear-gradient(90deg, #6366f1, #3b82f6)' },
+    { value: '6+', label: t('skills_projects_label'), color: '#a78bfa', strip: 'linear-gradient(90deg, #7c3aed, #a855f7)' },
+    { value: '10+', label: t('skills_tech_label'), color: '#22d3ee', strip: 'linear-gradient(90deg, #0891b2, #06b6d4)' },
   ];
 
   return (
@@ -96,7 +99,7 @@ export default function Skills() {
         <div className="text-center mb-16">
           <span className="section-badge">Tech Stack</span>
           <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4">
-            Kỹ năng <span className="gradient-text">công nghệ</span>
+            <span className="gradient-text">{t('skills_heading')}</span>
           </h2>
           <p className="text-slate-400 text-lg">
             Bộ công cụ & công nghệ tôi sử dụng hàng ngày
@@ -107,11 +110,9 @@ export default function Skills() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mb-8">
           {skillCategories.map((category, index) => (
             <div key={index} className="glass-card overflow-hidden group">
-              {/* Strip */}
               <div className="h-[2px]" style={{ background: category.stripColor, opacity: 0.7 }}></div>
 
               <div className="p-6">
-                {/* Header */}
                 <div className="flex items-center gap-3 mb-5">
                   <div
                     className="w-11 h-11 rounded-xl flex items-center justify-center shadow-lg flex-shrink-0"
@@ -122,17 +123,12 @@ export default function Skills() {
                   <h3 className="text-base font-bold" style={{ color: category.titleColor }}>{category.category}</h3>
                 </div>
 
-                {/* Skill tags */}
                 <div className="flex flex-wrap gap-2">
                   {category.skills.map((skill) => (
                     <span
                       key={skill}
                       className="px-3 py-1.5 rounded-lg text-xs font-medium transition-all cursor-default hover:scale-105"
-                      style={{
-                        background: category.tagBg,
-                        border: `1px solid ${category.tagBorder}`,
-                        color: category.tagText,
-                      }}
+                      style={{ background: category.tagBg, border: `1px solid ${category.tagBorder}`, color: category.tagText }}
                     >
                       {skill}
                     </span>
