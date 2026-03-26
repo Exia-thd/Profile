@@ -1,5 +1,9 @@
 import { Code2, Database, Cloud, Shield, Settings, Layers } from 'lucide-react';
+import { Suspense, lazy } from 'react';
+import { Canvas } from '@react-three/fiber';
 import { useLang } from '../i18n/LangContext';
+
+const SkillsDecor = lazy(() => import('./three/SkillsDecor'));
 
 export default function Skills() {
   const { t } = useLang();
@@ -87,6 +91,15 @@ export default function Skills() {
 
   return (
     <section id="skills" className="py-24 px-4 sm:px-6 lg:px-8 bg-[#07071a] relative overflow-hidden">
+      {/* Three.js decorative background */}
+      <div className="absolute inset-0 pointer-events-none">
+        <Suspense fallback={null}>
+          <Canvas camera={{ position: [0, 0, 6], fov: 60 }} gl={{ alpha: true, antialias: true }} style={{ background: 'transparent' }}>
+            <SkillsDecor />
+          </Canvas>
+        </Suspense>
+      </div>
+
       {/* Background */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/3 left-1/4 w-80 h-80 rounded-full blur-[120px]" style={{ background: 'rgba(99,102,241,0.05)' }}></div>
