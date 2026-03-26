@@ -1,5 +1,9 @@
 import { GraduationCap, Calendar, MapPin, Github, Linkedin, Mail, ArrowDown } from 'lucide-react';
+import { Suspense, lazy } from 'react';
+import { Canvas } from '@react-three/fiber';
 import { useLang } from '../i18n/LangContext';
+
+const HeroScene = lazy(() => import('./three/HeroScene'));
 
 export default function Hero() {
   const { t } = useLang();
@@ -9,21 +13,30 @@ export default function Hero() {
       id="home"
       className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden bg-[#07071a]"
     >
+      {/* Three.js Canvas background */}
+      <div className="absolute inset-0 pointer-events-none">
+        <Suspense fallback={null}>
+          <Canvas
+            camera={{ position: [0, 0, 6], fov: 60 }}
+            gl={{ alpha: true, antialias: true }}
+            style={{ background: 'transparent' }}
+          >
+            <HeroScene />
+          </Canvas>
+        </Suspense>
+      </div>
+
       {/* Background mesh gradients */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div
           className="absolute top-1/4 -left-48 w-[550px] h-[550px] rounded-full blur-[130px] animate-glow-pulse"
-          style={{ background: 'rgba(99,102,241,0.13)' }}
+          style={{ background: 'rgba(99,102,241,0.10)' }}
         ></div>
         <div
           className="absolute bottom-1/4 -right-48 w-[550px] h-[550px] rounded-full blur-[130px] animate-glow-pulse"
-          style={{ background: 'rgba(139,92,246,0.10)', animationDelay: '2s' }}
+          style={{ background: 'rgba(139,92,246,0.08)', animationDelay: '2s' }}
         ></div>
-        <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full blur-[140px]"
-          style={{ background: 'rgba(6,182,212,0.04)' }}
-        ></div>
-        <div className="absolute inset-0 grid-pattern opacity-50"></div>
+        <div className="absolute inset-0 grid-pattern opacity-30"></div>
       </div>
 
       <div className="max-w-4xl mx-auto w-full relative z-10 pt-16">
