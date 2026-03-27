@@ -45,12 +45,12 @@ function AppContent() {
       <nav className="fixed top-0 w-full z-50 border-b border-white/[0.06]" style={{ background: 'rgba(7,7,26,0.75)', backdropFilter: 'blur(20px)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 bg-gradient-to-br from-indigo-500 to-violet-500 rounded-lg flex items-center justify-center shadow-lg shadow-indigo-500/25">
+            <a href="#home" className="flex items-center gap-2.5 group">
+              <div className="w-8 h-8 bg-gradient-to-br from-indigo-500 to-violet-500 rounded-lg flex items-center justify-center shadow-lg shadow-indigo-500/25 transition-transform group-hover:scale-110">
                 <Code2 className="w-4 h-4 text-white" />
               </div>
-              <span className="font-bold text-lg text-white">Trần Hữu Đạt</span>
-            </div>
+              <span className="font-bold text-lg text-white group-hover:text-indigo-300 transition-colors">Trần Hữu Đạt</span>
+            </a>
 
             {/* Desktop nav */}
             <div className="hidden md:flex items-center gap-1">
