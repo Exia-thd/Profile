@@ -1,4 +1,4 @@
-import { CheckCircle2, Layers, Bot, BarChart3, Package, Phone, Activity } from 'lucide-react';
+import { CheckCircle2, Layers, Bot, BarChart3, Package, Phone, Activity, Brain } from 'lucide-react';
 import { useLang } from '../i18n/LangContext';
 
 export default function Projects() {
@@ -95,6 +95,21 @@ export default function Projects() {
       badgeBorder: 'rgba(34,197,94,0.25)',
       badgeText: '#86efac',
       highlights: [t('proj_bhs_h1'), t('proj_bhs_h2')],
+    },
+    {
+      title: t('proj_maa_title'),
+      subtitle: t('proj_maa_sub'),
+      description: t('proj_maa_desc'),
+      tech: ['.NET Core', 'PostgreSQL', 'Tailwind', 'Claude AI', 'GraphRAG'],
+      icon: Brain,
+      color: 'linear-gradient(135deg, #f97316, #ec4899)',
+      stripColor: 'linear-gradient(90deg, #f97316, #ec4899)',
+      iconShadow: 'rgba(249,115,22,0.35)',
+      badge: t('proj_maa_badge'),
+      badgeBg: 'rgba(249,115,22,0.1)',
+      badgeBorder: 'rgba(249,115,22,0.3)',
+      badgeText: '#fdba74',
+      highlights: [t('proj_maa_h1'), t('proj_maa_h2'), t('proj_maa_h3'), t('proj_maa_h4')],
     },
   ];
 

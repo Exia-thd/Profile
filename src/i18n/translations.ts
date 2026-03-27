@@ -140,6 +140,16 @@ export const translations = {
     proj_cc_h3: 'Automation Testing with Java Selenium',
     proj_cc_h4: 'Mock services for stability assurance',
 
+    // Projects – Multi-Agent R&D
+    proj_maa_title: 'Multi-Agent for Solution',
+    proj_maa_sub: 'R&D · AI Automation Platform',
+    proj_maa_desc: 'Designing an AI-powered solution using Claude AI to automate the full software development cycle — from reading Jira specs to auto-generating database schemas, backend code, and frontend UI components.',
+    proj_maa_h1: 'Multi-Agent orchestration: Model AI + Workflow + Agent Skills',
+    proj_maa_h2: 'GraphRAG-based Memory for persistent context & knowledge retrieval',
+    proj_maa_h3: 'Auto-generates .NET backend code and PostgreSQL migrations from specs',
+    proj_maa_h4: 'AI-driven Tailwind UI component generation from Figma/Jira descriptions',
+    proj_maa_badge: '2026 · R&D',
+
     // Skills
     skills_heading: 'Technical Skills',
     skills_subtitle: 'The tools & technologies I use daily',
@@ -316,6 +326,16 @@ export const translations = {
     proj_cc_h2: 'Kiến trúc Microservices',
     proj_cc_h3: 'Automation Testing với Java Selenium',
     proj_cc_h4: 'Mock services cho đảm bảo độ ổn định',
+
+    // Projects – Multi-Agent R&D
+    proj_maa_title: 'Multi-Agent for Solution',
+    proj_maa_sub: 'R&D · Nền tảng tự động hóa AI',
+    proj_maa_desc: 'Thiết kế solution khai thác Claude AI để tự động hóa toàn bộ quy trình phát triển phần mềm — từ đọc tài liệu Jira đến tự động sinh database schema, code backend và Tailwind UI components.',
+    proj_maa_h1: 'Orchestration đa Agent: Model AI + Workflow + Agent Skills',
+    proj_maa_h2: 'Memory dựa trên GraphRAG cho ngữ cảnh bền vững & truy xuất tri thức',
+    proj_maa_h3: 'Tự động sinh .NET backend code và PostgreSQL migrations từ spec',
+    proj_maa_h4: 'AI tự động tạo Tailwind UI components từ mô tả Figma/Jira',
+    proj_maa_badge: '2026 · R&D',
 
     // Skills
     skills_heading: 'Kỹ năng công nghệ',
