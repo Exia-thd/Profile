@@ -135,7 +135,7 @@ export default function Hero() {
               GitHub
             </a>
             <a
-              href="https://linkedin.com"
+              href="https://vn.linkedin.com/in/exia-692a3914b"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-white px-8 py-3.5 rounded-xl font-semibold transition-all hover:-translate-y-0.5 transform"
