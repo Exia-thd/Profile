@@ -1,5 +1,5 @@
 import { Code2, Menu, X, Globe } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { LangProvider, useLang } from './i18n/LangContext';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -7,17 +7,36 @@ import Experience from './components/Experience';
 import Projects from './components/Projects';
 import Skills from './components/Skills';
 import Contact from './components/Contact';
+import { CubeIcon, RingIcon, DiamondIcon, HexIcon, OrbIcon } from './components/nav/NavIcon3D';
 
 function AppContent() {
   const { lang, setLang, t } = useLang();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('');
+
+  // Scroll spy — highlight nav item for the section currently in view
+  useEffect(() => {
+    const ids = ['about', 'experience', 'projects', 'skills', 'contact'];
+    const observers: IntersectionObserver[] = [];
+    ids.forEach((id) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const obs = new IntersectionObserver(
+        ([entry]) => { if (entry.isIntersecting) setActiveSection(id); },
+        { rootMargin: '-15% 0px -75% 0px', threshold: 0 },
+      );
+      obs.observe(el);
+      observers.push(obs);
+    });
+    return () => observers.forEach((o) => o.disconnect());
+  }, []);
 
   const navLinks = [
-    { href: '#about', label: t('nav_about') },
-    { href: '#experience', label: t('nav_experience') },
-    { href: '#projects', label: t('nav_projects') },
-    { href: '#skills', label: t('nav_skills') },
-    { href: '#contact', label: t('nav_contact') },
+    { href: '#about',      id: 'about',      label: t('nav_about'),       Icon: CubeIcon,    color: '#6366f1' },
+    { href: '#experience', id: 'experience', label: t('nav_experience'),  Icon: RingIcon,    color: '#8b5cf6' },
+    { href: '#projects',   id: 'projects',   label: t('nav_projects'),    Icon: DiamondIcon, color: '#3b82f6' },
+    { href: '#skills',     id: 'skills',     label: t('nav_skills'),      Icon: HexIcon,     color: '#10b981' },
+    { href: '#contact',    id: 'contact',    label: t('nav_contact'),     Icon: OrbIcon,     color: '#06b6d4' },
   ];
 
   return (
@@ -35,15 +54,36 @@ function AppContent() {
 
             {/* Desktop nav */}
             <div className="hidden md:flex items-center gap-1">
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="px-4 py-2 text-slate-400 hover:text-white hover:bg-white/[0.06] rounded-lg transition-all text-sm font-medium"
-                >
-                  {link.label}
-                </a>
-              ))}
+              {navLinks.map((link) => {
+                const active = activeSection === link.id;
+                return (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    className="relative flex items-center gap-1.5 px-3 py-2 rounded-lg transition-all text-sm font-medium group"
+                    style={{
+                      color: active ? '#fff' : '#94a3b8',
+                      background: active ? `${link.color}18` : 'transparent',
+                      boxShadow: active ? `inset 0 -1.5px 0 0 ${link.color}` : 'none',
+                    }}
+                    onMouseEnter={(e) => {
+                      if (!active) (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.05)';
+                    }}
+                    onMouseLeave={(e) => {
+                      if (!active) (e.currentTarget as HTMLElement).style.background = 'transparent';
+                    }}
+                  >
+                    <link.Icon color={active ? link.color : '#475569'} />
+                    <span>{link.label}</span>
+                    {active && (
+                      <span
+                        className="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full"
+                        style={{ background: link.color, boxShadow: `0 0 6px ${link.color}` }}
+                      />
+                    )}
+                  </a>
+                );
+              })}
 
               {/* Language toggle */}
               <button
@@ -87,16 +127,25 @@ function AppContent() {
         {/* Mobile menu */}
         {menuOpen && (
           <div className="md:hidden border-t border-white/[0.06] px-4 py-3 space-y-1" style={{ background: 'rgba(7,7,26,0.95)' }}>
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="block px-4 py-2.5 text-slate-400 hover:text-white hover:bg-white/[0.06] rounded-lg transition-all text-sm font-medium"
-                onClick={() => setMenuOpen(false)}
-              >
-                {link.label}
-              </a>
-            ))}
+            {navLinks.map((link) => {
+              const active = activeSection === link.id;
+              return (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="flex items-center gap-3 px-4 py-2.5 rounded-lg transition-all text-sm font-medium"
+                  style={{
+                    color: active ? '#fff' : '#94a3b8',
+                    background: active ? `${link.color}15` : 'transparent',
+                    borderLeft: active ? `2px solid ${link.color}` : '2px solid transparent',
+                  }}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  <link.Icon color={active ? link.color : '#475569'} />
+                  {link.label}
+                </a>
+              );
+            })}
           </div>
         )}
       </nav>

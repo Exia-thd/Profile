@@ -74,3 +74,29 @@
     background-size: 32px 32px;
   }
 }
+
+/* ─── Nav 3D icon keyframes ──────────────────────────────────────────────── */
+@keyframes nc-cube {
+  from { transform: rotateY(0deg) rotateX(22deg); }
+  to   { transform: rotateY(360deg) rotateX(22deg); }
+}
+@keyframes nc-ring {
+  from { transform: rotateY(0deg) rotateX(8deg); }
+  to   { transform: rotateY(360deg) rotateX(8deg); }
+}
+@keyframes nc-diamond {
+  from { transform: rotate(45deg) rotateY(0deg) rotateX(15deg); }
+  to   { transform: rotate(45deg) rotateY(360deg) rotateX(15deg); }
+}
+@keyframes nc-hex {
+  from { transform: rotateY(0deg) rotateX(18deg); }
+  to   { transform: rotateY(360deg) rotateX(18deg); }
+}
+@keyframes nc-orb {
+  from { transform: rotateY(0deg); }
+  to   { transform: rotateY(360deg); }
+}
+@keyframes nc-satellite {
+  from { transform: rotate(0deg) translateX(7px) rotate(0deg); }
+  to   { transform: rotate(360deg) translateX(7px) rotate(-360deg); }
+}
