@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import { useLang } from '../i18n/LangContext';
 import SpotlightCard from './interactive/SpotlightCard';
+import TiltCard3D from './interactive/TiltCard3D';
 
 export default function Skills() {
   const { t, lang } = useLang();
@@ -222,53 +223,55 @@ export default function Skills() {
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.92, y: 15 }}
                   transition={{ duration: 0.3 }}
-                  whileHover={{ y: -4 }}
+                  className="h-full"
                 >
-                  <SpotlightCard
-                    className="overflow-hidden group flex flex-col justify-between h-full hover:border-indigo-500/40 transition-colors"
-                    spotlightColor={`${category.color}25`}
-                  >
-                    {/* Colored top strip */}
-                    <div className="h-1" style={{ background: category.stripColor }} />
+                  <TiltCard3D maxTilt={7} scale={1.02} className="h-full">
+                    <SpotlightCard
+                      className="overflow-hidden group flex flex-col justify-between h-full hover:border-indigo-500/50 transition-colors"
+                      spotlightColor={`${category.color}35`}
+                    >
+                      {/* Colored top strip */}
+                      <div className="h-1" style={{ background: category.stripColor }} />
 
-                    <div className="p-6">
-                      {/* Category title */}
-                      <div className="flex items-center gap-3 mb-5">
-                        <div
-                          className="w-11 h-11 rounded-xl flex items-center justify-center shadow-lg flex-shrink-0 group-hover:scale-110 transition-transform duration-300"
-                          style={{ background: `${category.color}20`, border: `1px solid ${category.color}50` }}
-                        >
-                          <Icon className="w-5 h-5" style={{ color: category.color }} />
-                        </div>
-                        <div>
-                          <h3 className="text-base font-bold text-white">{category.category}</h3>
-                          <span className="text-[11px] font-mono text-slate-400">
-                            {category.skills.length} {lang === 'vi' ? 'công nghệ' : 'tools'}
-                          </span>
-                        </div>
-                      </div>
-
-                      {/* Skills tags list */}
-                      <div className="flex flex-wrap gap-2">
-                        {category.skills.map((skill) => (
+                      <div className="p-6">
+                        {/* Category title */}
+                        <div className="flex items-center gap-3 mb-5">
                           <div
-                            key={skill.name}
-                            className="group/tag inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-mono font-medium transition-all hover:scale-105 cursor-default hover:shadow-md"
-                            style={{
-                              background: category.tagBg,
-                              border: `1px solid ${category.tagBorder}`,
-                              color: category.tagText,
-                            }}
+                            className="w-11 h-11 rounded-xl flex items-center justify-center shadow-lg flex-shrink-0 group-hover:scale-110 transition-transform duration-300"
+                            style={{ background: `${category.color}25`, border: `1px solid ${category.color}60` }}
                           >
-                            <span>{skill.name}</span>
-                            <span className="text-[10px] opacity-60 font-sans group-hover/tag:opacity-100">
-                              {skill.exp}
+                            <Icon className="w-5 h-5" style={{ color: category.color }} />
+                          </div>
+                          <div>
+                            <h3 className="text-base font-bold text-white">{category.category}</h3>
+                            <span className="text-[11px] font-mono text-slate-400">
+                              {category.skills.length} {lang === 'vi' ? 'công nghệ' : 'tools'}
                             </span>
                           </div>
-                        ))}
+                        </div>
+
+                        {/* Skills tags list */}
+                        <div className="flex flex-wrap gap-2">
+                          {category.skills.map((skill) => (
+                            <div
+                              key={skill.name}
+                              className="group/tag inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-mono font-medium transition-all hover:scale-105 cursor-default hover:shadow-md"
+                              style={{
+                                background: category.tagBg,
+                                border: `1px solid ${category.tagBorder}`,
+                                color: category.tagText,
+                              }}
+                            >
+                              <span>{skill.name}</span>
+                              <span className="text-[10px] opacity-70 font-sans group-hover/tag:opacity-100">
+                                {skill.exp}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                  </SpotlightCard>
+                    </SpotlightCard>
+                  </TiltCard3D>
                 </motion.div>
               );
             })}

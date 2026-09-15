@@ -13,8 +13,8 @@ interface SpotlightCardProps extends HTMLAttributes<HTMLDivElement> {
 export default function SpotlightCard({
   children,
   className = '',
-  spotlightColor = 'rgba(99, 102, 241, 0.15)',
-  borderColor = 'rgba(255, 255, 255, 0.08)',
+  spotlightColor = 'rgba(99, 102, 241, 0.25)',
+  borderColor = 'rgba(129, 140, 248, 0.2)',
   onClick,
   id,
 }: SpotlightCardProps) {
@@ -47,14 +47,14 @@ export default function SpotlightCard({
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className={`relative rounded-2xl overflow-hidden transition-all duration-300 ${
+      className={`relative rounded-2xl overflow-hidden transition-all duration-300 shadow-lg shadow-indigo-950/20 ${
         onClick ? 'cursor-pointer' : ''
       } ${className}`}
       style={{
-        background: 'rgba(15, 17, 38, 0.7)',
+        background: 'linear-gradient(145deg, rgba(22, 28, 62, 0.8) 0%, rgba(14, 18, 44, 0.85) 100%)',
         border: `1px solid ${borderColor}`,
-        backdropFilter: 'blur(16px)',
-        WebkitBackdropFilter: 'blur(16px)',
+        backdropFilter: 'blur(20px)',
+        WebkitBackdropFilter: 'blur(20px)',
       }}
     >
       {/* Spotlight Radial Gradient */}
@@ -62,9 +62,11 @@ export default function SpotlightCard({
         className="pointer-events-none absolute -inset-px transition-opacity duration-300"
         style={{
           opacity,
-          background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, ${spotlightColor}, transparent 40%)`,
+          background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, ${spotlightColor}, transparent 45%)`,
         }}
       />
+      {/* Top subtle light reflection */}
+      <div className="pointer-events-none absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
       {/* Content wrapper */}
       <div className="relative z-10">{children}</div>
     </div>

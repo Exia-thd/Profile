@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import { useLang } from '../i18n/LangContext';
 import SpotlightCard from './interactive/SpotlightCard';
+import TiltCard3D from './interactive/TiltCard3D';
 import ProjectModal, { ProjectDetailData } from './interactive/ProjectModal';
 
 export default function Projects() {
@@ -295,97 +296,98 @@ export default function Projects() {
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.92, y: 15 }}
                   transition={{ duration: 0.35, ease: 'easeOut' }}
-                  whileHover={{ y: -5 }}
                   className="h-full"
                 >
-                  <SpotlightCard
-                    className="overflow-hidden group flex flex-col justify-between h-full cursor-pointer hover:border-indigo-500/40 transition-colors"
-                    spotlightColor={`${project.color}25`}
-                    onClick={() => setActiveModalProject(project)}
-                  >
-                    {/* Top colored strip */}
-                    <div className="h-1 flex-shrink-0" style={{ background: project.stripColor }} />
+                  <TiltCard3D maxTilt={7} scale={1.02} className="h-full">
+                    <SpotlightCard
+                      className="overflow-hidden group flex flex-col justify-between h-full cursor-pointer hover:border-indigo-500/50 transition-colors"
+                      spotlightColor={`${project.color}35`}
+                      onClick={() => setActiveModalProject(project)}
+                    >
+                      {/* Top colored strip */}
+                      <div className="h-1 flex-shrink-0" style={{ background: project.stripColor }} />
 
-                    <div className="p-6 flex flex-col flex-1">
-                      {/* Header row */}
-                      <div className="flex items-start justify-between gap-3 mb-4">
-                        <div className="flex items-center gap-3">
-                          <div
-                            className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300"
+                      <div className="p-6 flex flex-col flex-1">
+                        {/* Header row */}
+                        <div className="flex items-start justify-between gap-3 mb-4">
+                          <div className="flex items-center gap-3">
+                            <div
+                              className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300"
+                              style={{
+                                background: `${project.color}25`,
+                                border: `1px solid ${project.color}60`,
+                              }}
+                            >
+                              <Icon className="w-5 h-5" style={{ color: project.color }} />
+                            </div>
+                            <div>
+                              <h3 className="text-base font-bold text-white leading-tight group-hover:text-indigo-300 transition-colors flex items-center gap-1.5">
+                                <span>{project.title}</span>
+                                <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity text-indigo-400" />
+                              </h3>
+                              <p className="text-xs text-slate-400 mt-0.5">{project.subtitle}</p>
+                            </div>
+                          </div>
+
+                          <span
+                            className="px-2.5 py-1 rounded-full text-xs font-semibold border whitespace-nowrap flex-shrink-0"
                             style={{
-                              background: `${project.color}20`,
-                              border: `1px solid ${project.color}50`,
+                              background: project.badgeBg,
+                              borderColor: project.badgeBorder,
+                              color: project.badgeText,
                             }}
                           >
-                            <Icon className="w-5 h-5" style={{ color: project.color }} />
-                          </div>
-                          <div>
-                            <h3 className="text-base font-bold text-white leading-tight group-hover:text-indigo-300 transition-colors flex items-center gap-1.5">
-                              <span>{project.title}</span>
-                              <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity text-indigo-400" />
-                            </h3>
-                            <p className="text-xs text-slate-400 mt-0.5">{project.subtitle}</p>
-                          </div>
+                            {project.badge}
+                          </span>
                         </div>
 
-                        <span
-                          className="px-2.5 py-1 rounded-full text-xs font-semibold border whitespace-nowrap flex-shrink-0"
-                          style={{
-                            background: project.badgeBg,
-                            borderColor: project.badgeBorder,
-                            color: project.badgeText,
-                          }}
-                        >
-                          {project.badge}
-                        </span>
-                      </div>
+                        {/* Description */}
+                        <p className="text-slate-200 text-xs sm:text-sm mb-4 leading-relaxed line-clamp-3">
+                          {project.description}
+                        </p>
 
-                      {/* Description */}
-                      <p className="text-slate-300 text-xs sm:text-sm mb-4 leading-relaxed line-clamp-3">
-                        {project.description}
-                      </p>
+                        {/* KPI Metrics Chips */}
+                        {project.metrics && (
+                          <div className="grid grid-cols-3 gap-2 mb-4 p-2.5 rounded-xl bg-slate-900/60 border border-white/10">
+                            {project.metrics.map((m, mIdx) => (
+                              <div key={mIdx} className="text-center">
+                                <div className="text-xs font-mono font-bold text-cyan-300">{m.value}</div>
+                                <div className="text-[10px] text-slate-400 truncate">{m.label}</div>
+                              </div>
+                            ))}
+                          </div>
+                        )}
 
-                      {/* KPI Metrics Chips */}
-                      {project.metrics && (
-                        <div className="grid grid-cols-3 gap-2 mb-4 p-2.5 rounded-xl bg-white/[0.02] border border-white/5">
-                          {project.metrics.map((m, mIdx) => (
-                            <div key={mIdx} className="text-center">
-                              <div className="text-xs font-mono font-bold text-cyan-400">{m.value}</div>
-                              <div className="text-[10px] text-slate-400 truncate">{m.label}</div>
+                        {/* Tech tags */}
+                        <div className="flex flex-wrap gap-1.5 mb-4">
+                          {project.tech.map((t) => (
+                            <span
+                              key={t}
+                              className="px-2 py-0.5 rounded-md text-[11px] font-mono font-medium bg-slate-800/80 border border-white/15 text-slate-200 group-hover:border-indigo-400/40 transition-colors"
+                            >
+                              {t}
+                            </span>
+                          ))}
+                        </div>
+
+                        {/* Highlights preview */}
+                        <div className="space-y-1.5 mt-auto pt-2 border-t border-white/10">
+                          {project.highlights.slice(0, 2).map((highlight, idx) => (
+                            <div key={idx} className="flex items-start gap-2 text-xs text-slate-300">
+                              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 mt-0.5 flex-shrink-0" />
+                              <span className="line-clamp-1">{highlight}</span>
                             </div>
                           ))}
                         </div>
-                      )}
 
-                      {/* Tech tags */}
-                      <div className="flex flex-wrap gap-1.5 mb-4">
-                        {project.tech.map((t) => (
-                          <span
-                            key={t}
-                            className="px-2 py-0.5 rounded-md text-[11px] font-mono font-medium bg-white/5 border border-white/10 text-slate-300 group-hover:border-white/20 transition-colors"
-                          >
-                            {t}
-                          </span>
-                        ))}
+                        {/* Deep dive trigger banner */}
+                        <div className="mt-4 pt-3 flex items-center justify-between text-xs text-indigo-400 font-semibold group-hover:text-indigo-300 transition-colors">
+                          <span>{lang === 'vi' ? 'Xem kiến trúc chi tiết' : 'Inspect system details'}</span>
+                          <ArrowUpRight className="w-3.5 h-3.5" />
+                        </div>
                       </div>
-
-                      {/* Highlights preview */}
-                      <div className="space-y-1.5 mt-auto pt-2 border-t border-white/5">
-                        {project.highlights.slice(0, 2).map((highlight, idx) => (
-                          <div key={idx} className="flex items-start gap-2 text-xs text-slate-400">
-                            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 mt-0.5 flex-shrink-0" />
-                            <span className="line-clamp-1">{highlight}</span>
-                          </div>
-                        ))}
-                      </div>
-
-                      {/* Deep dive trigger banner */}
-                      <div className="mt-4 pt-3 flex items-center justify-between text-xs text-indigo-400 font-semibold group-hover:text-indigo-300 transition-colors">
-                        <span>{lang === 'vi' ? 'Xem kiến trúc chi tiết' : 'Inspect system details'}</span>
-                        <ArrowUpRight className="w-3.5 h-3.5" />
-                      </div>
-                    </div>
-                  </SpotlightCard>
+                    </SpotlightCard>
+                  </TiltCard3D>
                 </motion.div>
               );
             })}

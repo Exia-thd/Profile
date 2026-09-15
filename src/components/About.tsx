@@ -2,6 +2,7 @@ import { Server, Code2, Workflow, Cloud, TrendingUp, Award, Sparkles, CheckCircl
 import { motion } from 'motion/react';
 import { useLang } from '../i18n/LangContext';
 import SpotlightCard from './interactive/SpotlightCard';
+import TiltCard3D from './interactive/TiltCard3D';
 
 export default function About() {
   const { t, lang } = useLang();
@@ -176,22 +177,25 @@ export default function About() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-40px' }}
                 transition={{ duration: 0.4, delay: 0.1 + index * 0.08 }}
+                className="h-full"
               >
-                <SpotlightCard
-                  className="p-6 relative flex flex-col justify-between h-full hover:border-white/20 transition-colors"
-                  spotlightColor={item.spotlight}
-                >
-                  <div>
-                    <div
-                      className="w-11 h-11 rounded-xl flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform"
-                      style={{ background: `${item.color}20`, border: `1px solid ${item.color}50` }}
-                    >
-                      <Icon className="w-5 h-5" style={{ color: item.color }} />
+                <TiltCard3D maxTilt={9} scale={1.02} className="h-full">
+                  <SpotlightCard
+                    className="p-6 relative flex flex-col justify-between h-full hover:border-white/30 transition-colors"
+                    spotlightColor={item.spotlight}
+                  >
+                    <div>
+                      <div
+                        className="w-11 h-11 rounded-xl flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform"
+                        style={{ background: `${item.color}25`, border: `1px solid ${item.color}60` }}
+                      >
+                        <Icon className="w-5 h-5" style={{ color: item.color }} />
+                      </div>
+                      <h3 className="text-base font-bold text-white mb-2">{item.title}</h3>
+                      <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">{item.description}</p>
                     </div>
-                    <h3 className="text-base font-bold text-white mb-2">{item.title}</h3>
-                    <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">{item.description}</p>
-                  </div>
-                </SpotlightCard>
+                  </SpotlightCard>
+                </TiltCard3D>
               </motion.div>
             );
           })}

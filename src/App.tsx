@@ -14,6 +14,7 @@ import Footer from './components/Footer';
 import TerminalCLI from './components/interactive/TerminalCLI';
 import CommandPalette from './components/interactive/CommandPalette';
 import ToastNotification from './components/interactive/ToastNotification';
+import PresentationMode from './components/interactive/PresentationMode';
 import { Terminal as TerminalIcon, Sparkles } from 'lucide-react';
 
 export default function App() {
@@ -33,7 +34,7 @@ export default function App() {
 
   return (
     <LangProvider>
-      <div className="min-h-screen bg-[#07071a] text-slate-100 selection:bg-indigo-500/30 selection:text-indigo-200 relative overflow-x-hidden font-sans">
+      <div className="min-h-screen bg-transparent text-slate-100 selection:bg-indigo-500/30 selection:text-indigo-200 relative overflow-x-hidden font-sans">
         {/* Dynamic Interactive Particle Grid Canvas */}
         <InteractiveCanvas />
 
@@ -89,6 +90,9 @@ export default function App() {
           onOpenTerminal={() => setTerminalOpen(true)}
           onCopyEmail={copyEmail}
         />
+
+        {/* Presentation Slide Tour Mode */}
+        <PresentationMode />
 
         {/* Toast Alerts */}
         <ToastNotification message={toastMessage} />

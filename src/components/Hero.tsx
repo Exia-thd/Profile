@@ -19,9 +19,12 @@ import {
   CheckCircle2,
   Play,
   Pause,
+  Layers,
+  Box,
 } from 'lucide-react';
 import { useLang } from '../i18n/LangContext';
 import SpotlightCard from './interactive/SpotlightCard';
+import TiltCard3D from './interactive/TiltCard3D';
 
 interface HeroProps {
   onOpenTerminal: () => void;
@@ -77,343 +80,450 @@ export default function Hero({
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden pt-20 pb-16"
+      className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden pt-24 pb-16"
     >
-      {/* Background mesh gradients with subtle motion */}
+      {/* Background radiant mesh gradients with lively illumination */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
-          animate={{ scale: [1, 1.15, 1], opacity: [0.12, 0.2, 0.12] }}
+          animate={{ scale: [1, 1.18, 1], opacity: [0.22, 0.32, 0.22] }}
           transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute top-1/4 -left-48 w-[600px] h-[600px] rounded-full blur-[140px]"
-          style={{ background: 'rgba(99, 102, 241, 0.16)' }}
+          className="absolute -top-24 -left-24 w-[750px] h-[750px] rounded-full blur-[140px]"
+          style={{ background: 'radial-gradient(circle, rgba(99, 102, 241, 0.35) 0%, rgba(56, 189, 248, 0.15) 50%, transparent 70%)' }}
         />
         <motion.div
-          animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.18, 0.1] }}
+          animate={{ scale: [1, 1.25, 1], opacity: [0.18, 0.28, 0.18] }}
           transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
-          className="absolute bottom-1/4 -right-48 w-[600px] h-[600px] rounded-full blur-[140px]"
-          style={{ background: 'rgba(139, 92, 246, 0.14)' }}
+          className="absolute top-1/3 -right-36 w-[700px] h-[700px] rounded-full blur-[150px]"
+          style={{ background: 'radial-gradient(circle, rgba(168, 85, 247, 0.3) 0%, rgba(6, 182, 212, 0.15) 50%, transparent 70%)' }}
         />
         <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] rounded-full blur-[160px] pointer-events-none"
-          style={{ background: 'rgba(6, 182, 212, 0.06)' }}
+          className="absolute bottom-10 left-1/3 w-[600px] h-[400px] rounded-full blur-[160px] pointer-events-none"
+          style={{ background: 'rgba(16, 185, 129, 0.12)' }}
         />
-        <div className="absolute inset-0 grid-pattern opacity-40" />
+        <div className="absolute inset-0 grid-pattern opacity-50" />
       </div>
 
-      <div className="max-w-5xl mx-auto w-full relative z-10">
-        <div className="text-center">
-          {/* Top Status Badges with subtle bounce */}
-          <motion.div
-            initial={{ opacity: 0, y: -16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="flex flex-wrap items-center justify-center gap-3 mb-8"
-          >
-            {/* Available badge */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wide uppercase border bg-emerald-500/10 border-emerald-500/25 text-emerald-300 backdrop-blur-md shadow-sm">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
-              </span>
-              <span>{lang === 'vi' ? 'Sẵn sàng nhận dự án & cơ hội mới' : 'Available for opportunities'}</span>
-            </div>
-
-            {/* Live System Health */}
-            <div className="hidden sm:inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-mono text-slate-400 border border-white/10 bg-white/[0.03] backdrop-blur-md">
-              <Activity className="w-3.5 h-3.5 text-cyan-400 animate-pulse" />
-              <span>Production SLA 99.9%</span>
-              <span className="text-slate-600">|</span>
-              <span className="text-emerald-400 font-bold">{ping}ms latency</span>
-            </div>
-          </motion.div>
-
-          {/* Avatar with spinning dashed ring & floating glow */}
-          <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
-            className="mb-7 inline-block relative group"
-          >
-            {/* Outer spinning dashed ring */}
-            <div
-              className="absolute rounded-full border-2 border-dashed animate-spin-slow"
-              style={{ inset: '-12px', borderColor: 'rgba(99, 102, 241, 0.45)' }}
-            />
-            {/* Second counter-rotating ring */}
-            <div
-              className="absolute rounded-full border border-dotted"
-              style={{
-                inset: '-20px',
-                borderColor: 'rgba(56, 189, 248, 0.25)',
-                animation: 'spin-slow 35s linear infinite reverse',
-              }}
-            />
-            {/* Glow ring */}
-            <div
-              className="absolute rounded-full transition-all duration-500 group-hover:scale-110"
-              style={{
-                inset: '-6px',
-                background: 'linear-gradient(135deg, rgba(99,102,241,0.6), rgba(139,92,246,0.6), rgba(6,182,212,0.6))',
-                borderRadius: '9999px',
-                filter: 'blur(10px)',
-              }}
-            />
-            {/* Monogram / Avatar Container */}
-            <div
-              className="relative w-32 h-32 sm:w-36 sm:h-36 mx-auto rounded-full bg-gradient-to-br from-indigo-500 via-violet-600 to-cyan-500 flex items-center justify-center text-white text-4xl sm:text-5xl font-extrabold shadow-2xl tracking-tight select-none cursor-pointer transition-transform duration-300 group-hover:scale-105"
-              style={{ boxShadow: '0 0 55px rgba(99,102,241,0.5)' }}
-            >
-              ĐT
-            </div>
-            {/* Online Indicator with radar ping */}
-            <div
-              className="absolute bottom-1 right-1 w-9 h-9 bg-emerald-500 rounded-full flex items-center justify-center shadow-lg"
-              style={{ border: '3.5px solid #07071a', boxShadow: '0 0 16px rgba(16,185,129,0.7)' }}
-            >
-              <div className="w-2.5 h-2.5 bg-white rounded-full animate-ping" />
-            </div>
-          </motion.div>
-
-          {/* Developer Name */}
-          <motion.h1
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.15 }}
-            className="text-4xl sm:text-6xl md:text-7xl font-extrabold mb-3 tracking-tight"
-          >
-            <span className="bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent">
-              Trần Hữu Đạt
+      <div className="max-w-7xl mx-auto w-full relative z-10">
+        {/* Top Status Badges */}
+        <motion.div
+          initial={{ opacity: 0, y: -16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="flex flex-wrap items-center justify-center lg:justify-start gap-3 mb-8"
+        >
+          {/* Available badge */}
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wide uppercase border bg-emerald-500/15 border-emerald-500/35 text-emerald-300 backdrop-blur-md shadow-[0_0_15px_rgba(16,185,129,0.2)]">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
             </span>
-          </motion.h1>
-
-          {/* Dynamic Role Title with AnimatePresence Flip */}
-          <div className="h-14 sm:h-16 flex flex-col items-center justify-center mb-4">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={roleIndex}
-                initial={{ opacity: 0, y: 12, filter: 'blur(4px)' }}
-                animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                exit={{ opacity: 0, y: -12, filter: 'blur(4px)' }}
-                transition={{ duration: 0.35 }}
-                className="flex flex-col items-center"
-              >
-                <div className="text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight flex items-center gap-2">
-                  <span
-                    className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-purple-300 to-cyan-300 font-bold"
-                  >
-                    {roles[roleIndex].title}
-                  </span>
-                  <span className="inline-block w-2 h-5 bg-indigo-400 animate-pulse ml-0.5" />
-                </div>
-                <div className="text-xs sm:text-sm font-mono text-slate-400 mt-1 flex items-center gap-2">
-                  <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-                  <span>{roles[roleIndex].sub}</span>
-                </div>
-              </motion.div>
-            </AnimatePresence>
+            <span>{lang === 'vi' ? 'Sẵn sàng nhận dự án & cơ hội mới' : 'Available for opportunities'}</span>
           </div>
 
-          {/* Academic & Location Metadata */}
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.25 }}
-            className="flex flex-wrap items-center justify-center gap-3 text-xs sm:text-sm text-slate-400 mb-6"
-          >
-            <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.04] border border-white/10 backdrop-blur-sm">
-              <GraduationCap className="w-4 h-4 text-indigo-400" />
-              {t('hero_university')} (Đại học Bách Khoa TP.HCM)
-            </span>
-            <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.04] border border-white/10 backdrop-blur-sm">
-              <MapPin className="w-4 h-4 text-violet-400" />
-              {t('hero_location')}
-            </span>
-          </motion.div>
+          {/* High Availability SLA */}
+          <div className="hidden sm:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono text-slate-300 border border-white/15 bg-slate-900/60 backdrop-blur-md shadow-sm">
+            <Activity className="w-3.5 h-3.5 text-cyan-400 animate-pulse" />
+            <span>Production SLA 99.9%</span>
+            <span className="text-slate-500">|</span>
+            <span className="text-emerald-400 font-bold">{ping}ms latency</span>
+          </div>
+        </motion.div>
 
-          {/* Summary Bio */}
-          <motion.p
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto mb-8 leading-relaxed"
-          >
-            {lang === 'vi' ? (
-              <>
-                Kỹ sư Backend với <strong className="text-white font-semibold">5+ năm kinh nghiệm</strong> thực chiến thiết kế và vận hành các hệ thống phân tán chịu tải cao, kiến trúc <strong className="text-indigo-400">Microservices</strong>, <strong className="text-cyan-400">AWS Serverless</strong> và giải pháp tự động hoá <strong className="text-violet-400">TMA AI-First Multi-Agent (GraphRAG / MCP)</strong>.
-              </>
-            ) : (
-              <>
-                Backend Developer with <strong className="text-white font-semibold">5+ years of experience</strong> building mission-critical distributed systems, high-concurrency <strong className="text-indigo-400">Microservices</strong>, <strong className="text-cyan-400">AWS Serverless</strong> architectures, and enterprise <strong className="text-violet-400">TMA AI-First Multi-Agent frameworks (GraphRAG / MCP)</strong>.
-              </>
-            )}
-          </motion.p>
+        {/* Hero Main Grid: Left Profile Details | Right 3D Interactive Stage */}
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center mb-12">
+          {/* Left Column: Profile Information */}
+          <div className="lg:col-span-7 text-center lg:text-left">
+            <div className="flex flex-col sm:flex-row items-center lg:items-start gap-5 mb-5 justify-center lg:justify-start">
+              {/* Avatar with 3D Tilt & Glow */}
+              <TiltCard3D maxTilt={15} scale={1.05} className="cursor-pointer">
+                <div className="relative group">
+                  {/* Outer spinning dashed ring */}
+                  <div
+                    className="absolute rounded-full border-2 border-dashed animate-spin-slow"
+                    style={{ inset: '-10px', borderColor: 'rgba(99, 102, 241, 0.6)' }}
+                  />
+                  {/* Glowing halo */}
+                  <div
+                    className="absolute rounded-full transition-all duration-500 group-hover:scale-110"
+                    style={{
+                      inset: '-4px',
+                      background: 'linear-gradient(135deg, rgba(99,102,241,0.8), rgba(168,85,247,0.8), rgba(6,182,212,0.8))',
+                      filter: 'blur(12px)',
+                    }}
+                  />
+                  {/* Monogram */}
+                  <div
+                    className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-gradient-to-br from-indigo-500 via-violet-600 to-cyan-400 flex items-center justify-center text-white text-3xl sm:text-4xl font-extrabold shadow-2xl tracking-tight select-none border-2 border-white/20"
+                    style={{ boxShadow: '0 0 35px rgba(99,102,241,0.6)' }}
+                  >
+                    ĐT
+                  </div>
+                  {/* Online ping dot */}
+                  <div
+                    className="absolute bottom-0 right-0 w-8 h-8 bg-emerald-500 rounded-full flex items-center justify-center shadow-lg border-2 border-slate-900"
+                    style={{ boxShadow: '0 0 14px rgba(16,185,129,0.9)' }}
+                  >
+                    <div className="w-2.5 h-2.5 bg-white rounded-full animate-ping" />
+                  </div>
+                </div>
+              </TiltCard3D>
 
-          {/* Live System Telemetry Banner with Real-time Tick */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.35 }}
-            className="max-w-3xl mx-auto mb-8 rounded-2xl bg-slate-900/80 border border-indigo-500/20 shadow-xl backdrop-blur-xl p-3 sm:p-3.5 text-left"
-          >
-            <div className="flex items-center justify-between gap-2 pb-2 mb-2 border-b border-white/[0.06] text-xs">
-              <div className="flex items-center gap-2 font-mono text-slate-300">
-                <Radio className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
-                <span className="font-bold text-slate-200">LIVE SYSTEM TELEMETRY</span>
-                <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                  HEALTH: NOMINAL
+              {/* Developer Name & Header */}
+              <div className="text-center sm:text-left">
+                <span className="text-xs font-mono uppercase tracking-widest text-indigo-400 font-bold block mb-1">
+                  Senior Software Engineer
                 </span>
-              </div>
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={() => setIsTelemetryPaused(!isTelemetryPaused)}
-                  className="p-1 rounded hover:bg-white/10 text-slate-400 hover:text-white transition-colors text-[11px] flex items-center gap-1 font-mono"
-                  title={isTelemetryPaused ? 'Resume stream' : 'Pause stream'}
+                <motion.h1
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                  className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight"
                 >
-                  {isTelemetryPaused ? <Play className="w-3 h-3 text-amber-400" /> : <Pause className="w-3 h-3 text-slate-400" />}
-                  <span className="hidden sm:inline">{isTelemetryPaused ? 'Resume' : 'Live'}</span>
-                </button>
+                  <span className="bg-gradient-to-r from-white via-slate-100 to-indigo-200 bg-clip-text text-transparent drop-shadow-sm">
+                    Trần Hữu Đạt
+                  </span>
+                </motion.h1>
               </div>
             </div>
 
-            <div className="flex items-center justify-between gap-3 text-xs font-mono">
-              <div className="flex items-center gap-2 overflow-hidden">
-                <span className="text-slate-400 shrink-0">[{telemetryEvents[streamIndex].time}]</span>
-                <span
-                  className="px-2 py-0.5 rounded text-[10px] font-bold shrink-0"
-                  style={{ backgroundColor: `${telemetryEvents[streamIndex].color}20`, color: telemetryEvents[streamIndex].color }}
+            {/* Dynamic Role Title with AnimatePresence Flip */}
+            <div className="h-16 flex flex-col justify-center mb-3">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={roleIndex}
+                  initial={{ opacity: 0, y: 12, filter: 'blur(4px)' }}
+                  animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                  exit={{ opacity: 0, y: -12, filter: 'blur(4px)' }}
+                  transition={{ duration: 0.35 }}
+                  className="flex flex-col items-center lg:items-start"
                 >
-                  {telemetryEvents[streamIndex].service}
-                </span>
-                <span className="text-slate-300 truncate">
-                  {telemetryEvents[streamIndex].text}
-                </span>
-              </div>
-              <span className="text-emerald-400 font-bold shrink-0 hidden sm:inline">
-                {ping}ms
+                  <div className="text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight flex items-center gap-2">
+                    <span
+                      className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-300 via-cyan-300 to-purple-300 font-bold"
+                    >
+                      {roles[roleIndex].title}
+                    </span>
+                    <span className="inline-block w-2 h-5 bg-indigo-400 animate-pulse ml-0.5" />
+                  </div>
+                  <div className="text-xs sm:text-sm font-mono text-slate-300 mt-1 flex items-center gap-2">
+                    <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+                    <span>{roles[roleIndex].sub}</span>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            {/* Academic & Location Metadata */}
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="flex flex-wrap items-center justify-center lg:justify-start gap-2.5 text-xs sm:text-sm text-slate-300 mb-6"
+            >
+              <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-900/60 border border-indigo-500/25 backdrop-blur-md shadow-sm">
+                <GraduationCap className="w-4 h-4 text-indigo-400" />
+                {t('hero_university')} (ĐH Bách Khoa TP.HCM)
               </span>
-            </div>
-          </motion.div>
+              <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-900/60 border border-indigo-500/25 backdrop-blur-md shadow-sm">
+                <MapPin className="w-4 h-4 text-violet-400" />
+                {t('hero_location')}
+              </span>
+            </motion.div>
 
-          {/* Action CTAs */}
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="flex flex-wrap items-center justify-center gap-3.5 mb-12"
-          >
-            <a
-              href="#contact"
-              className="inline-flex items-center gap-2 text-white px-6 sm:px-7 py-3 rounded-xl font-semibold text-sm transition-all hover:-translate-y-1 hover:shadow-indigo-500/40 shadow-lg shadow-indigo-500/25 bg-gradient-to-r from-indigo-600 via-violet-600 to-indigo-600 bg-[length:200%_auto] hover:bg-[position:right_center] duration-300"
+            {/* Summary Bio */}
+            <motion.p
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.25 }}
+              className="text-slate-200 text-sm sm:text-base leading-relaxed mb-6 max-w-2xl mx-auto lg:mx-0"
             >
-              <Mail className="w-4 h-4" />
-              <span>{t('hero_contact_btn')}</span>
-            </a>
+              {lang === 'vi' ? (
+                <>
+                  Kỹ sư Backend với <strong className="text-white font-semibold">5+ năm kinh nghiệm</strong> thực chiến thiết kế và vận hành các hệ thống phân tán chịu tải cao, kiến trúc <strong className="text-cyan-300 font-semibold">Microservices</strong>, <strong className="text-indigo-300 font-semibold">AWS Serverless</strong> và giải pháp tự động hoá <strong className="text-violet-300 font-semibold">TMA AI-First Multi-Agent (GraphRAG / MCP)</strong>.
+                </>
+              ) : (
+                <>
+                  Backend Developer with <strong className="text-white font-semibold">5+ years of experience</strong> building mission-critical distributed systems, high-concurrency <strong className="text-cyan-300 font-semibold">Microservices</strong>, <strong className="text-indigo-300 font-semibold">AWS Serverless</strong> architectures, and enterprise <strong className="text-violet-300 font-semibold">TMA AI-First Multi-Agent frameworks (GraphRAG / MCP)</strong>.
+                </>
+              )}
+            </motion.p>
 
-            {/* Open Terminal Trigger */}
-            <button
-              onClick={onOpenTerminal}
-              className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold text-slate-200 hover:text-white bg-slate-900/80 hover:bg-slate-800 border border-white/10 hover:border-indigo-500/40 transition-all shadow-md group hover:-translate-y-0.5"
+            {/* Action CTAs */}
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="flex flex-wrap items-center justify-center lg:justify-start gap-3 mb-6"
             >
-              <Terminal className="w-4 h-4 text-emerald-400 group-hover:rotate-12 transition-transform" />
-              <span>{lang === 'vi' ? 'Mở Backend CLI' : 'Interactive CLI'}</span>
-            </button>
+              <a
+                href="#contact"
+                className="inline-flex items-center gap-2 text-white px-6 sm:px-7 py-3 rounded-xl font-semibold text-sm transition-all hover:-translate-y-1 hover:shadow-indigo-500/50 shadow-xl shadow-indigo-600/30 bg-gradient-to-r from-indigo-600 via-violet-600 to-indigo-600 bg-[length:200%_auto] hover:bg-[position:right_center] duration-300"
+              >
+                <Mail className="w-4 h-4" />
+                <span>{t('hero_contact_btn')}</span>
+              </a>
 
-            {/* Quick Command Palette Button */}
-            <button
-              onClick={onOpenCommandPalette}
-              className="hidden sm:inline-flex items-center gap-2 px-4 py-3 rounded-xl text-xs font-mono text-slate-400 hover:text-white bg-white/[0.03] hover:bg-white/[0.08] border border-white/10 transition-all hover:-translate-y-0.5"
-              title="Command Palette (Cmd + K)"
+              {/* Open Terminal Trigger */}
+              <button
+                onClick={onOpenTerminal}
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold text-slate-200 hover:text-white bg-slate-900/90 hover:bg-slate-800 border border-indigo-500/30 hover:border-indigo-400 transition-all shadow-md group hover:-translate-y-0.5"
+              >
+                <Terminal className="w-4 h-4 text-emerald-400 group-hover:rotate-12 transition-transform" />
+                <span>{lang === 'vi' ? 'Mở Backend CLI' : 'Interactive CLI'}</span>
+              </button>
+
+              {/* Quick Command Palette Button */}
+              <button
+                onClick={onOpenCommandPalette}
+                className="hidden sm:inline-flex items-center gap-2 px-4 py-3 rounded-xl text-xs font-mono text-slate-300 hover:text-white bg-slate-900/70 hover:bg-slate-800 border border-white/15 transition-all hover:-translate-y-0.5"
+                title="Command Palette (Cmd + K)"
+              >
+                <Command className="w-3.5 h-3.5 text-indigo-400" />
+                <span>Cmd + K</span>
+              </button>
+
+              {/* Social Link: GitHub */}
+              <a
+                href="https://github.com/exia-thd"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-3 rounded-xl text-sm font-medium text-slate-300 hover:text-white bg-slate-900/70 hover:bg-slate-800 border border-white/15 transition-all hover:-translate-y-0.5"
+              >
+                <Github className="w-4 h-4" />
+                <span className="hidden sm:inline">GitHub</span>
+              </a>
+
+              {/* Social Link: LinkedIn */}
+              <a
+                href="https://vn.linkedin.com/in/exia-692a3914b"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-3 rounded-xl text-sm font-medium text-slate-300 hover:text-white bg-slate-900/70 hover:bg-slate-800 border border-white/15 transition-all hover:-translate-y-0.5"
+              >
+                <Linkedin className="w-4 h-4 text-blue-400" />
+                <span className="hidden sm:inline">LinkedIn</span>
+              </a>
+            </motion.div>
+
+            {/* Live System Telemetry Banner */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.35 }}
+              className="rounded-2xl bg-slate-950/80 border border-indigo-500/30 shadow-2xl backdrop-blur-xl p-3.5 text-left"
             >
-              <Command className="w-3.5 h-3.5 text-indigo-400" />
-              <span>Cmd + K</span>
-            </button>
-
-            {/* Social Link: GitHub */}
-            <a
-              href="https://github.com/exia-thd"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-3 rounded-xl text-sm font-medium text-slate-300 hover:text-white bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 transition-all hover:-translate-y-0.5"
-            >
-              <Github className="w-4 h-4" />
-              <span className="hidden sm:inline">GitHub</span>
-            </a>
-
-            {/* Social Link: LinkedIn */}
-            <a
-              href="https://vn.linkedin.com/in/exia-692a3914b"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-3 rounded-xl text-sm font-medium text-slate-300 hover:text-white bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 transition-all hover:-translate-y-0.5"
-            >
-              <Linkedin className="w-4 h-4 text-blue-400" />
-              <span className="hidden sm:inline">LinkedIn</span>
-            </a>
-          </motion.div>
-
-          {/* Quick Metrics Bento Row with Hover Lift & Glow */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.45 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-4xl mx-auto mb-10 text-left"
-          >
-            <SpotlightCard className="p-4 group hover:scale-[1.03] transition-all duration-300" spotlightColor="rgba(99, 102, 241, 0.25)">
-              <div className="flex items-center justify-between">
-                <div className="text-2xl sm:text-3xl font-extrabold text-indigo-400 font-mono">5+</div>
-                <Server className="w-4 h-4 text-indigo-400/50 group-hover:text-indigo-400 transition-colors" />
+              <div className="flex items-center justify-between gap-2 pb-2 mb-2 border-b border-white/10 text-xs">
+                <div className="flex items-center gap-2 font-mono text-slate-200">
+                  <Radio className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
+                  <span className="font-bold text-white tracking-wide">LIVE SYSTEM TELEMETRY</span>
+                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-bold">
+                    HEALTH: NOMINAL
+                  </span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => setIsTelemetryPaused(!isTelemetryPaused)}
+                    className="p-1 rounded hover:bg-white/10 text-slate-400 hover:text-white transition-colors text-[11px] flex items-center gap-1 font-mono"
+                    title={isTelemetryPaused ? 'Resume stream' : 'Pause stream'}
+                  >
+                    {isTelemetryPaused ? <Play className="w-3 h-3 text-amber-400" /> : <Pause className="w-3 h-3 text-slate-400" />}
+                    <span className="hidden sm:inline">{isTelemetryPaused ? 'Resume' : 'Live'}</span>
+                  </button>
+                </div>
               </div>
-              <div className="text-xs text-slate-300 mt-1 font-semibold">
+
+              <div className="flex items-center justify-between gap-3 text-xs font-mono">
+                <div className="flex items-center gap-2 overflow-hidden">
+                  <span className="text-slate-400 shrink-0">[{telemetryEvents[streamIndex].time}]</span>
+                  <span
+                    className="px-2 py-0.5 rounded text-[10px] font-bold shrink-0 shadow-sm"
+                    style={{ backgroundColor: `${telemetryEvents[streamIndex].color}25`, color: telemetryEvents[streamIndex].color, border: `1px solid ${telemetryEvents[streamIndex].color}40` }}
+                  >
+                    {telemetryEvents[streamIndex].service}
+                  </span>
+                  <span className="text-slate-200 truncate">
+                    {telemetryEvents[streamIndex].text}
+                  </span>
+                </div>
+                <span className="text-emerald-400 font-bold shrink-0 hidden sm:inline">
+                  {ping}ms
+                </span>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Right Column: Interactive System Architecture & Tech Highlights */}
+          <div className="lg:col-span-5">
+            <TiltCard3D maxTilt={7} scale={1.01} className="w-full">
+              <SpotlightCard
+                className="p-6 sm:p-7 relative rounded-3xl overflow-hidden border border-indigo-500/30 bg-slate-900/80 backdrop-blur-2xl shadow-2xl text-left"
+                spotlightColor="rgba(99, 102, 241, 0.3)"
+              >
+                {/* Header: System Status & Active Pod */}
+                <div className="flex items-center justify-between pb-4 mb-5 border-b border-white/10">
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-lg bg-indigo-500/20 border border-indigo-500/40 flex items-center justify-center">
+                      <Server className="w-4 h-4 text-indigo-400" />
+                    </div>
+                    <div>
+                      <h3 className="text-sm font-bold text-white leading-none">
+                        {lang === 'vi' ? 'Kiến trúc & Trọng tâm kỹ thuật' : 'Backend & AI Focus'}
+                      </h3>
+                      <p className="text-[11px] font-mono text-cyan-400 mt-1">cluster: production-asia-se1</p>
+                    </div>
+                  </div>
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-mono font-bold bg-emerald-500/15 border border-emerald-500/30 text-emerald-300">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                    ONLINE
+                  </span>
+                </div>
+
+                {/* Core Pillars */}
+                <div className="space-y-3.5 mb-5">
+                  <div className="p-3 rounded-xl bg-white/[0.03] border border-white/5 hover:border-indigo-500/30 transition-all">
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="text-xs font-bold text-indigo-300 flex items-center gap-1.5">
+                        <Cpu className="w-3.5 h-3.5 text-indigo-400" />
+                        TMA AI-First & Autonomous Agents
+                      </span>
+                      <span className="text-[10px] font-mono text-slate-400">Lead</span>
+                    </div>
+                    <p className="text-xs text-slate-300 leading-relaxed">
+                      {lang === 'vi'
+                        ? 'Xây dựng Multi-Agent Orchestration, tích hợp GraphRAG & chuẩn giao thức Model Context Protocol (MCP).'
+                        : 'Architecting Multi-Agent systems, GraphRAG retrieval pipelines, and Model Context Protocol (MCP).'}
+                    </p>
+                  </div>
+
+                  <div className="p-3 rounded-xl bg-white/[0.03] border border-white/5 hover:border-cyan-500/30 transition-all">
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="text-xs font-bold text-cyan-300 flex items-center gap-1.5">
+                        <Layers className="w-3.5 h-3.5 text-cyan-400" />
+                        Healthcare Distributed Services
+                      </span>
+                      <span className="text-[10px] font-mono text-slate-400">10K+ / day</span>
+                    </div>
+                    <p className="text-xs text-slate-300 leading-relaxed">
+                      {lang === 'vi'
+                        ? 'Hệ thống tiếp nhận cấp cứu thời gian thực, Kafka event streams, Redis cache giảm 70% độ trễ cho cơ sở y tế Texas.'
+                        : 'Real-time emergency dispatching, Kafka event pipeline, and Redis caching reducing latency by -70% for Texas hospitals.'}
+                    </p>
+                  </div>
+
+                  <div className="p-3 rounded-xl bg-white/[0.03] border border-white/5 hover:border-amber-500/30 transition-all">
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="text-xs font-bold text-amber-300 flex items-center gap-1.5">
+                        <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+                        AWS Serverless & Resilience
+                      </span>
+                      <span className="text-[10px] font-mono text-slate-400">Cost Opt</span>
+                    </div>
+                    <p className="text-xs text-slate-300 leading-relaxed">
+                      {lang === 'vi'
+                        ? 'Kiến trúc Lambda + Aurora PostgreSQL zero-idle cost, thiết kế microservices có khả năng tự phục hồi (resilient).'
+                        : 'AWS Lambda + Aurora PostgreSQL zero-idle infrastructure, fault-tolerant & resilient microservices design.'}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Tech chips footer */}
+                <div className="pt-3 border-t border-white/10 flex flex-wrap gap-1.5">
+                  {['.NET 9', 'C#', 'Java Spring', 'Python', 'Kafka', 'Redis', 'Docker', 'AWS'].map((tag) => (
+                    <span
+                      key={tag}
+                      className="px-2 py-0.5 rounded-md text-[11px] font-mono bg-indigo-500/10 border border-indigo-500/25 text-indigo-200"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </SpotlightCard>
+            </TiltCard3D>
+          </div>
+        </div>
+
+        {/* 4 Quick Metrics Bento Row wrapped in 3D Tilt Cards */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.45 }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto mb-12 text-left"
+        >
+          <TiltCard3D maxTilt={12} scale={1.03}>
+            <SpotlightCard className="p-5 h-full group" spotlightColor="rgba(99, 102, 241, 0.35)">
+              <div className="flex items-center justify-between">
+                <div className="text-3xl sm:text-4xl font-extrabold text-indigo-300 font-mono drop-shadow-sm">5+</div>
+                <div className="w-9 h-9 rounded-xl bg-indigo-500/20 flex items-center justify-center border border-indigo-500/30 group-hover:scale-110 transition-transform">
+                  <Server className="w-4 h-4 text-indigo-400" />
+                </div>
+              </div>
+              <div className="text-sm text-white mt-2 font-bold">
                 {lang === 'vi' ? 'Năm kinh nghiệm backend' : 'Years Experience'}
               </div>
-              <div className="text-[11px] text-slate-400 mt-0.5">.NET, Java, Python, AWS</div>
+              <div className="text-xs text-slate-400 mt-1">.NET, Java, Python, AWS</div>
             </SpotlightCard>
+          </TiltCard3D>
 
-            <SpotlightCard className="p-4 group hover:scale-[1.03] transition-all duration-300" spotlightColor="rgba(168, 85, 247, 0.25)">
+          <TiltCard3D maxTilt={12} scale={1.03}>
+            <SpotlightCard className="p-5 h-full group" spotlightColor="rgba(168, 85, 247, 0.35)">
               <div className="flex items-center justify-between">
-                <div className="text-2xl sm:text-3xl font-extrabold text-violet-400 font-mono">-70%</div>
-                <Activity className="w-4 h-4 text-violet-400/50 group-hover:text-violet-400 transition-colors" />
+                <div className="text-3xl sm:text-4xl font-extrabold text-violet-300 font-mono drop-shadow-sm">-70%</div>
+                <div className="w-9 h-9 rounded-xl bg-violet-500/20 flex items-center justify-center border border-violet-500/30 group-hover:scale-110 transition-transform">
+                  <Activity className="w-4 h-4 text-violet-400" />
+                </div>
               </div>
-              <div className="text-xs text-slate-300 mt-1 font-semibold">
+              <div className="text-sm text-white mt-2 font-bold">
                 {lang === 'vi' ? 'Giảm độ trễ truy vấn' : 'Query Response Time'}
               </div>
-              <div className="text-[11px] text-slate-400 mt-0.5">PostgreSQL + Redis Cache</div>
+              <div className="text-xs text-slate-400 mt-1">PostgreSQL + Redis Cache</div>
             </SpotlightCard>
+          </TiltCard3D>
 
-            <SpotlightCard className="p-4 group hover:scale-[1.03] transition-all duration-300" spotlightColor="rgba(56, 189, 248, 0.25)">
+          <TiltCard3D maxTilt={12} scale={1.03}>
+            <SpotlightCard className="p-5 h-full group" spotlightColor="rgba(56, 189, 248, 0.35)">
               <div className="flex items-center justify-between">
-                <div className="text-2xl sm:text-3xl font-extrabold text-cyan-400 font-mono">10K+</div>
-                <Cpu className="w-4 h-4 text-cyan-400/50 group-hover:text-cyan-400 transition-colors" />
+                <div className="text-3xl sm:text-4xl font-extrabold text-cyan-300 font-mono drop-shadow-sm">10K+</div>
+                <div className="w-9 h-9 rounded-xl bg-cyan-500/20 flex items-center justify-center border border-cyan-500/30 group-hover:scale-110 transition-transform">
+                  <Cpu className="w-4 h-4 text-cyan-400" />
+                </div>
               </div>
-              <div className="text-xs text-slate-300 mt-1 font-semibold">
+              <div className="text-sm text-white mt-2 font-bold">
                 {lang === 'vi' ? 'Yêu cầu y tế / ngày' : 'Daily Claims Processed'}
               </div>
-              <div className="text-[11px] text-slate-400 mt-0.5">Healthcare Production SLA</div>
+              <div className="text-xs text-slate-400 mt-1">Healthcare Production SLA</div>
             </SpotlightCard>
+          </TiltCard3D>
 
-            <SpotlightCard className="p-4 group hover:scale-[1.03] transition-all duration-300" spotlightColor="rgba(249, 115, 22, 0.25)">
+          <TiltCard3D maxTilt={12} scale={1.03}>
+            <SpotlightCard className="p-5 h-full group" spotlightColor="rgba(249, 115, 22, 0.35)">
               <div className="flex items-center justify-between">
-                <div className="text-2xl sm:text-3xl font-extrabold text-orange-400 font-mono">2026</div>
-                <Sparkles className="w-4 h-4 text-orange-400/50 group-hover:text-orange-400 transition-colors" />
+                <div className="text-3xl sm:text-4xl font-extrabold text-orange-300 font-mono drop-shadow-sm">2026</div>
+                <div className="w-9 h-9 rounded-xl bg-orange-500/20 flex items-center justify-center border border-orange-500/30 group-hover:scale-110 transition-transform">
+                  <Sparkles className="w-4 h-4 text-orange-400" />
+                </div>
               </div>
-              <div className="text-xs text-slate-300 mt-1 font-semibold">
+              <div className="text-sm text-white mt-2 font-bold">
                 {lang === 'vi' ? 'TMA AI-First Lead' : 'TMA AI-First Lead'}
               </div>
-              <div className="text-[11px] text-slate-400 mt-0.5">LLM Agents + GraphRAG + MCP</div>
+              <div className="text-xs text-slate-400 mt-1">LLM Agents + GraphRAG + MCP</div>
             </SpotlightCard>
-          </motion.div>
+          </TiltCard3D>
+        </motion.div>
 
-          {/* Scroll down indicator with animated pulse */}
+        {/* Scroll down indicator */}
+        <div className="text-center">
           <a
             href="#about"
-            className="inline-flex flex-col items-center gap-2 text-slate-400 hover:text-white transition-colors group"
+            className="inline-flex flex-col items-center gap-2 text-slate-300 hover:text-white transition-colors group"
           >
-            <span className="text-[11px] uppercase tracking-widest font-mono group-hover:text-indigo-400 transition-colors">{t('hero_scroll')}</span>
-            <div className="w-6 h-9 rounded-full border border-slate-700 flex items-start justify-center p-1 group-hover:border-indigo-500 transition-colors">
+            <span className="text-xs uppercase tracking-widest font-mono group-hover:text-cyan-300 transition-colors font-semibold">
+              {t('hero_scroll')}
+            </span>
+            <div className="w-6 h-10 rounded-full border-2 border-indigo-400/40 flex items-start justify-center p-1 group-hover:border-cyan-400 transition-colors shadow-[0_0_12px_rgba(99,102,241,0.3)]">
               <motion.div
-                animate={{ y: [0, 14, 0] }}
+                animate={{ y: [0, 16, 0] }}
                 transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
-                className="w-1.5 h-1.5 rounded-full bg-indigo-400"
+                className="w-1.5 h-1.5 rounded-full bg-cyan-400"
               />
             </div>
           </a>
