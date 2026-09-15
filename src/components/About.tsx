@@ -1,188 +1,242 @@
-import { Code2, Server, Cloud, Workflow, Sparkles, TrendingUp, Award } from 'lucide-react';
+import { Server, Code2, Workflow, Cloud, TrendingUp, Award, Sparkles, CheckCircle2, Shield } from 'lucide-react';
+import { motion } from 'motion/react';
 import { useLang } from '../i18n/LangContext';
+import SpotlightCard from './interactive/SpotlightCard';
 
 export default function About() {
-  const { t } = useLang();
+  const { t, lang } = useLang();
 
   const highlights = [
     {
       icon: Server,
       title: t('about_hl1_title'),
       description: t('about_hl1_desc'),
-      color: 'linear-gradient(135deg, #6366f1, #3b82f6)',
-      borderColor: 'rgba(99,102,241,0.3)',
+      gradient: 'from-indigo-500 to-blue-500',
+      color: '#6366f1',
+      spotlight: 'rgba(99, 102, 241, 0.15)',
     },
     {
       icon: Code2,
       title: t('about_hl2_title'),
       description: t('about_hl2_desc'),
-      color: 'linear-gradient(135deg, #7c3aed, #a855f7)',
-      borderColor: 'rgba(124,58,237,0.3)',
+      gradient: 'from-violet-500 to-purple-500',
+      color: '#8b5cf6',
+      spotlight: 'rgba(139, 92, 246, 0.15)',
     },
     {
       icon: Workflow,
       title: t('about_hl3_title'),
       description: t('about_hl3_desc'),
-      color: 'linear-gradient(135deg, #0891b2, #06b6d4)',
-      borderColor: 'rgba(8,145,178,0.3)',
+      gradient: 'from-cyan-500 to-teal-500',
+      color: '#06b6d4',
+      spotlight: 'rgba(6, 182, 212, 0.15)',
     },
     {
       icon: Cloud,
       title: t('about_hl4_title'),
       description: t('about_hl4_desc'),
-      color: 'linear-gradient(135deg, #059669, #10b981)',
-      borderColor: 'rgba(5,150,105,0.3)',
+      gradient: 'from-emerald-500 to-green-500',
+      color: '#10b981',
+      spotlight: 'rgba(16, 185, 129, 0.15)',
     },
   ];
 
   const strengths = [
-    t('about_str1'),
-    t('about_str2'),
-    t('about_str3'),
-    t('about_str4'),
-    t('about_str5'),
+    {
+      title: t('about_str1'),
+      detail: lang === 'vi' ? 'Quy trình xét duyệt nhiều bước, phân quyền theo role động, tích hợp Kafka/SignalR.' : 'Multi-step approval workflows with dynamic role-based routing, Kafka & SignalR.',
+    },
+    {
+      title: t('about_str2'),
+      detail: lang === 'vi' ? 'Thiết kế giao tiếp bất đồng bộ, message broker RabbitMQ/Kafka, phân rã domain sạch.' : 'Asynchronous communication, RabbitMQ/Kafka message brokers, clean domain segregation.',
+    },
+    {
+      title: t('about_str3'),
+      detail: lang === 'vi' ? 'Tích hợp LLMs (Claude, Llama2), GraphRAG, Vector Database FAISS cho tự động hoá.' : 'LLM integrations (Claude, Llama2), GraphRAG knowledge graphs, FAISS vector retrieval.',
+    },
+    {
+      title: t('about_str4'),
+      detail: lang === 'vi' ? 'Kiến trúc AWS Lambda, Aurora Serverless, API Gateway, S3, SES tối ưu chi phí.' : 'Cost-efficient AWS Lambda, Aurora Serverless, API Gateway, S3 & SES architecture.',
+    },
+    {
+      title: t('about_str5'),
+      detail: lang === 'vi' ? 'Hệ thống RBAC granular, JWT + OAuth2, bảo mật Azure AD và chuẩn y tế nghiêm ngặt.' : 'Granular RBAC systems, JWT + OAuth2, Azure AD enterprise auth & healthcare standards.',
+    },
   ];
 
   return (
     <section id="about" className="py-24 px-4 sm:px-6 lg:px-8 bg-[#07071a] relative overflow-hidden">
-      {/* Background */}
+      {/* Subtle Glows */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 -left-32 w-96 h-96 rounded-full blur-[120px] -translate-y-1/2" style={{ background: 'rgba(99,102,241,0.06)' }}></div>
-        <div className="absolute top-1/2 -right-32 w-96 h-96 rounded-full blur-[120px] -translate-y-1/2" style={{ background: 'rgba(139,92,246,0.06)' }}></div>
-        <div className="absolute inset-0 grid-pattern opacity-40"></div>
+        <div className="absolute top-1/2 -left-32 w-96 h-96 rounded-full blur-[140px] -translate-y-1/2 bg-indigo-600/10" />
+        <div className="absolute top-1/2 -right-32 w-96 h-96 rounded-full blur-[140px] -translate-y-1/2 bg-violet-600/10" />
+        <div className="absolute inset-0 grid-pattern opacity-30" />
       </div>
 
-      <div className="max-w-7xl mx-auto relative">
-        {/* Header */}
+      <div className="max-w-7xl mx-auto relative z-10">
+        {/* Section Header */}
         <div className="text-center mb-16">
           <span className="section-badge">About Me</span>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4">
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-white mb-4 tracking-tight">
             <span className="gradient-text">{t('about_heading')}</span>
           </h2>
-          <p className="text-slate-400 text-lg max-w-2xl mx-auto">{t('about_subtitle')}</p>
+          <p className="text-slate-400 text-base sm:text-lg max-w-2xl mx-auto">
+            {t('about_subtitle')}
+          </p>
         </div>
 
         {/* Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-
-          {/* Large intro card — spans 2 cols & 2 rows on md+ */}
-          <div
-            className="md:col-span-2 md:row-span-2 glass-card p-8 relative overflow-hidden group"
-            style={{ borderTop: '1px solid rgba(99,102,241,0.25)' }}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
+          {/* Main Hero Card — Spans 2 cols & 2 rows */}
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.5 }}
+            className="md:col-span-2 md:row-span-2"
           >
-            <div
-              className="absolute top-0 left-0 right-0 h-[2px] rounded-t-2xl"
-              style={{ background: 'linear-gradient(90deg, #6366f1, #8b5cf6, #06b6d4)' }}
-            ></div>
-            <div
-              className="absolute -top-12 -right-12 w-48 h-48 rounded-full blur-2xl transition-all duration-500 group-hover:opacity-80"
-              style={{ background: 'rgba(99,102,241,0.08)' }}
-            ></div>
-
-            <div className="relative">
-              <div
-                className="w-14 h-14 rounded-2xl flex items-center justify-center mb-6 shadow-lg"
-                style={{ background: 'linear-gradient(135deg, #6366f1, #8b5cf6)', boxShadow: '0 8px 24px rgba(99,102,241,0.3)' }}
-              >
-                <Sparkles className="w-7 h-7 text-white" />
-              </div>
-
-              <h3 className="text-2xl font-bold text-white mb-4">Senior Backend Developer</h3>
-
-              <p className="text-slate-400 leading-relaxed mb-6">
-                {t('hero_bio_1')}{' '}
-                <span className="text-white font-semibold">{t('hero_bio_2')}</span>{' '}
-                {t('about_card_body')}{' '}
-                <span className="text-indigo-400">healthcare management</span>{' '}
-                {t('about_card_to')}{' '}
-                <span className="text-violet-400">AI-powered enterprise systems</span>.
-              </p>
-
-              {/* Mini stats */}
-              <div className="grid grid-cols-3 gap-3 mb-6">
-                {[
-                  { value: '5+', label: t('exp_years'), color: '#818cf8' },
-                  { value: '6+', label: t('exp_bigprojects'), color: '#a78bfa' },
-                  { value: '10+', label: t('exp_technologies'), color: '#67e8f9' },
-                ].map((stat) => (
-                  <div
-                    key={stat.label}
-                    className="text-center p-3 rounded-xl"
-                    style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)' }}
-                  >
-                    <div className="text-2xl font-extrabold" style={{ color: stat.color }}>{stat.value}</div>
-                    <div className="text-slate-500 text-xs mt-1">{stat.label}</div>
-                  </div>
-                ))}
-              </div>
-
-              {/* Tech tags */}
-              <div className="flex flex-wrap gap-2">
-                {['.NET Core', 'Java Spring Boot', 'Python', 'AWS', 'PostgreSQL', 'Redis'].map((tag) => (
-                  <span
-                    key={tag}
-                    className="px-3 py-1 rounded-lg text-xs font-medium"
-                    style={{ background: 'rgba(99,102,241,0.1)', border: '1px solid rgba(99,102,241,0.2)', color: '#a5b4fc' }}
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Feature cards — 2×2 on the right */}
-          {highlights.map((item, index) => (
-            <div
-              key={index}
-              className="glass-card p-6 relative overflow-hidden group cursor-default"
+            <SpotlightCard
+              className="p-7 sm:p-8 relative flex flex-col justify-between h-full"
+              spotlightColor="rgba(99, 102, 241, 0.25)"
+              borderColor="rgba(99, 102, 241, 0.2)"
             >
-              <div
-                className="absolute top-0 left-0 right-0 h-[2px] rounded-t-2xl opacity-70 group-hover:opacity-100 transition-opacity"
-                style={{ background: item.color }}
-              ></div>
-              <div
-                className="w-11 h-11 rounded-xl flex items-center justify-center mb-4 shadow-lg"
-                style={{ background: item.color, boxShadow: `0 6px 20px ${item.borderColor}` }}
-              >
-                <item.icon className="w-5 h-5 text-white" />
-              </div>
-              <h3 className="text-base font-bold text-white mb-2">{item.title}</h3>
-              <p className="text-slate-400 text-sm leading-relaxed">{item.description}</p>
-            </div>
-          ))}
+              {/* Top colored strip */}
+              <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-indigo-500 via-violet-500 to-cyan-400" />
 
-          {/* Full-width strengths card */}
-          <div className="md:col-span-4 glass-card p-8">
-            <div className="flex items-center gap-3 mb-6">
-              <div
-                className="w-10 h-10 rounded-xl flex items-center justify-center shadow-lg"
-                style={{ background: 'linear-gradient(135deg, #f59e0b, #f97316)', boxShadow: '0 6px 20px rgba(245,158,11,0.25)' }}
-              >
-                <Award className="w-5 h-5 text-white" />
-              </div>
-              <h3 className="text-xl font-bold text-white">{t('about_strengths')}</h3>
-            </div>
-            <div className="grid sm:grid-cols-2 gap-3">
-              {strengths.map((strength, index) => (
-                <div
-                  key={index}
-                  className="flex items-start gap-3 p-4 rounded-xl transition-all"
-                  style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)' }}
-                  onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = 'rgba(99,102,241,0.05)'; (e.currentTarget as HTMLElement).style.borderColor = 'rgba(99,102,241,0.15)'; }}
-                  onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.02)'; (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.05)'; }}
-                >
-                  <div
-                    className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
-                    style={{ background: 'rgba(99,102,241,0.15)', border: '1px solid rgba(99,102,241,0.3)' }}
-                  >
-                    <TrendingUp className="w-3 h-3 text-indigo-400" />
+              <div>
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center shadow-lg shadow-indigo-500/30">
+                    <Sparkles className="w-6 h-6 text-white" />
                   </div>
-                  <span className="text-slate-300 text-sm leading-relaxed">{strength}</span>
+                  <div>
+                    <span className="text-xs font-mono uppercase tracking-wider text-indigo-400 font-semibold">
+                      Engineering Profile
+                    </span>
+                    <h3 className="text-xl sm:text-2xl font-bold text-white">Senior Backend Developer</h3>
+                  </div>
                 </div>
-              ))}
-            </div>
-          </div>
+
+                <p className="text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
+                  {t('hero_bio_1')}{' '}
+                  <span className="text-white font-semibold">{t('hero_bio_2')}</span>{' '}
+                  {t('about_card_body')}{' '}
+                  <span className="text-indigo-400 font-medium">healthcare systems (HIS/LIS)</span>{' '}
+                  {t('about_card_to')}{' '}
+                  <span className="text-violet-400 font-medium">AI-powered multi-agent enterprise automation</span>.
+                </p>
+
+                {/* Stat counters */}
+                <div className="grid grid-cols-3 gap-3 mb-6">
+                  {[
+                    { value: '5+', label: t('exp_years'), color: '#818cf8' },
+                    { value: '6+', label: t('exp_bigprojects'), color: '#a78bfa' },
+                    { value: '10+', label: t('exp_technologies'), color: '#38bdf8' },
+                  ].map((stat) => (
+                    <div
+                      key={stat.label}
+                      className="text-center p-3 rounded-xl bg-white/[0.03] border border-white/5 hover:border-white/15 transition-colors"
+                    >
+                      <div className="text-2xl sm:text-3xl font-extrabold font-mono" style={{ color: stat.color }}>
+                        {stat.value}
+                      </div>
+                      <div className="text-slate-400 text-xs mt-1 font-medium">{stat.label}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Core Tech stack tags */}
+              <div className="pt-4 border-t border-white/10">
+                <span className="text-[11px] font-mono text-slate-400 uppercase tracking-wider block mb-2">
+                  Core Foundation
+                </span>
+                <div className="flex flex-wrap gap-2">
+                  {['C# .NET Core', 'Java Spring Boot', 'Python', 'AWS Serverless', 'PostgreSQL', 'Redis', 'Docker'].map(
+                    (tag) => (
+                      <span
+                        key={tag}
+                        className="px-2.5 py-1 rounded-lg text-xs font-medium bg-indigo-500/10 border border-indigo-500/25 text-indigo-300 font-mono hover:scale-105 transition-transform"
+                      >
+                        {tag}
+                      </span>
+                    )
+                  )}
+                </div>
+              </div>
+            </SpotlightCard>
+          </motion.div>
+
+          {/* 4 Feature Cards (2x2 Grid) */}
+          {highlights.map((item, index) => {
+            const Icon = item.icon;
+            return (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ duration: 0.4, delay: 0.1 + index * 0.08 }}
+              >
+                <SpotlightCard
+                  className="p-6 relative flex flex-col justify-between h-full hover:border-white/20 transition-colors"
+                  spotlightColor={item.spotlight}
+                >
+                  <div>
+                    <div
+                      className="w-11 h-11 rounded-xl flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform"
+                      style={{ background: `${item.color}20`, border: `1px solid ${item.color}50` }}
+                    >
+                      <Icon className="w-5 h-5" style={{ color: item.color }} />
+                    </div>
+                    <h3 className="text-base font-bold text-white mb-2">{item.title}</h3>
+                    <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">{item.description}</p>
+                  </div>
+                </SpotlightCard>
+              </motion.div>
+            );
+          })}
+
+          {/* Full-width Strengths & Architectural Competencies */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="md:col-span-4"
+          >
+            <SpotlightCard
+              className="p-7 sm:p-8"
+              spotlightColor="rgba(245, 158, 11, 0.15)"
+              borderColor="rgba(245, 158, 11, 0.2)"
+            >
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center shadow-lg shadow-amber-500/25">
+                  <Award className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <span className="text-xs font-mono uppercase tracking-wider text-amber-400 font-semibold">
+                    Competencies
+                  </span>
+                  <h3 className="text-xl font-bold text-white">{t('about_strengths')}</h3>
+                </div>
+              </div>
+
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
+                {strengths.map((str, index) => (
+                  <div
+                    key={index}
+                    className="p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:border-indigo-500/30 hover:bg-white/[0.04] transition-all group"
+                  >
+                    <div className="flex items-center gap-2 mb-1.5">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0 group-hover:scale-110 transition-transform" />
+                      <span className="text-sm font-semibold text-white">{str.title}</span>
+                    </div>
+                    <p className="text-xs text-slate-400 leading-relaxed pl-6">{str.detail}</p>
+                  </div>
+                ))}
+              </div>
+            </SpotlightCard>
+          </motion.div>
         </div>
       </div>
     </section>
