@@ -455,7 +455,7 @@ export default function Experience() {
         {/* Career Summary KPI Stats */}
         <div className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-3.5">
           {[
-            { value: '5+', label: t('exp_years'), color: '#818cf8', gradient: 'from-indigo-500 to-blue-500' },
+            { value: '7+', label: t('exp_years'), color: '#818cf8', gradient: 'from-indigo-500 to-blue-500' },
             { value: '6+', label: t('exp_bigprojects'), color: '#a78bfa', gradient: 'from-violet-500 to-purple-500' },
             { value: '3', label: t('exp_companies'), color: '#34d399', gradient: 'from-emerald-500 to-teal-500' },
             { value: '10+', label: t('exp_technologies'), color: '#38bdf8', gradient: 'from-cyan-500 to-sky-500' },

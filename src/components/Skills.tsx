@@ -133,7 +133,7 @@ export default function Skills() {
   ];
 
   const stats = [
-    { value: '5+', label: t('skills_years_label'), color: '#818cf8' },
+    { value: '7+', label: t('skills_years_label'), color: '#818cf8' },
     { value: '6+', label: t('skills_projects_label'), color: '#a78bfa' },
     { value: '25+', label: t('skills_tech_label'), color: '#38bdf8' },
     { value: '99.9%', label: lang === 'vi' ? 'Uptime SLA thực chiến' : 'Production Uptime', color: '#34d399' },

@@ -29,8 +29,8 @@ const SLIDES: SlideSection[] = [
     badge: '01 / 07 · PROFILE',
     titleVi: 'Trần Hữu Đạt — Senior Backend Developer',
     titleEn: 'Trần Hữu Đạt — Senior Backend Developer',
-    descVi: '5+ năm backend: 10.000+ hồ sơ bảo hiểm/ngày, AWS Serverless giảm 80% thời gian báo cáo, AI-First Multi-Agent trên GraphRAG / MCP',
-    descEn: '5+ years in backend: 10,000+ claims a day, AWS Serverless cutting reporting time 80%, AI-First Multi-Agent on GraphRAG / MCP',
+    descVi: '7+ năm backend: 10.000+ hồ sơ bảo hiểm/ngày, AWS Serverless giảm 80% thời gian báo cáo, AI-First Multi-Agent trên GraphRAG / MCP',
+    descEn: '7+ years in backend: 10,000+ claims a day, AWS Serverless cutting reporting time 80%, AI-First Multi-Agent on GraphRAG / MCP',
     iconText: '👨‍💻',
   },
   {

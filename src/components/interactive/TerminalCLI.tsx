@@ -88,7 +88,7 @@ export default function TerminalCLI({ onClose }: { onClose?: () => void }) {
             <p className="text-white font-bold text-sm">Trần Hữu Đạt · Senior Backend Developer</p>
             <p>🎓 HCMC University of Technology (Đại học Bách Khoa TP.HCM)</p>
             <p>📍 TP. Hồ Chí Minh, Việt Nam</p>
-            <p>💼 5+ years building systems that stay up under real load: 10,000+ insurance claims a day at 99.9% uptime, AWS Serverless pipelines 80% faster, and an AI-First multi-agent framework on GraphRAG memory + MCP protocol.</p>
+            <p>💼 7+ years building systems that stay up under real load: 10,000+ insurance claims a day at 99.9% uptime, AWS Serverless pipelines 80% faster, and an AI-First multi-agent framework on GraphRAG memory + MCP protocol.</p>
           </div>
         );
         break;

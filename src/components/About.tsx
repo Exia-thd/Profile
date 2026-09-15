@@ -129,7 +129,7 @@ export default function About() {
                 {/* Stat counters */}
                 <div className="grid grid-cols-3 gap-3 mb-6">
                   {[
-                    { value: '5+', label: t('exp_years'), color: '#818cf8' },
+                    { value: '7+', label: t('exp_years'), color: '#818cf8' },
                     { value: '6+', label: t('exp_bigprojects'), color: '#a78bfa' },
                     { value: '10+', label: t('exp_technologies'), color: '#38bdf8' },
                   ].map((stat) => (

@@ -239,11 +239,11 @@ export default function Hero({
             >
               {lang === 'vi' ? (
                 <>
-                  Kỹ sư Backend <strong className="text-white font-semibold">5+ năm</strong> xây những hệ thống trụ được dưới tải thật: nền tảng y tế <strong className="text-cyan-300 font-semibold">xử lý 10.000+ hồ sơ bảo hiểm mỗi ngày, uptime 99,9%</strong>, pipeline <strong className="text-indigo-300 font-semibold">AWS Serverless giảm 80% thời gian báo cáo</strong>, và — với vai trò <strong className="text-orange-300 font-semibold">AI Team Lead tại TMA Solutions</strong> — framework AI-First multi-agent trên nền <strong className="text-violet-300 font-semibold">bộ nhớ GraphRAG</strong> và <strong className="text-violet-300 font-semibold">giao thức MCP</strong>, cắt <strong className="text-white font-semibold">75%</strong> thời gian khởi tạo dự án.
+                  Kỹ sư Backend <strong className="text-white font-semibold">7+ năm</strong> xây những hệ thống trụ được dưới tải thật: nền tảng y tế <strong className="text-cyan-300 font-semibold">xử lý 10.000+ hồ sơ bảo hiểm mỗi ngày, uptime 99,9%</strong>, pipeline <strong className="text-indigo-300 font-semibold">AWS Serverless giảm 80% thời gian báo cáo</strong>, và — với vai trò <strong className="text-orange-300 font-semibold">AI Team Lead tại TMA Solutions</strong> — framework AI-First multi-agent trên nền <strong className="text-violet-300 font-semibold">bộ nhớ GraphRAG</strong> và <strong className="text-violet-300 font-semibold">giao thức MCP</strong>, cắt <strong className="text-white font-semibold">75%</strong> thời gian khởi tạo dự án.
                 </>
               ) : (
                 <>
-                  Backend Developer with <strong className="text-white font-semibold">5+ years</strong> building systems that stay up under real load: a healthcare platform <strong className="text-cyan-300 font-semibold">clearing 10,000+ insurance claims a day at 99.9% uptime</strong>, <strong className="text-indigo-300 font-semibold">AWS Serverless pipelines that cut reporting time by 80%</strong>, and — as <strong className="text-orange-300 font-semibold">AI Team Lead at TMA Solutions</strong> — an AI-First multi-agent framework built on <strong className="text-violet-300 font-semibold">GraphRAG memory</strong> and the <strong className="text-violet-300 font-semibold">Model Context Protocol (MCP)</strong> that removes <strong className="text-white font-semibold">75%</strong> of project setup work.
+                  Backend Developer with <strong className="text-white font-semibold">7+ years</strong> building systems that stay up under real load: a healthcare platform <strong className="text-cyan-300 font-semibold">clearing 10,000+ insurance claims a day at 99.9% uptime</strong>, <strong className="text-indigo-300 font-semibold">AWS Serverless pipelines that cut reporting time by 80%</strong>, and — as <strong className="text-orange-300 font-semibold">AI Team Lead at TMA Solutions</strong> — an AI-First multi-agent framework built on <strong className="text-violet-300 font-semibold">GraphRAG memory</strong> and the <strong className="text-violet-300 font-semibold">Model Context Protocol (MCP)</strong> that removes <strong className="text-white font-semibold">75%</strong> of project setup work.
                 </>
               )}
             </motion.p>
@@ -452,7 +452,7 @@ export default function Hero({
           <TiltCard3D maxTilt={12} scale={1.03}>
             <SpotlightCard className="p-5 h-full group" spotlightColor="rgba(99, 102, 241, 0.35)">
               <div className="flex items-center justify-between">
-                <div className="text-3xl sm:text-4xl font-extrabold text-indigo-300 font-mono drop-shadow-sm">5+</div>
+                <div className="text-3xl sm:text-4xl font-extrabold text-indigo-300 font-mono drop-shadow-sm">7+</div>
                 <div className="w-9 h-9 rounded-xl bg-indigo-500/20 flex items-center justify-center border border-indigo-500/30 group-hover:scale-110 transition-transform">
                   <Server className="w-4 h-4 text-indigo-400" />
                 </div>
