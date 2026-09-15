@@ -61,7 +61,7 @@ export const translations = {
     // Experience – TMA AI-First Framework Team Lead
     tma_role: 'AI Team Lead & Senior Backend Developer',
     tma_company: 'TMA Solutions (AI-First Engineering)',
-    tma_period: '2024 – Present (In parallel with BHS)',
+    tma_period: '2025 – Present (In parallel with BHS)',
     tma_desc: 'Led a dedicated R&D team building an AI-First Software Development Framework from the ground up: automating project initialization (scaffolding), dynamic code generation, auto-generation of documentation, and continuous developer wiki synthesis across cross-functional engineering roles.',
     tma_mod1_name: 'Project Scaffolding & Spec Ingestion',
     tma_mod1_detail: 'Engineered automated project initialization: ingesting requirements, Jira stories, and OpenAPI contracts to scaffold production-grade backend, frontend, and mobile projects.',
@@ -141,7 +141,7 @@ export const translations = {
     proj_tma_h2: 'GraphRAG persistent memory & Model Context Protocol (MCP) integration',
     proj_tma_h3: 'Specialized autonomous agents for Dev BE, FE, Mobile, QA, and BA roles',
     proj_tma_h4: 'Self-learning agent architecture with automated harness evaluation engine',
-    proj_tma_badge: '2024 – Present · Team Lead',
+    proj_tma_badge: '2025 – Present · Team Lead',
 
     // Project 2: BHS Healthcare
     proj_bhs_title: 'BHS (BestMed Healthcare Platform)',
@@ -299,7 +299,7 @@ export const translations = {
     // Experience – TMA AI-First Framework Team Lead
     tma_role: 'AI Team Lead & Senior Backend Developer',
     tma_company: 'TMA Solutions (AI-First Engineering)',
-    tma_period: '2024 – Hiện tại (Song song với BHS)',
+    tma_period: '2025 – Hiện tại (Song song với BHS)',
     tma_desc: 'Lead một team chuyên trách xây dựng AI-first framework độc quyền cho TMA: từ bước Khởi tạo dự án (Init project scaffolding), tự động sinh tài liệu kỹ thuật (Docs), tự tạo Wiki tri thức, vận hành theo mô hình LLM, workflow, skills, GraphRAG memory và giao thức MCP cho các role từ Backend, Frontend, Mobile đến QA và BA.',
     tma_mod1_name: 'Khởi tạo dự án & Đọc đặc tả tự động',
     tma_mod1_detail: 'Phát triển cơ chế tự động đọc tài liệu nghiệp vụ Jira/specs để scaffold toàn bộ source code chuẩn cho backend, frontend và mobile.',
@@ -379,7 +379,7 @@ export const translations = {
     proj_tma_h2: 'Bộ nhớ ngữ cảnh GraphRAG và tích hợp giao thức Model Context Protocol (MCP)',
     proj_tma_h3: 'Agent tự trị chuyên biệt cho các role Dev BE, FE, Mobile, QA và BA',
     proj_tma_h4: 'Kiến trúc Self-learning agent đi kèm harness agent tự động benchmark kiểm thử',
-    proj_tma_badge: '2024 – Hiện tại · Team Lead',
+    proj_tma_badge: '2025 – Hiện tại · Team Lead',
 
     // Project 2: BHS Healthcare
     proj_bhs_title: 'BHS (BestMed Healthcare Platform)',
