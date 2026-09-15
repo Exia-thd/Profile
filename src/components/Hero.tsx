@@ -46,15 +46,15 @@ export default function Hero({
   const roles = [
     { title: 'Senior Backend Developer', sub: '.NET Core · Java · Python · Distributed Systems', color: '#818cf8' },
     { title: 'TMA AI-First Team Lead', sub: 'Autonomous Agents · GraphRAG · MCP Protocol', color: '#fb923c' },
-    { title: 'Healthcare Distributed Systems', sub: 'Emergency Admin · BestmedIQ AI · Redis -70% Latency', color: '#2dd4bf' },
+    { title: 'Healthcare Platform Engineer', sub: 'Aged-Care Medication · Sisense BI · Azure Functions', color: '#2dd4bf' },
     { title: 'AWS Serverless Architect', sub: 'Zero-Idle Cost · Lambda · Aurora PostgreSQL', color: '#f59e0b' },
   ];
 
   const telemetryEvents = [
     { time: '01:44:02', service: 'TMA-Agent', status: 'OK', text: 'GraphRAG index synchronized (12,480 entities)', color: '#38bdf8' },
-    { time: '01:44:05', service: 'BHS-Emergency', status: 'CRITICAL', text: 'Care team auto-dispatched in 1.4s (SLA < 2s)', color: '#ef4444' },
-    { time: '01:44:09', service: 'Redis-Cluster', status: 'ACTIVE', text: 'Cache hit ratio 99.4% · Latency reduced -70%', color: '#10b981' },
-    { time: '01:44:12', service: 'Kafka-Broker', status: 'STREAM', text: '10,000+ claim events published to consumer group', color: '#a855f7' },
+    { time: '01:44:05', service: 'BESTMED-Auth', status: 'ENFORCED', text: 'S8 administration blocked: PIN + dual-sign required', color: '#ef4444' },
+    { time: '01:44:09', service: 'Sisense-Sync', status: 'ACTIVE', text: 'Tenant row-level security synced (ElastiCube + Live)', color: '#10b981' },
+    { time: '01:44:12', service: 'Service-Bus', status: 'STREAM', text: 'Timer trigger -> worker queue drained, 0 backlog', color: '#a855f7' },
     { time: '01:44:16', service: 'Harness-Agent', status: 'VERIFIED', text: 'BE & FE code scaffolding passed test benchmarks', color: '#fb923c' },
     { time: '01:44:20', service: 'AWS-Aurora', status: 'OPTIMAL', text: 'Zero-idle auto-scale configured across 3 AZs', color: '#f59e0b' },
   ];
@@ -239,11 +239,11 @@ export default function Hero({
             >
               {lang === 'vi' ? (
                 <>
-                  Kỹ sư Backend <strong className="text-white font-semibold">7+ năm</strong> xây những hệ thống trụ được dưới tải thật: nền tảng y tế <strong className="text-cyan-300 font-semibold">xử lý 10.000+ hồ sơ bảo hiểm mỗi ngày, uptime 99,9%</strong>, pipeline <strong className="text-indigo-300 font-semibold">AWS Serverless giảm 80% thời gian báo cáo</strong>, và — với vai trò <strong className="text-orange-300 font-semibold">AI Team Lead tại TMA Solutions</strong> — framework AI-First multi-agent trên nền <strong className="text-violet-300 font-semibold">bộ nhớ GraphRAG</strong> và <strong className="text-violet-300 font-semibold">giao thức MCP</strong>, cắt <strong className="text-white font-semibold">75%</strong> thời gian khởi tạo dự án.
+                  Kỹ sư Backend <strong className="text-white font-semibold">7+ năm</strong> với các hệ thống chạy thật: sở hữu toàn bộ mảng <strong className="text-cyan-300 font-semibold">tích hợp BI Sisense</strong> và lớp <strong className="text-cyan-300 font-semibold">tuân thủ pháp lý cho quy trình cấp phát thuốc</strong> của nền tảng chăm sóc người cao tuổi BESTMED, xây hệ thống báo cáo <strong className="text-indigo-300 font-semibold">AWS Serverless</strong> trên Lambda + Cognito + Aurora, và — với vai trò <strong className="text-orange-300 font-semibold">AI Team Lead tại TMA Solutions</strong> — dẫn dắt framework AI-First multi-agent trên nền <strong className="text-violet-300 font-semibold">bộ nhớ GraphRAG</strong> và <strong className="text-violet-300 font-semibold">giao thức MCP</strong>.
                 </>
               ) : (
                 <>
-                  Backend Developer with <strong className="text-white font-semibold">7+ years</strong> building systems that stay up under real load: a healthcare platform <strong className="text-cyan-300 font-semibold">clearing 10,000+ insurance claims a day at 99.9% uptime</strong>, <strong className="text-indigo-300 font-semibold">AWS Serverless pipelines that cut reporting time by 80%</strong>, and — as <strong className="text-orange-300 font-semibold">AI Team Lead at TMA Solutions</strong> — an AI-First multi-agent framework built on <strong className="text-violet-300 font-semibold">GraphRAG memory</strong> and the <strong className="text-violet-300 font-semibold">Model Context Protocol (MCP)</strong> that removes <strong className="text-white font-semibold">75%</strong> of project setup work.
+                  Backend Developer with <strong className="text-white font-semibold">7+ years</strong> on production systems: I own the <strong className="text-cyan-300 font-semibold">Sisense BI integration</strong> and the <strong className="text-cyan-300 font-semibold">medication-authorisation compliance layer</strong> of the BESTMED aged-care platform, built <strong className="text-indigo-300 font-semibold">AWS Serverless reporting</strong> on Lambda + Cognito + Aurora, and — as <strong className="text-orange-300 font-semibold">AI Team Lead at TMA Solutions</strong> — lead an AI-First multi-agent framework built on <strong className="text-violet-300 font-semibold">GraphRAG memory</strong> and the <strong className="text-violet-300 font-semibold">Model Context Protocol (MCP)</strong>.
                 </>
               )}
             </motion.p>
@@ -399,14 +399,14 @@ export default function Hero({
                     <div className="flex items-center justify-between mb-1">
                       <span className="text-xs font-bold text-cyan-300 flex items-center gap-1.5">
                         <Layers className="w-3.5 h-3.5 text-cyan-400" />
-                        Healthcare Distributed Services
+                        Healthcare Platform Engineering
                       </span>
-                      <span className="text-[10px] font-mono text-slate-400">10K+ / day</span>
+                      <span className="text-[10px] font-mono text-slate-400">190 issues</span>
                     </div>
                     <p className="text-xs text-slate-300 leading-relaxed">
                       {lang === 'vi'
-                        ? 'Hệ thống tiếp nhận cấp cứu thời gian thực, Kafka event streams, Redis cache giảm 70% độ trễ cho cơ sở y tế Texas.'
-                        : 'Real-time emergency dispatching, Kafka event pipeline, and Redis caching reducing latency by -70% for Texas hospitals.'}
+                        ? 'Tích hợp BI Sisense, pipeline bảo mật dữ liệu trên Azure Functions và lớp tuân thủ cấp phát thuốc theo luật bang Victoria.'
+                        : 'Sisense BI integration, an Azure Functions data-security pipeline, and a medication-authorisation layer compliant with Victorian legislation.'}
                     </p>
                   </div>
 

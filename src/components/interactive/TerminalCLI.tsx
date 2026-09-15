@@ -88,7 +88,7 @@ export default function TerminalCLI({ onClose }: { onClose?: () => void }) {
             <p className="text-white font-bold text-sm">Trần Hữu Đạt · Senior Backend Developer</p>
             <p>🎓 HCMC University of Technology (Đại học Bách Khoa TP.HCM)</p>
             <p>📍 TP. Hồ Chí Minh, Việt Nam</p>
-            <p>💼 7+ years building systems that stay up under real load: 10,000+ insurance claims a day at 99.9% uptime, AWS Serverless pipelines 80% faster, and an AI-First multi-agent framework on GraphRAG memory + MCP protocol.</p>
+            <p>💼 7+ years on production backends: I own the Sisense BI integration and the medication-authorisation compliance layer of an aged-care platform, built AWS Serverless reporting on Lambda + Cognito + Aurora, and lead TMA's AI-First multi-agent framework on GraphRAG memory + MCP protocol.</p>
           </div>
         );
         break;
@@ -111,7 +111,7 @@ export default function TerminalCLI({ onClose }: { onClose?: () => void }) {
           <div className="space-y-1.5 text-xs text-slate-300">
             <p className="text-indigo-400 font-bold">Featured Production & R&D Projects:</p>
             <p><span className="text-orange-400 font-semibold">[1] TMA AI-First Framework (Team Lead):</span> LLM workflows, GraphRAG memory, MCP protocol, Self-Learning & Harness agents for BE/FE/Mobile/QA/BA</p>
-            <p><span className="text-cyan-300 font-semibold">[2] BHS Healthcare Platform:</span> Emergency Medical Requests, Emergency Admin, Care Team coordination, BestmedIQ AI analytics, AI Angular upgrade</p>
+            <p><span className="text-cyan-300 font-semibold">[2] BESTMED Platform (aged care):</span> Sisense BI integration, Azure Functions data-security pipeline, Victorian legislation medication compliance, AngularJS → Angular migration</p>
             <p><span className="text-purple-300 font-semibold">[3] HRM System (2,000+ staff):</span> Dynamic multi-step approval workflow, Hangfire, Quartz.NET, Kafka, Redis, FCM real-time alerts</p>
             <p><span className="text-amber-300 font-semibold">[4] AWS Serverless WDR:</span> Lambda + Cognito MFA + Aurora PostgreSQL + CloudWatch/SQS automated reporting</p>
             <p><span className="text-emerald-300 font-semibold">[5] Savvy Assistant AI:</span> Llama2 + FAISS vector search + RAG pipeline + ML image search</p>
@@ -126,7 +126,7 @@ export default function TerminalCLI({ onClose }: { onClose?: () => void }) {
           <div className="text-xs text-slate-300 space-y-1">
             <p className="text-emerald-400 font-bold">Architecture Highlights:</p>
             <p>1. <span className="text-white">TMA AI-First Framework:</span> Spec Ingestion → LLM Agents (BE/FE/Mobile/QA/BA) → GraphRAG Context Memory → MCP Tooling → Self-Learning & Harness Verification</p>
-            <p>2. <span className="text-white">BHS Healthcare & Emergency:</span> Emergency Ingress Dispatch → Real-time Triage → Care Team Coordinator → BestmedIQ AI Analysis → Redis Caching (-70% latency) → Partitioned PostgreSQL</p>
+            <p>2. <span className="text-white">BESTMED Medication Platform:</span> Timer Trigger → Service Bus → Worker → API (hourly tenant sync) → Sisense row-level security (ElastiCube + Live) → SQL Server</p>
             <p>3. <span className="text-white">Enterprise Workflow Engine (HRM):</span> Role-based Approval Graph → Hangfire/Quartz Schedulers → Kafka Event Streaming → NotiHub & FCM Push</p>
             <p>4. <span className="text-white">AWS Serverless Architecture (WDR):</span> API Gateway → Cognito MFA → Stateless Node.js Lambdas → Aurora PostgreSQL → EventBridge/SQS</p>
           </div>
@@ -136,12 +136,12 @@ export default function TerminalCLI({ onClose }: { onClose?: () => void }) {
       case 'metrics':
         result = (
           <div className="space-y-1 text-xs font-mono text-slate-300 bg-black/40 p-2.5 rounded-lg border border-white/5">
-            <p className="text-emerald-400 font-bold">HTTP 200 OK — Production Benchmark:</p>
-            <p>• API Latency (p95): <span className="text-cyan-300">14.2 ms</span></p>
-            <p>• PostgreSQL Query Speedup: <span className="text-cyan-300">+70% via Redis Cache</span></p>
-            <p>• Healthcare Claims Volume: <span className="text-cyan-300">10,000+ per day</span></p>
-            <p>• Enterprise User Base: <span className="text-cyan-300">2,000+ concurrent employees</span></p>
-            <p>• Uptime SLA: <span className="text-emerald-300">99.9% Zero Downtime</span></p>
+            <p className="text-emerald-400 font-bold">HTTP 200 OK — Delivery Record:</p>
+            <p>• BESTMED issues delivered: <span className="text-cyan-300">190 across releases 2.44 → 2.48</span></p>
+            <p>• Medication authorisation paths unified: <span className="text-cyan-300">6 → 1</span></p>
+            <p>• Recurring alert defects closed at root cause: <span className="text-cyan-300">8 via one state-machine redesign</span></p>
+            <p>• Production race condition removed: <span className="text-cyan-300">four-layer token/lock redesign</span></p>
+            <p>• Projects shipped: <span className="text-emerald-300">7 across AI, healthcare, cloud and enterprise</span></p>
           </div>
         );
         break;

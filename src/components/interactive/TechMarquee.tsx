@@ -25,7 +25,7 @@ export default function TechMarquee() {
     { name: 'AWS Lambda & SQS', category: 'Serverless', icon: Cloud, color: '#f59e0b' },
     { name: 'Redis Cache Layer', category: 'High Speed', icon: Zap, color: '#f43f5e' },
     { name: 'Kafka Event Streaming', category: 'Message Broker', icon: Layers, color: '#a78bfa' },
-    { name: 'Emergency Admin BHS', category: 'Healthcare SLA', icon: Sparkles, color: '#2dd4bf' },
+    { name: 'Sisense BI', category: 'Analytics Layer', icon: Sparkles, color: '#2dd4bf' },
     { name: 'Self-Learning Agent', category: 'Evaluation Harness', icon: Cpu, color: '#f472b6' },
     { name: 'Java Spring Boot', category: 'Microservices', icon: Server, color: '#60a5fa' },
     { name: 'Python FAISS Vector DB', category: 'AI Retrieval', icon: Brain, color: '#4ade80' },

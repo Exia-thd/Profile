@@ -29,8 +29,8 @@ const SLIDES: SlideSection[] = [
     badge: '01 / 07 · PROFILE',
     titleVi: 'Trần Hữu Đạt — Senior Backend Developer',
     titleEn: 'Trần Hữu Đạt — Senior Backend Developer',
-    descVi: '7+ năm backend: 10.000+ hồ sơ bảo hiểm/ngày, AWS Serverless giảm 80% thời gian báo cáo, AI-First Multi-Agent trên GraphRAG / MCP',
-    descEn: '7+ years in backend: 10,000+ claims a day, AWS Serverless cutting reporting time 80%, AI-First Multi-Agent on GraphRAG / MCP',
+    descVi: '7+ năm backend: tích hợp BI và lớp tuân thủ cấp phát thuốc của nền tảng BESTMED, báo cáo AWS Serverless, AI-First Multi-Agent trên GraphRAG / MCP',
+    descEn: '7+ years in backend: BI integration and medication-compliance layer of the BESTMED platform, AWS Serverless reporting, AI-First Multi-Agent on GraphRAG / MCP',
     iconText: '👨‍💻',
   },
   {
@@ -56,8 +56,8 @@ const SLIDES: SlideSection[] = [
     badge: '04 / 07 · EXPERIENCE',
     titleVi: 'Kinh nghiệm thực chiến & Lộ trình',
     titleEn: 'Work Experience & Timeline',
-    descVi: 'TMA Solutions (AI-First Lead), Renesas, BestmedIQ AI, Healthcare Emergency Admin (Texas, US)',
-    descEn: 'TMA Solutions (AI-First Lead), Renesas Design, BestmedIQ AI, Healthcare Emergency Admin (Texas, US)',
+    descVi: 'TMA Solutions từ 2021 — AI-First Framework (Team Lead), BESTMED Platform, và các dự án outsource cho khách hàng',
+    descEn: 'TMA Solutions since 2021 — AI-First Framework (Team Lead), BESTMED Platform, and outsourced client projects',
     iconText: '💼',
   },
   {
@@ -65,8 +65,8 @@ const SLIDES: SlideSection[] = [
     badge: '05 / 07 · PORTFOLIO',
     titleVi: 'Dự án trọng điểm & Hệ thống sản phẩm',
     titleEn: 'Key Projects & Production Systems',
-    descVi: 'Hệ thống tiếp nhận ca cấp cứu, Auto-Claims 10K+/ngày, Agentic Developer Scaffolding Platform',
-    descEn: 'Emergency Care Response, High-Scale Claims Engine, and TMA AI-First Enterprise Agents',
+    descVi: 'Nền tảng cấp phát thuốc BESTMED, báo cáo AWS Serverless (WDR), và framework agent AI-First của TMA',
+    descEn: 'BESTMED medication platform, AWS Serverless reporting (WDR), and TMA AI-First enterprise agents',
     iconText: '🚀',
   },
   {

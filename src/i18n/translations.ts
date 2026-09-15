@@ -84,26 +84,27 @@ export const translations = {
     tma_ach4: 'Built robust self-learning agent loops with automated harness test evaluation',
 
     // Experience – BHS
-    bhs_role: 'Backend Developer',
-    bhs_company: 'TMA Solutions · BestMed Healthcare Platform (BHS)',
-    bhs_period: '2026 – Present',
-    bhs_desc: 'Developing and operating the BestMed healthcare & insurance management platform — digitizing corporate health insurance, medical emergency requests, care team coordination, and BestmedIQ AI reporting.',
-    bhs_mod1_name: 'Emergency Medical Requests & Emergency Admin',
-    bhs_mod1_detail: 'Architected critical emergency medical dispatch system and Emergency Admin console for real-time incident triage, automated alert escalations, and audit logging.',
-    bhs_mod2_name: 'Care Team Management & Coordination',
-    bhs_mod2_detail: 'Designed the Care Team module enabling seamless doctor-nurse-specialist assignment, patient tracking, and inter-departmental clinical communication.',
-    bhs_mod3_name: 'BestmedIQ AI Report Analytics System',
-    bhs_mod3_detail: 'Integrated BestmedIQ AI-driven analytics and reporting engine to detect claim anomalies, summarize patient histories, and generate automated diagnostic summaries.',
-    bhs_mod4_name: 'AI-Assisted Angular Upgrade & Modernization',
-    bhs_mod4_detail: 'Leveraged AI-assisted AST tooling and automated migration workflows to upgrade legacy Angular frontend components to modern standards with zero regression.',
-    bhs_mod5_name: 'Insurance Claims Engine & Performance Optimization',
-    bhs_mod5_detail: 'Engineered multi-level claims approval with Redis caching (70% latency reduction), PostgreSQL query indexing, RabbitMQ message queues, and HL7/FHIR + AES-256 data protection.',
-    bhs_mod6_name: 'Granular RBAC & Healthcare Security',
-    bhs_mod6_detail: 'Implemented strict RBAC across Doctors, Nurses, Insurance Staff, and Emergency Admins with JWT & Azure AD / OAuth2 authentication.',
-    bhs_ach1: '70% response time reduction through query optimization and Redis caching layer',
-    bhs_ach2: 'Processes 10,000+ medical insurance claims daily with 99.9% uptime SLA',
-    bhs_ach3: 'Sub-2-second dispatch latency for critical Emergency Medical Requests',
-    bhs_ach4: 'Integrated BestmedIQ AI analytics and upgraded Angular platform seamlessly',
+    bhs_role: 'Software Engineer',
+    bhs_company: 'TMA Solutions · BESTMED Platform',
+    bhs_period: 'Sep 2025 – Present',
+    bhs_desc: 'Building the BESTMED aged-care medication management platform — clinical medication administration under Victorian legislation, a Sisense BI analytics layer, and the modernisation of legacy AngularJS administration screens. 190 issues delivered across releases 2.44 to 2.48.',
+    bhs_mod1_name: 'BESTMED – Sisense BI Integration',
+    bhs_mod1_detail: 'Architected and owned the end-to-end BI integration between BESTMED and Sisense, covering user provisioning, token issuance, group synchronisation and facility-level configuration — the platform analytics layer built from the ground up.',
+    bhs_mod2_name: 'Event-Driven Data-Security Pipeline',
+    bhs_mod2_detail: 'Designed a Timer Trigger → Service Bus → Worker → API pipeline on Azure Functions for hourly tenant synchronisation and user deletion, supporting both ElastiCube and Live row-level security models.',
+    bhs_mod3_name: 'Victorian Legislation Compliance for Medication Administration',
+    bhs_mod3_detail: 'Led the emergency-administration workflow with PIN authorisation and dual-sign, plus role-based restrictions on S4/S4D/S8 and hazardous/cytotoxic drugs, unifying authorisation rules across six previously divergent administration code paths.',
+    bhs_mod4_name: 'Prescription Directions Alert State Machine',
+    bhs_mod4_detail: 'Re-architected the directions alert system from ad-hoc imperative state mutation into a baseline-signature state machine, resolving a cluster of eight recurring defects at the root cause and extending the same design to mobile and PRN variants at near-zero incremental cost.',
+    bhs_mod5_name: 'BESTMED Connect Medication-Review Integration',
+    bhs_mod5_detail: 'Designed the cross-repository, cross-identity contract for the medication-review module, keeping workflow state server-authoritative across two systems owned by separate teams.',
+    bhs_mod6_name: 'Care Team Export & AngularJS Modernisation',
+    bhs_mod6_detail: 'Built the Care Team conversation search and CSV/PDF export pipeline (Angular + Web API + stored procedures) with filter parity between list view and exported output; migrated legacy AngularJS administration screens to modern Angular under a strangler-fig approach with full route parity.',
+    bhs_ach1: '190 issues delivered across releases 2.44 → 2.48',
+    bhs_ach2: 'Eliminated a production provisioning race condition via a four-layer token/lock and login-first redesign, removing intermittent first-access failures for all new users',
+    bhs_ach3: 'Unified medication authorisation rules across six previously divergent code paths',
+    bhs_ach4: 'Resolved eight recurring alert defects at root cause with a single state-machine redesign',
+    bhs_ach5: 'Drove team-wide adoption of AI-assisted development (Claude Code), establishing the workflow and conventions used by the development team',
 
     // Experience – XYZ
     xyz_role: 'Senior Backend Developer',
@@ -136,7 +137,7 @@ export const translations = {
     // Projects
     proj_heading: 'Featured Projects',
     proj_subtitle: 'Production-proven systems spanning AI-First frameworks, healthcare, AWS serverless, and enterprise workflows',
-    proj_current: '2026 – Present',
+    proj_current: 'Sep 2025 – Present',
 
     // Project 1: TMA AI-First Framework
     proj_tma_title: 'AI-First Enterprise Framework',
@@ -146,16 +147,25 @@ export const translations = {
     proj_tma_h2: 'GraphRAG persistent memory & Model Context Protocol (MCP) integration',
     proj_tma_h3: 'Specialized autonomous agents for Dev BE, FE, Mobile, QA, and BA roles',
     proj_tma_h4: 'Self-learning agent architecture with automated harness evaluation engine',
+    proj_tma_h5: 'Automated project scaffolding driven by requirements, Jira stories and OpenAPI contracts',
+    proj_tma_h6: 'Automated technical documentation, ERD diagrams and API references synced from codebase commits',
+    proj_tma_h7: 'Continuous Confluence/Markdown developer wiki synthesis kept in step with the code',
     proj_tma_badge: '2025 – Present · Team Lead',
 
     // Project 2: BHS Healthcare
-    proj_bhs_title: 'BHS (BestMed Healthcare Platform)',
-    proj_bhs_sub: 'Healthcare & Insurance Management System',
-    proj_bhs_desc: 'Comprehensive healthcare platform digitizing corporate health insurance workflows, emergency medical requests, care team collaboration, BestmedIQ AI reporting, and AI-assisted Angular frontend modernization with 99.9% uptime SLA.',
-    proj_bhs_h1: 'Emergency Medical Requests & Emergency Admin triage console',
-    proj_bhs_h2: 'Care Team coordination module for clinical workflows & specialist dispatch',
-    proj_bhs_h3: 'BestmedIQ AI report system integration & AI-assisted Angular upgrade',
-    proj_bhs_h4: 'Claims engine optimized with Redis caching (-70% latency) & PostgreSQL',
+    proj_bhs_title: 'BESTMED Platform',
+    proj_bhs_sub: 'Aged-Care Medication Management · Software Engineer',
+    proj_bhs_desc: 'Aged-care medication management platform built on ASP.NET Core, Angular/AngularJS, Azure Functions, Service Bus, SQL Server and Sisense. Work spans the BI analytics layer, an event-driven data-security pipeline, medication-administration compliance under Victorian legislation, and the modernisation of legacy administration screens — 190 issues delivered across releases 2.44 to 2.48.',
+    proj_bhs_h1: 'Architected and owned the end-to-end BESTMED–Sisense BI integration: user provisioning, token issuance, group synchronisation and facility-level configuration',
+    proj_bhs_h2: 'Event-driven data-security pipeline (Timer Trigger → Service Bus → Worker → API) for hourly tenant sync and user deletion, supporting ElastiCube and Live row-level security',
+    proj_bhs_h3: 'Eliminated a production provisioning race condition via a four-layer token/lock and login-first redesign, removing intermittent first-access failures',
+    proj_bhs_h4: 'Led Victorian legislation compliance: emergency administration with PIN authorisation and dual-sign, plus role-based restrictions on S4/S4D/S8 and hazardous/cytotoxic drugs',
+    proj_bhs_h5: 'Unified medication authorisation rules across six previously divergent administration code paths',
+    proj_bhs_h6: 'Cross-repository, cross-identity contract for the BESTMED Connect medication-review module, keeping workflow state server-authoritative across two systems',
+    proj_bhs_h7: 'Re-architected the prescription directions alert system into a baseline-signature state machine, fixing eight recurring defects at root cause and reusing it for mobile and PRN variants',
+    proj_bhs_h8: 'Care Team conversation search with CSV/PDF export (Angular + Web API + stored procedures), enforcing filter parity between list view and exported output',
+    proj_bhs_h9: 'Migrated legacy AngularJS administration screens to modern Angular under a strangler-fig approach with full route parity — drug maintenance, facility groups, online orders, resident search',
+    proj_bhs_h10: 'Drove team-wide adoption of AI-assisted development (Claude Code), establishing the workflow and conventions used by the team',
 
     // Project 3: HRM System
     proj_hrm_title: 'Human Resource Manager (HRM)',
@@ -165,6 +175,10 @@ export const translations = {
     proj_hrm_h2: 'Salary calculation engine and CRM voucher management',
     proj_hrm_h3: 'Job scheduling with Hangfire & Quartz.NET; Kafka & Redis messaging',
     proj_hrm_h4: 'Real-time notifications via NotiHub & Firebase Cloud Messaging (FCM)',
+    proj_hrm_h5: 'Employee management with granular RBAC backed by IdentityServer, JWT and OAuth2',
+    proj_hrm_h6: 'Document management with configurable multi-step approval routing',
+    proj_hrm_h7: 'Timekeeping, leave requests, reporting and staff ranking modules',
+    proj_hrm_h8: 'Kafka event streaming and Redis caching on a PostgreSQL + Entity Framework core',
 
     // Project 4: Work Done Report (AWS Serverless)
     proj_wdr_title: 'Work Done Report (WDR)',
@@ -174,6 +188,11 @@ export const translations = {
     proj_wdr_h2: 'AWS Cognito authentication with MFA, session management & CSP headers',
     proj_wdr_h3: 'Report versioning with audit trails and automated PDF/Excel generation',
     proj_wdr_h4: 'Event-driven scheduled jobs with CloudWatch Events / EventBridge & SQS',
+    proj_wdr_h5: 'Multi-step approval workflow engine with conditional routing rules',
+    proj_wdr_h6: 'Centralised error tracking and activity logging across the platform',
+    proj_wdr_h7: 'Interactive dashboards with real-time analytics',
+    proj_wdr_h8: 'Comprehensive RBAC backed by IAM policies, data encryption and CSP against XSS',
+    proj_wdr_h9: 'Infrastructure as code with AWS CloudFormation and SAM',
 
     // Project 5: Savvy Assistant AI
     proj_savvy_title: 'Savvy Assistant - AI Enterprise Chatbot',
@@ -183,6 +202,8 @@ export const translations = {
     proj_savvy_h2: 'High-speed semantic vector search using FAISS and All-MiniLM-L6-v2',
     proj_savvy_h3: 'Machine Learning-based image searching capability',
     proj_savvy_h4: 'RAG pipeline over internal knowledge base reducing support tickets by 40%',
+    proj_savvy_h5: 'Python MVC backend architecture paired with a React frontend',
+    proj_savvy_h6: 'NLP-driven response generation over the internal enterprise knowledge base',
 
     // Project 6: Asset Management System
     proj_asset_title: 'Asset Management System',
@@ -192,6 +213,8 @@ export const translations = {
     proj_asset_h2: 'GLPI REST API synchronization for IT hardware inventory',
     proj_asset_h3: 'Microservices for notifications, reporting & chat service integration',
     proj_asset_h4: 'IdentityServer OAuth2/JWT security and Quartz.NET scheduled jobs',
+    proj_asset_h5: 'Full lifecycle management for employee-owned assets and IT devices',
+    proj_asset_h6: 'User management APIs with role-based access control on PostgreSQL',
 
     // Project 7: Contact Center System
     proj_cc_title: 'Omnichannel Contact Center',
@@ -201,6 +224,8 @@ export const translations = {
     proj_cc_h2: 'Intelligent routing service management across 500+ agents',
     proj_cc_h3: 'Automation testing infrastructure built with Java Selenium & Winium',
     proj_cc_h4: 'Refactored mock services ensuring high stability during test runs',
+    proj_cc_h5: 'Java Spring Boot microservices architecture on MySQL',
+    proj_cc_h6: 'Unit and integration testing supporting validation of each new release',
 
     // Skills
     skills_heading: 'Technical Skills',
@@ -327,26 +352,27 @@ export const translations = {
     tma_ach4: 'Triển khai thành công self-learning agent và harness agent tự động đánh giá',
 
     // Experience – BHS
-    bhs_role: 'Backend Developer',
-    bhs_company: 'TMA Solutions · BestMed Healthcare Platform (BHS)',
-    bhs_period: '2026 – Hiện tại',
-    bhs_desc: 'Phát triển và vận hành nền tảng quản lý y tế & bảo hiểm BestMed – số hóa quy trình bảo hiểm, xử lý yêu cầu cấp cứu khẩn cấp, điều phối Care Team, tích hợp hệ thống báo cáo BestmedIQ AI và nâng cấp Angular.',
-    bhs_mod1_name: 'Yêu cầu khẩn cấp y tế & Emergency Admin',
-    bhs_mod1_detail: 'Xây dựng hệ thống tiếp nhận và xử lý yêu cầu cấp cứu y tế tức thời cùng cổng quản trị Emergency Admin để điều phối khẩn cấp, tự động cảnh báo và kiểm toán.',
-    bhs_mod2_name: 'Điều phối Care Team (Đội ngũ chăm sóc)',
-    bhs_mod2_detail: 'Thiết kế module quản lý Care Team: phân công bác sĩ, y tá, chuyên gia chăm sóc theo ca bệnh và liên lạc nội bộ lâm sàng.',
-    bhs_mod3_name: 'BestmedIQ - Tích hợp hệ thống báo cáo AI',
-    bhs_mod3_detail: 'Tích hợp hệ thống BestmedIQ ứng dụng AI phân tích dữ liệu y tế, phát hiện bất thường trong hồ sơ bồi thường và tự động tổng hợp báo cáo lâm sàng.',
-    bhs_mod4_name: 'Nâng cấp giao diện Angular bằng AI',
-    bhs_mod4_detail: 'Ứng dụng các công cụ AI và phân tích cú pháp AST tự động để nâng cấp giao diện Angular cũ lên phiên bản hiện đại, đảm bảo tương thích 100%.',
-    bhs_mod5_name: 'Engine Bồi thường & Tối ưu hiệu năng',
-    bhs_mod5_detail: 'Engine xử lý claim đa cấp, tối ưu query PostgreSQL (giảm 70% latency), cache Redis, message queue RabbitMQ, chuẩn HL7/FHIR và mã hóa AES-256.',
-    bhs_mod6_name: 'Phân quyền RBAC & Bảo mật y tế',
-    bhs_mod6_detail: 'Implement hệ thống RBAC chi tiết: Bác sĩ, Y tá, Nhân viên bảo hiểm, Emergency Admin với JWT + Azure AD / OAuth2.',
-    bhs_ach1: 'Giảm 70% latency truy vấn nhờ tối ưu PostgreSQL và Redis caching layer',
-    bhs_ach2: 'Xử lý 10,000+ yêu cầu bảo hiểm y tế mỗi ngày với 99.9% uptime SLA',
-    bhs_ach3: 'Thời gian phản hồi điều phối cấp cứu khẩn cấp dưới 2 giây',
-    bhs_ach4: 'Tích hợp thành công BestmedIQ AI và nâng cấp giao diện Angular',
+    bhs_role: 'Software Engineer',
+    bhs_company: 'TMA Solutions · BESTMED Platform',
+    bhs_period: '09/2025 – Hiện tại',
+    bhs_desc: 'Phát triển nền tảng quản lý cấp phát thuốc cho chăm sóc người cao tuổi BESTMED — quy trình cấp phát thuốc lâm sàng theo luật bang Victoria, lớp phân tích BI trên Sisense, và hiện đại hoá các màn hình quản trị AngularJS cũ. Đã xử lý 190 issue qua các release 2.44 đến 2.48.',
+    bhs_mod1_name: 'Tích hợp BI giữa BESTMED và Sisense',
+    bhs_mod1_detail: 'Thiết kế và sở hữu toàn bộ luồng tích hợp BI giữa BESTMED và Sisense: provisioning người dùng, phát hành token, đồng bộ group và cấu hình theo từng facility — xây lớp phân tích của nền tảng từ con số không.',
+    bhs_mod2_name: 'Pipeline bảo mật dữ liệu hướng sự kiện',
+    bhs_mod2_detail: 'Thiết kế pipeline Timer Trigger → Service Bus → Worker → API trên Azure Functions để đồng bộ tenant theo giờ và xoá người dùng, hỗ trợ cả hai mô hình row-level security ElastiCube và Live.',
+    bhs_mod3_name: 'Tuân thủ luật bang Victoria cho quy trình cấp phát thuốc',
+    bhs_mod3_detail: 'Dẫn dắt phần workflow cấp phát khẩn cấp có xác thực PIN và ký kép, cùng giới hạn theo vai trò với thuốc nhóm S4/S4D/S8 và thuốc nguy hại/độc tế bào, hợp nhất luật phân quyền trên sáu nhánh code cấp phát vốn đang phân mảnh.',
+    bhs_mod4_name: 'State machine cho hệ thống cảnh báo chỉ định thuốc',
+    bhs_mod4_detail: 'Tái kiến trúc hệ thống cảnh báo chỉ định từ kiểu thay đổi trạng thái thủ công rời rạc sang state machine dựa trên baseline-signature, xử lý tận gốc một cụm tám lỗi lặp lại và mở rộng cùng thiết kế đó sang biến thể mobile và PRN gần như không tốn thêm chi phí.',
+    bhs_mod5_name: 'Tích hợp module medication-review BESTMED Connect',
+    bhs_mod5_detail: 'Thiết kế hợp đồng tích hợp xuyên repository, xuyên identity cho module medication-review, giữ trạng thái workflow do server quyết định giữa hai hệ thống thuộc hai team khác nhau.',
+    bhs_mod6_name: 'Care Team Export & hiện đại hoá AngularJS',
+    bhs_mod6_detail: 'Xây luồng tìm kiếm hội thoại Care Team và xuất CSV/PDF (Angular + Web API + stored procedure), đảm bảo bộ lọc ở màn danh sách và file xuất ra khớp nhau; migrate các màn hình quản trị AngularJS cũ sang Angular hiện đại theo hướng strangler-fig, giữ nguyên toàn bộ route.',
+    bhs_ach1: 'Xử lý 190 issue qua các release 2.44 → 2.48',
+    bhs_ach2: 'Loại bỏ race condition provisioning trên production bằng thiết kế lại theo cơ chế token/lock bốn lớp và login-first, chấm dứt lỗi truy cập lần đầu cho toàn bộ người dùng mới',
+    bhs_ach3: 'Hợp nhất luật phân quyền cấp phát thuốc trên sáu nhánh code vốn phân mảnh',
+    bhs_ach4: 'Xử lý tận gốc tám lỗi cảnh báo lặp lại chỉ bằng một lần tái thiết kế state machine',
+    bhs_ach5: 'Dẫn dắt việc áp dụng AI-assisted development (Claude Code) cho cả team, thiết lập quy trình và quy ước mà team đang dùng',
 
     // Experience – XYZ
     xyz_role: 'Senior Backend Developer',
@@ -379,7 +405,7 @@ export const translations = {
     // Projects
     proj_heading: 'Dự án thực chiến',
     proj_subtitle: 'Các hệ thống sản xuất và R&D từ nền tảng AI-First, y tế khẩn cấp, AWS Serverless đến workflow doanh nghiệp',
-    proj_current: '2026 – Hiện tại',
+    proj_current: '09/2025 – Hiện tại',
 
     // Project 1: TMA AI-First Framework
     proj_tma_title: 'AI-First Enterprise Framework',
@@ -389,16 +415,25 @@ export const translations = {
     proj_tma_h2: 'Bộ nhớ ngữ cảnh GraphRAG và tích hợp giao thức Model Context Protocol (MCP)',
     proj_tma_h3: 'Agent tự trị chuyên biệt cho các role Dev BE, FE, Mobile, QA và BA',
     proj_tma_h4: 'Kiến trúc Self-learning agent đi kèm harness agent tự động benchmark kiểm thử',
+    proj_tma_h5: 'Tự động scaffolding dự án từ requirement, Jira story và hợp đồng OpenAPI',
+    proj_tma_h6: 'Tự sinh tài liệu kỹ thuật, sơ đồ ERD và API reference đồng bộ từ commit trong codebase',
+    proj_tma_h7: 'Liên tục tổng hợp wiki Confluence/Markdown cho developer, luôn bám sát code',
     proj_tma_badge: '2025 – Hiện tại · Team Lead',
 
     // Project 2: BHS Healthcare
-    proj_bhs_title: 'BHS (BestMed Healthcare Platform)',
-    proj_bhs_sub: 'Hệ thống Quản lý Y tế & Bảo hiểm Toàn diện',
-    proj_bhs_desc: 'Nền tảng y tế số hóa quy trình bồi thường bảo hiểm, điều phối yêu cầu cấp cứu y tế khẩn cấp, quản lý Care Team, tích hợp hệ thống báo cáo BestmedIQ AI và nâng cấp frontend Angular bằng AI với SLA 99.9%.',
-    proj_bhs_h1: 'Xử lý yêu cầu cấp cứu y tế khẩn cấp & cổng quản trị Emergency Admin',
-    proj_bhs_h2: 'Module điều phối Care Team lâm sàng và liên lạc chuyên gia theo ca bệnh',
-    proj_bhs_h3: 'Tích hợp BestmedIQ AI phân tích báo cáo và AI hỗ trợ nâng cấp Angular',
-    proj_bhs_h4: 'Engine bồi thường tối ưu với cache Redis (giảm 70% latency) & PostgreSQL',
+    proj_bhs_title: 'BESTMED Platform',
+    proj_bhs_sub: 'Quản lý cấp phát thuốc chăm sóc người cao tuổi · Software Engineer',
+    proj_bhs_desc: 'Nền tảng quản lý cấp phát thuốc cho chăm sóc người cao tuổi, xây trên ASP.NET Core, Angular/AngularJS, Azure Functions, Service Bus, SQL Server và Sisense. Phạm vi công việc trải từ lớp phân tích BI, pipeline bảo mật dữ liệu hướng sự kiện, tuân thủ pháp lý cho quy trình cấp phát thuốc theo luật bang Victoria, đến hiện đại hoá các màn hình quản trị cũ — 190 issue qua các release 2.44 đến 2.48.',
+    proj_bhs_h1: 'Thiết kế và sở hữu toàn bộ luồng tích hợp BI BESTMED–Sisense: provisioning người dùng, phát hành token, đồng bộ group và cấu hình theo facility',
+    proj_bhs_h2: 'Pipeline bảo mật dữ liệu hướng sự kiện (Timer Trigger → Service Bus → Worker → API) đồng bộ tenant theo giờ và xoá người dùng, hỗ trợ row-level security cả ElastiCube lẫn Live',
+    proj_bhs_h3: 'Loại bỏ race condition provisioning trên production bằng thiết kế token/lock bốn lớp và login-first, chấm dứt lỗi truy cập lần đầu',
+    proj_bhs_h4: 'Dẫn dắt phần tuân thủ luật bang Victoria: cấp phát khẩn cấp có xác thực PIN và ký kép, giới hạn theo vai trò với thuốc S4/S4D/S8 và thuốc nguy hại/độc tế bào',
+    proj_bhs_h5: 'Hợp nhất luật phân quyền cấp phát thuốc trên sáu nhánh code vốn phân mảnh',
+    proj_bhs_h6: 'Hợp đồng tích hợp xuyên repository, xuyên identity cho module medication-review BESTMED Connect, giữ trạng thái workflow do server quyết định giữa hai hệ thống',
+    proj_bhs_h7: 'Tái kiến trúc hệ thống cảnh báo chỉ định thuốc thành state machine baseline-signature, xử lý tận gốc tám lỗi lặp lại và tái dùng cho biến thể mobile và PRN',
+    proj_bhs_h8: 'Tìm kiếm hội thoại Care Team kèm xuất CSV/PDF (Angular + Web API + stored procedure), đảm bảo bộ lọc khớp giữa màn danh sách và file xuất ra',
+    proj_bhs_h9: 'Migrate màn hình quản trị AngularJS cũ sang Angular hiện đại theo hướng strangler-fig, giữ nguyên route — drug maintenance, facility groups, online orders, resident search',
+    proj_bhs_h10: 'Dẫn dắt việc áp dụng AI-assisted development (Claude Code) cho cả team, thiết lập quy trình và quy ước team đang dùng',
 
     // Project 3: HRM System
     proj_hrm_title: 'Human Resource Manager (HRM)',
@@ -408,6 +443,10 @@ export const translations = {
     proj_hrm_h2: 'Tính năng tính lương nhân viên và quản lý voucher dịch vụ CRM',
     proj_hrm_h3: 'Lập lịch tác vụ với Hangfire & Quartz.NET; message bus Kafka & Redis',
     proj_hrm_h4: 'Thông báo real-time qua NotiHub & Firebase Cloud Messaging (FCM)',
+    proj_hrm_h5: 'Quản lý nhân sự với RBAC chi tiết trên nền IdentityServer, JWT và OAuth2',
+    proj_hrm_h6: 'Quản lý tài liệu với luồng phê duyệt đa bước cấu hình được',
+    proj_hrm_h7: 'Các module chấm công, nghỉ phép, báo cáo và xếp hạng nhân sự',
+    proj_hrm_h8: 'Event streaming Kafka và caching Redis trên nền PostgreSQL + Entity Framework',
 
     // Project 4: Work Done Report (AWS Serverless)
     proj_wdr_title: 'Work Done Report (WDR)',
@@ -417,6 +456,11 @@ export const translations = {
     proj_wdr_h2: 'Xác thực AWS Cognito với MFA, quản lý phiên và bảo mật CSP',
     proj_wdr_h3: 'Versioning báo cáo kèm audit trail và tự động xuất file PDF/Excel',
     proj_wdr_h4: 'Lập lịch tác vụ hướng sự kiện với CloudWatch Events / EventBridge & SQS',
+    proj_wdr_h5: 'Engine workflow phê duyệt đa bước với luật định tuyến theo điều kiện',
+    proj_wdr_h6: 'Hệ thống theo dõi lỗi và ghi log hoạt động tập trung cho toàn nền tảng',
+    proj_wdr_h7: 'Dashboard tương tác với phân tích thời gian thực',
+    proj_wdr_h8: 'RBAC toàn diện trên nền IAM policy, mã hoá dữ liệu và CSP chống XSS',
+    proj_wdr_h9: 'Hạ tầng dưới dạng code với AWS CloudFormation và SAM',
 
     // Project 5: Savvy Assistant AI
     proj_savvy_title: 'Savvy Assistant - AI Enterprise Chatbot',
@@ -426,6 +470,8 @@ export const translations = {
     proj_savvy_h2: 'Tìm kiếm ngữ nghĩa siêu tốc với FAISS và embedding All-MiniLM-L6-v2',
     proj_savvy_h3: 'Tính năng tìm kiếm bằng hình ảnh ứng dụng Machine Learning',
     proj_savvy_h4: 'Quy trình RAG trên kho tri thức nội bộ giúp giảm 40% ticket hỗ trợ',
+    proj_savvy_h5: 'Kiến trúc backend Python MVC kết hợp frontend React',
+    proj_savvy_h6: 'Sinh phản hồi bằng NLP trên kho tri thức nội bộ của doanh nghiệp',
 
     // Project 6: Asset Management System
     proj_asset_title: 'Asset Management System',
@@ -435,6 +481,8 @@ export const translations = {
     proj_asset_h2: 'Đồng bộ hai chiều với hệ thống quản lý IT GLPI qua REST API',
     proj_asset_h3: 'Microservices phục vụ thông báo, báo cáo và tích hợp Chat service',
     proj_asset_h4: 'Bảo mật OAuth2/JWT với IdentityServer và lập lịch Quartz.NET',
+    proj_asset_h5: 'Quản lý trọn vòng đời tài sản của nhân viên và thiết bị IT',
+    proj_asset_h6: 'API quản lý người dùng với phân quyền theo vai trò trên PostgreSQL',
 
     // Project 7: Contact Center System
     proj_cc_title: 'Omnichannel Contact Center',
@@ -444,6 +492,8 @@ export const translations = {
     proj_cc_h2: 'Quản trị dịch vụ định tuyến cuộc gọi thông minh cho 500+ tổng đài viên',
     proj_cc_h3: 'Hạ tầng kiểm thử tự động phát triển bằng Java Selenium & Winium',
     proj_cc_h4: 'Thiết kế & tái cấu trúc mock services đảm bảo độ ổn định môi trường test',
+    proj_cc_h5: 'Kiến trúc microservices Java Spring Boot trên nền MySQL',
+    proj_cc_h6: 'Unit test và integration test phục vụ kiểm định từng phiên bản phát hành',
 
     // Skills
     skills_heading: 'Kỹ năng công nghệ',
