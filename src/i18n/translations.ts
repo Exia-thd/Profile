@@ -55,13 +55,18 @@ export const translations = {
     exp_achievements: 'Key Achievements',
     exp_years: 'Years',
     exp_bigprojects: 'Major Projects',
-    exp_companies: 'Companies',
+    exp_clients: 'Clients',
     exp_technologies: 'Technologies',
+    exp_employer: 'TMA Solutions',
+    exp_employer_period: '2021 – Present',
+    exp_employer_note: 'One employer throughout. Every engagement below was delivered at TMA Solutions — internal projects alongside outsourced projects delivered for client companies. Dates overlap where engagements ran in parallel.',
+    exp_internal: 'Internal project',
+    exp_outsourced: 'Outsourced project',
 
     // Experience – TMA AI-First Framework Team Lead
     tma_role: 'AI Team Lead & Senior Backend Developer',
-    tma_company: 'TMA Solutions (AI-First Engineering)',
-    tma_period: '2025 – Present (In parallel with BHS)',
+    tma_company: 'TMA Solutions · AI-First Engineering',
+    tma_period: '2025 – Present',
     tma_desc: 'Led a dedicated R&D team building an AI-First Software Development Framework from the ground up: automating project initialization (scaffolding), dynamic code generation, auto-generation of documentation, and continuous developer wiki synthesis across cross-functional engineering roles.',
     tma_mod1_name: 'Project Scaffolding & Spec Ingestion',
     tma_mod1_detail: 'Engineered automated project initialization: ingesting requirements, Jira stories, and OpenAPI contracts to scaffold production-grade backend, frontend, and mobile projects.',
@@ -80,7 +85,7 @@ export const translations = {
 
     // Experience – BHS
     bhs_role: 'Backend Developer',
-    bhs_company: 'BHS (BestMed Healthcare Platform)',
+    bhs_company: 'TMA Solutions · BestMed Healthcare Platform (BHS)',
     bhs_period: '2026 – Present',
     bhs_desc: 'Developing and operating the BestMed healthcare & insurance management platform — digitizing corporate health insurance, medical emergency requests, care team coordination, and BestmedIQ AI reporting.',
     bhs_mod1_name: 'Emergency Medical Requests & Emergency Admin',
@@ -102,7 +107,7 @@ export const translations = {
 
     // Experience – XYZ
     xyz_role: 'Senior Backend Developer',
-    xyz_company: 'XYZ Software Company',
+    xyz_company: 'TMA Solutions · Client XYZ',
     xyz_period: '2022 – 2025',
     xyz_desc: 'Engineered enterprise HRM (Human Resource Management) system, AWS Serverless Work Done Report (WDR), and Savvy Assistant AI chatbot for 2,000+ enterprise users.',
     xyz_mod1_name: 'HRM Workflow & Approval Engine',
@@ -117,7 +122,7 @@ export const translations = {
 
     // Experience – ABC
     abc_role: 'Backend Developer',
-    abc_company: 'ABC Technology Company',
+    abc_company: 'TMA Solutions · Client ABC',
     abc_period: '2021 – 2023',
     abc_desc: 'Developed omnichannel Contact Center system and enterprise Asset Management System for a major telecommunications enterprise.',
     abc_mod1_name: 'Omnichannel Contact Center & Routing',
@@ -293,13 +298,18 @@ export const translations = {
     exp_achievements: 'Thành tựu nổi bật',
     exp_years: 'Năm kinh nghiệm',
     exp_bigprojects: 'Dự án lớn',
-    exp_companies: 'Công ty',
+    exp_clients: 'Khách hàng',
     exp_technologies: 'Công nghệ',
+    exp_employer: 'TMA Solutions',
+    exp_employer_period: '2021 – Hiện tại',
+    exp_employer_note: 'Xuyên suốt tại một công ty. Toàn bộ các dự án bên dưới đều được thực hiện tại TMA Solutions — vừa dự án nội bộ, vừa các dự án outsource cho công ty khách hàng. Các mốc thời gian chồng nhau là do chạy song song.',
+    exp_internal: 'Dự án nội bộ',
+    exp_outsourced: 'Dự án outsource',
 
     // Experience – TMA AI-First Framework Team Lead
     tma_role: 'AI Team Lead & Senior Backend Developer',
-    tma_company: 'TMA Solutions (AI-First Engineering)',
-    tma_period: '2025 – Hiện tại (Song song với BHS)',
+    tma_company: 'TMA Solutions · AI-First Engineering',
+    tma_period: '2025 – Hiện tại',
     tma_desc: 'Lead một team chuyên trách xây dựng AI-first framework độc quyền cho TMA: từ bước Khởi tạo dự án (Init project scaffolding), tự động sinh tài liệu kỹ thuật (Docs), tự tạo Wiki tri thức, vận hành theo mô hình LLM, workflow, skills, GraphRAG memory và giao thức MCP cho các role từ Backend, Frontend, Mobile đến QA và BA.',
     tma_mod1_name: 'Khởi tạo dự án & Đọc đặc tả tự động',
     tma_mod1_detail: 'Phát triển cơ chế tự động đọc tài liệu nghiệp vụ Jira/specs để scaffold toàn bộ source code chuẩn cho backend, frontend và mobile.',
@@ -318,7 +328,7 @@ export const translations = {
 
     // Experience – BHS
     bhs_role: 'Backend Developer',
-    bhs_company: 'BHS (BestMed Healthcare Platform)',
+    bhs_company: 'TMA Solutions · BestMed Healthcare Platform (BHS)',
     bhs_period: '2026 – Hiện tại',
     bhs_desc: 'Phát triển và vận hành nền tảng quản lý y tế & bảo hiểm BestMed – số hóa quy trình bảo hiểm, xử lý yêu cầu cấp cứu khẩn cấp, điều phối Care Team, tích hợp hệ thống báo cáo BestmedIQ AI và nâng cấp Angular.',
     bhs_mod1_name: 'Yêu cầu khẩn cấp y tế & Emergency Admin',
@@ -340,7 +350,7 @@ export const translations = {
 
     // Experience – XYZ
     xyz_role: 'Senior Backend Developer',
-    xyz_company: 'Công ty Phần mềm XYZ',
+    xyz_company: 'TMA Solutions · Khách hàng XYZ',
     xyz_period: '2022 – 2025',
     xyz_desc: 'Phát triển hệ thống HRM (Human Resource Management), hệ thống Work Done Report (WDR) trên AWS Serverless và chatbot AI Savvy Assistant cho doanh nghiệp 2,000+ nhân sự.',
     xyz_mod1_name: 'HRM Workflow & Approval Engine',
@@ -355,7 +365,7 @@ export const translations = {
 
     // Experience – ABC
     abc_role: 'Backend Developer',
-    abc_company: 'Công ty Công nghệ ABC',
+    abc_company: 'TMA Solutions · Khách hàng ABC',
     abc_period: '2021 – 2023',
     abc_desc: 'Phát triển hệ thống Contact Center đa kênh và Asset Management System cho doanh nghiệp viễn thông lớn.',
     abc_mod1_name: 'Contact Center Đa kênh & Định tuyến',

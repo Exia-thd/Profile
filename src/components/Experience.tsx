@@ -14,6 +14,7 @@ import {
   Package,
   ChevronDown,
   Sparkles,
+  Building2,
 } from 'lucide-react';
 import { useLang } from '../i18n/LangContext';
 import SpotlightCard from './interactive/SpotlightCard';
@@ -35,6 +36,7 @@ export default function Experience() {
       location: 'TP. Hồ Chí Minh',
       type: t('exp_lead'),
       description: t('tma_desc'),
+      engagement: 'internal',
       dotColor: '#f97316',
       dotShadow: 'rgba(249, 115, 22, 0.4)',
       stripColor: 'linear-gradient(90deg, #f97316, #ec4899)',
@@ -96,6 +98,7 @@ export default function Experience() {
       location: 'TP. Hồ Chí Minh',
       type: t('exp_fulltime'),
       description: t('bhs_desc'),
+      engagement: 'internal',
       dotColor: '#10b981',
       dotShadow: 'rgba(16, 185, 129, 0.4)',
       stripColor: 'linear-gradient(90deg, #10b981, #06b6d4)',
@@ -164,6 +167,7 @@ export default function Experience() {
       location: 'TP. Hồ Chí Minh',
       type: t('exp_fulltime'),
       description: t('xyz_desc'),
+      engagement: 'outsourced',
       dotColor: '#6366f1',
       dotShadow: 'rgba(99, 102, 241, 0.4)',
       stripColor: 'linear-gradient(90deg, #6366f1, #8b5cf6)',
@@ -213,6 +217,7 @@ export default function Experience() {
       location: 'TP. Hồ Chí Minh',
       type: t('exp_fulltime'),
       description: t('abc_desc'),
+      engagement: 'outsourced',
       dotColor: '#38bdf8',
       dotShadow: 'rgba(56, 189, 248, 0.4)',
       stripColor: 'linear-gradient(90deg, #38bdf8, #818cf8)',
@@ -263,6 +268,29 @@ export default function Experience() {
             <span className="gradient-text">{t('exp_heading')}</span>
           </h2>
           <p className="text-slate-400 text-base sm:text-lg">{t('exp_subtitle')}</p>
+        </div>
+
+        {/* Single-employer banner: everything below happened at TMA Solutions */}
+        <div className="mb-10">
+          <SpotlightCard
+            className="p-0 overflow-hidden"
+            spotlightColor="rgba(99, 102, 241, 0.2)"
+            borderColor="rgba(255, 255, 255, 0.08)"
+          >
+            <div className="h-1" style={{ background: 'linear-gradient(90deg, #6366f1, #38bdf8)' }} />
+            <div className="p-6 sm:p-7 flex flex-col sm:flex-row sm:items-start gap-4">
+              <div className="w-12 h-12 shrink-0 rounded-2xl bg-indigo-500/15 border border-indigo-500/30 flex items-center justify-center">
+                <Building2 className="w-5 h-5 text-indigo-300" />
+              </div>
+              <div className="min-w-0">
+                <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                  <h3 className="text-lg sm:text-xl font-bold text-white">{t('exp_employer')}</h3>
+                  <span className="font-mono text-sm text-indigo-300">{t('exp_employer_period')}</span>
+                </div>
+                <p className="text-slate-400 text-sm leading-relaxed mt-1.5">{t('exp_employer_note')}</p>
+              </div>
+            </div>
+          </SpotlightCard>
         </div>
 
         {/* Timeline Container */}
@@ -360,6 +388,10 @@ export default function Experience() {
                           <Briefcase className="w-3.5 h-3.5 text-cyan-400" />
                           {exp.type}
                         </span>
+                        <span className="flex items-center gap-1.5">
+                          <Building2 className="w-3.5 h-3.5 text-emerald-400" />
+                          {exp.engagement === 'internal' ? t('exp_internal') : t('exp_outsourced')}
+                        </span>
                       </div>
 
                       <p className="text-slate-300 text-sm leading-relaxed mt-4">{exp.description}</p>
@@ -456,8 +488,8 @@ export default function Experience() {
         <div className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-3.5">
           {[
             { value: '7+', label: t('exp_years'), color: '#818cf8', gradient: 'from-indigo-500 to-blue-500' },
-            { value: '6+', label: t('exp_bigprojects'), color: '#a78bfa', gradient: 'from-violet-500 to-purple-500' },
-            { value: '3', label: t('exp_companies'), color: '#34d399', gradient: 'from-emerald-500 to-teal-500' },
+            { value: '7', label: t('exp_bigprojects'), color: '#a78bfa', gradient: 'from-violet-500 to-purple-500' },
+            { value: '3', label: t('exp_clients'), color: '#34d399', gradient: 'from-emerald-500 to-teal-500' },
             { value: '10+', label: t('exp_technologies'), color: '#38bdf8', gradient: 'from-cyan-500 to-sky-500' },
           ].map((stat) => (
             <SpotlightCard key={stat.label} className="p-5 text-center" spotlightColor="rgba(99, 102, 241, 0.15)">
