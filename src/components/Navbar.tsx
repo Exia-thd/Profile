@@ -10,6 +10,8 @@ import {
 } from 'lucide-react';
 import { useLang } from '../i18n/LangContext';
 import NavIcon3D from './nav/NavIcon3D';
+import AvatarDisplay from './common/AvatarDisplay';
+import { cyberAudio } from '../utils/cyberAudio';
 
 interface NavbarProps {
   onOpenTerminal: () => void;
@@ -64,23 +66,22 @@ export default function Navbar({ onOpenTerminal, onOpenCommandPalette }: NavbarP
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          {/* Brand Monogram Logo */}
-          <a
-            href="#home"
-            className="flex items-center gap-2.5 text-white font-bold group"
-          >
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 via-violet-600 to-cyan-400 flex items-center justify-center text-white text-sm font-extrabold shadow-md shadow-indigo-500/30 group-hover:scale-105 transition-transform">
-              ĐT
-            </div>
-            <div className="flex flex-col">
-              <span className="text-sm font-extrabold tracking-tight group-hover:text-indigo-300 transition-colors">
+          {/* Brand Avatar & Logo */}
+          <div className="flex items-center gap-3">
+            <AvatarDisplay size="sm" showUploadBadge={false} />
+            <a
+              href="#home"
+              onMouseEnter={() => cyberAudio.playHover()}
+              className="flex flex-col group text-left"
+            >
+              <span className="text-sm font-extrabold tracking-tight text-white group-hover:text-cyan-300 transition-colors leading-tight">
                 Trần Hữu Đạt
               </span>
               <span className="text-[10px] font-mono text-cyan-400 font-semibold tracking-wider">
                 Senior Backend Dev
               </span>
-            </div>
-          </a>
+            </a>
+          </div>
 
           {/* Desktop Nav Links */}
           <div className="hidden lg:flex items-center gap-1 bg-white/[0.03] border border-white/5 rounded-full p-1.5 backdrop-blur-md">
@@ -90,6 +91,8 @@ export default function Navbar({ onOpenTerminal, onOpenCommandPalette }: NavbarP
                 <a
                   key={link.href}
                   href={link.href}
+                  onMouseEnter={() => cyberAudio.playHover()}
+                  onClick={() => cyberAudio.playClick()}
                   className={`flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all ${
                     isActive
                       ? 'bg-gradient-to-r from-indigo-600 to-violet-600 text-white shadow-sm'
@@ -107,7 +110,11 @@ export default function Navbar({ onOpenTerminal, onOpenCommandPalette }: NavbarP
           <div className="hidden md:flex items-center gap-2">
             {/* Quick Command Palette Button */}
             <button
-              onClick={onOpenCommandPalette}
+              onClick={() => {
+                cyberAudio.playClick();
+                onOpenCommandPalette();
+              }}
+              onMouseEnter={() => cyberAudio.playHover()}
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 text-slate-300 hover:text-white text-xs font-mono transition-all"
               title="Search & Quick Commands"
             >
@@ -117,7 +124,11 @@ export default function Navbar({ onOpenTerminal, onOpenCommandPalette }: NavbarP
 
             {/* Interactive Terminal Trigger */}
             <button
-              onClick={onOpenTerminal}
+              onClick={() => {
+                cyberAudio.playClick();
+                onOpenTerminal();
+              }}
+              onMouseEnter={() => cyberAudio.playHover()}
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-indigo-600/20 hover:bg-indigo-600/30 border border-indigo-500/30 text-indigo-300 hover:text-white text-xs font-mono transition-all"
               title="Open Backend Terminal"
             >
@@ -127,7 +138,11 @@ export default function Navbar({ onOpenTerminal, onOpenCommandPalette }: NavbarP
 
             {/* Language Switcher */}
             <button
-              onClick={() => setLang(lang === 'vi' ? 'en' : 'vi')}
+              onClick={() => {
+                cyberAudio.playClick();
+                setLang(lang === 'vi' ? 'en' : 'vi');
+              }}
+              onMouseEnter={() => cyberAudio.playHover()}
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 text-slate-300 hover:text-white text-xs font-semibold transition-all"
             >
               <Globe className="w-3.5 h-3.5 text-cyan-400" />

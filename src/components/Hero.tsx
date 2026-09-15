@@ -25,6 +25,9 @@ import {
 import { useLang } from '../i18n/LangContext';
 import SpotlightCard from './interactive/SpotlightCard';
 import TiltCard3D from './interactive/TiltCard3D';
+import CyberHoloCore3D from './interactive/CyberHoloCore3D';
+import AvatarDisplay from './common/AvatarDisplay';
+import { cyberAudio } from '../utils/cyberAudio';
 
 interface HeroProps {
   onOpenTerminal: () => void;
@@ -42,10 +45,11 @@ export default function Hero({
   const [roleIndex, setRoleIndex] = useState(0);
   const [isTelemetryPaused, setIsTelemetryPaused] = useState(false);
   const [streamIndex, setStreamIndex] = useState(0);
+  const [heroTab, setHeroTab] = useState<'3d' | 'pillars'>('3d');
 
   const roles = [
     { title: 'Senior Backend Developer', sub: '.NET Core · Java · Python · Distributed Systems', color: '#818cf8' },
-    { title: 'TMA AI-First Team Lead', sub: 'Autonomous Agents · GraphRAG · MCP Protocol', color: '#fb923c' },
+    { title: 'AI System Architect @ TMA Solutions', sub: 'Autonomous Agents · GraphRAG · MCP Protocol', color: '#fb923c' },
     { title: 'Healthcare Platform Engineer', sub: 'Aged-Care Medication · Sisense BI · Azure Functions', color: '#2dd4bf' },
     { title: 'AWS Serverless Architect', sub: 'Zero-Idle Cost · Lambda · Aurora PostgreSQL', color: '#f59e0b' },
   ];
@@ -134,38 +138,9 @@ export default function Hero({
           {/* Left Column: Profile Information */}
           <div className="lg:col-span-7 text-center lg:text-left">
             <div className="flex flex-col sm:flex-row items-center lg:items-start gap-5 mb-5 justify-center lg:justify-start">
-              {/* Avatar with 3D Tilt & Glow */}
+              {/* Avatar with 3D Tilt & Cybernetic Ring */}
               <TiltCard3D maxTilt={15} scale={1.05} className="cursor-pointer">
-                <div className="relative group">
-                  {/* Outer spinning dashed ring */}
-                  <div
-                    className="absolute rounded-full border-2 border-dashed animate-spin-slow"
-                    style={{ inset: '-10px', borderColor: 'rgba(99, 102, 241, 0.6)' }}
-                  />
-                  {/* Glowing halo */}
-                  <div
-                    className="absolute rounded-full transition-all duration-500 group-hover:scale-110"
-                    style={{
-                      inset: '-4px',
-                      background: 'linear-gradient(135deg, rgba(99,102,241,0.8), rgba(168,85,247,0.8), rgba(6,182,212,0.8))',
-                      filter: 'blur(12px)',
-                    }}
-                  />
-                  {/* Monogram */}
-                  <div
-                    className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-gradient-to-br from-indigo-500 via-violet-600 to-cyan-400 flex items-center justify-center text-white text-3xl sm:text-4xl font-extrabold shadow-2xl tracking-tight select-none border-2 border-white/20"
-                    style={{ boxShadow: '0 0 35px rgba(99,102,241,0.6)' }}
-                  >
-                    ĐT
-                  </div>
-                  {/* Online ping dot */}
-                  <div
-                    className="absolute bottom-0 right-0 w-8 h-8 bg-emerald-500 rounded-full flex items-center justify-center shadow-lg border-2 border-slate-900"
-                    style={{ boxShadow: '0 0 14px rgba(16,185,129,0.9)' }}
-                  >
-                    <div className="w-2.5 h-2.5 bg-white rounded-full animate-ping" />
-                  </div>
-                </div>
+                <AvatarDisplay size="lg" showUploadBadge={true} />
               </TiltCard3D>
 
               {/* Developer Name & Header */}
@@ -239,11 +214,11 @@ export default function Hero({
             >
               {lang === 'vi' ? (
                 <>
-                  Kỹ sư Backend <strong className="text-white font-semibold">7+ năm</strong> với các hệ thống chạy thật: sở hữu toàn bộ mảng <strong className="text-cyan-300 font-semibold">tích hợp BI Sisense</strong> và lớp <strong className="text-cyan-300 font-semibold">tuân thủ pháp lý cho quy trình cấp phát thuốc</strong> của nền tảng chăm sóc người cao tuổi BESTMED, xây hệ thống báo cáo <strong className="text-indigo-300 font-semibold">AWS Serverless</strong> trên Lambda + Cognito + Aurora, và — với vai trò <strong className="text-orange-300 font-semibold">AI Team Lead tại TMA Solutions</strong> — dẫn dắt framework AI-First multi-agent trên nền <strong className="text-violet-300 font-semibold">bộ nhớ GraphRAG</strong> và <strong className="text-violet-300 font-semibold">giao thức MCP</strong>.
+                  Kỹ sư Backend <strong className="text-white font-semibold">7+ năm</strong> với các hệ thống chạy thật: sở hữu toàn bộ mảng <strong className="text-cyan-300 font-semibold">tích hợp BI Sisense</strong> và lớp <strong className="text-cyan-300 font-semibold">tuân thủ pháp lý cho quy trình cấp phát thuốc</strong> của nền tảng chăm sóc người cao tuổi BESTMED, xây hệ thống báo cáo <strong className="text-indigo-300 font-semibold">AWS Serverless</strong> trên Lambda + Cognito + Aurora, và — với vai trò <strong className="text-orange-300 font-semibold">AI System Architect tại TMA Solutions</strong> — thiết kế kiến trúc framework AI-First multi-agent trên nền <strong className="text-violet-300 font-semibold">bộ nhớ GraphRAG</strong> và <strong className="text-violet-300 font-semibold">giao thức MCP</strong>.
                 </>
               ) : (
                 <>
-                  Backend Developer with <strong className="text-white font-semibold">7+ years</strong> on production systems: I own the <strong className="text-cyan-300 font-semibold">Sisense BI integration</strong> and the <strong className="text-cyan-300 font-semibold">medication-authorisation compliance layer</strong> of the BESTMED aged-care platform, built <strong className="text-indigo-300 font-semibold">AWS Serverless reporting</strong> on Lambda + Cognito + Aurora, and — as <strong className="text-orange-300 font-semibold">AI Team Lead at TMA Solutions</strong> — lead an AI-First multi-agent framework built on <strong className="text-violet-300 font-semibold">GraphRAG memory</strong> and the <strong className="text-violet-300 font-semibold">Model Context Protocol (MCP)</strong>.
+                  Backend Developer with <strong className="text-white font-semibold">7+ years</strong> on production systems: I own the <strong className="text-cyan-300 font-semibold">Sisense BI integration</strong> and the <strong className="text-cyan-300 font-semibold">medication-authorisation compliance layer</strong> of the BESTMED aged-care platform, built <strong className="text-indigo-300 font-semibold">AWS Serverless reporting</strong> on Lambda + Cognito + Aurora, and — as <strong className="text-orange-300 font-semibold">AI System Architect at TMA Solutions</strong> — architect an AI-First multi-agent framework built on <strong className="text-violet-300 font-semibold">GraphRAG memory</strong> and the <strong className="text-violet-300 font-semibold">Model Context Protocol (MCP)</strong>.
                 </>
               )}
             </motion.p>
@@ -354,91 +329,127 @@ export default function Hero({
 
           {/* Right Column: Interactive System Architecture & Tech Highlights */}
           <div className="lg:col-span-5">
-            <TiltCard3D maxTilt={7} scale={1.01} className="w-full">
-              <SpotlightCard
-                className="p-6 sm:p-7 relative rounded-3xl overflow-hidden border border-indigo-500/30 bg-slate-900/80 backdrop-blur-2xl shadow-2xl text-left"
-                spotlightColor="rgba(99, 102, 241, 0.3)"
+            {/* High-Tech HUD View Switcher */}
+            <div className="flex items-center justify-between p-1.5 rounded-2xl bg-slate-950/80 border border-cyan-500/25 backdrop-blur-xl mb-3 font-mono text-xs shadow-lg">
+              <button
+                onClick={() => {
+                  setHeroTab('3d');
+                  cyberAudio.playClick();
+                }}
+                className={`flex-1 flex items-center justify-center gap-2 py-2 rounded-xl transition-all font-semibold ${
+                  heroTab === '3d'
+                    ? 'bg-gradient-to-r from-cyan-500/20 to-indigo-500/20 text-cyan-300 border border-cyan-500/40 shadow-[0_0_15px_rgba(6,182,212,0.2)]'
+                    : 'text-slate-400 hover:text-slate-200'
+                }`}
               >
-                {/* Header: System Status & Active Pod */}
-                <div className="flex items-center justify-between pb-4 mb-5 border-b border-white/10">
-                  <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-lg bg-indigo-500/20 border border-indigo-500/40 flex items-center justify-center">
-                      <Server className="w-4 h-4 text-indigo-400" />
-                    </div>
-                    <div>
-                      <h3 className="text-sm font-bold text-white leading-none">
-                        {lang === 'vi' ? 'Kiến trúc & Trọng tâm kỹ thuật' : 'Backend & AI Focus'}
-                      </h3>
-                      <p className="text-[11px] font-mono text-cyan-400 mt-1">cluster: production-asia-se1</p>
-                    </div>
-                  </div>
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-mono font-bold bg-emerald-500/15 border border-emerald-500/30 text-emerald-300">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                    ONLINE
-                  </span>
-                </div>
+                <Box className="w-3.5 h-3.5 text-cyan-400" />
+                <span>3D Holo Topology</span>
+              </button>
+              <button
+                onClick={() => {
+                  setHeroTab('pillars');
+                  cyberAudio.playClick();
+                }}
+                className={`flex-1 flex items-center justify-center gap-2 py-2 rounded-xl transition-all font-semibold ${
+                  heroTab === 'pillars'
+                    ? 'bg-gradient-to-r from-indigo-500/20 to-purple-500/20 text-indigo-300 border border-indigo-500/40 shadow-[0_0_15px_rgba(99,102,241,0.2)]'
+                    : 'text-slate-400 hover:text-slate-200'
+                }`}
+              >
+                <Server className="w-3.5 h-3.5 text-indigo-400" />
+                <span>{lang === 'vi' ? 'Kiến trúc & Trọng tâm kỹ thuật' : 'Backend & AI Focus'}</span>
+              </button>
+            </div>
 
-                {/* Core Pillars */}
-                <div className="space-y-3.5 mb-5">
-                  <div className="p-3 rounded-xl bg-white/[0.03] border border-white/5 hover:border-indigo-500/30 transition-all">
-                    <div className="flex items-center justify-between mb-1">
-                      <span className="text-xs font-bold text-indigo-300 flex items-center gap-1.5">
-                        <Cpu className="w-3.5 h-3.5 text-indigo-400" />
-                        TMA AI-First & Autonomous Agents
-                      </span>
-                      <span className="text-[10px] font-mono text-slate-400">Lead</span>
+            {heroTab === '3d' ? (
+              <CyberHoloCore3D />
+            ) : (
+              <TiltCard3D maxTilt={7} scale={1.01} className="w-full">
+                <SpotlightCard
+                  className="p-6 sm:p-7 relative rounded-3xl overflow-hidden border border-indigo-500/30 bg-slate-900/80 backdrop-blur-2xl shadow-2xl text-left"
+                  spotlightColor="rgba(99, 102, 241, 0.3)"
+                >
+                  {/* Header: System Status & Active Pod */}
+                  <div className="flex items-center justify-between pb-4 mb-5 border-b border-white/10">
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-8 h-8 rounded-lg bg-indigo-500/20 border border-indigo-500/40 flex items-center justify-center">
+                        <Server className="w-4 h-4 text-indigo-400" />
+                      </div>
+                      <div>
+                        <h3 className="text-sm font-bold text-white leading-none">
+                          {lang === 'vi' ? 'Kiến trúc & Trọng tâm kỹ thuật' : 'Backend & AI Focus'}
+                        </h3>
+                        <p className="text-[11px] font-mono text-cyan-400 mt-1">cluster: production-asia-se1</p>
+                      </div>
                     </div>
-                    <p className="text-xs text-slate-300 leading-relaxed">
-                      {lang === 'vi'
-                        ? 'Xây dựng Multi-Agent Orchestration, tích hợp GraphRAG & chuẩn giao thức Model Context Protocol (MCP).'
-                        : 'Architecting Multi-Agent systems, GraphRAG retrieval pipelines, and Model Context Protocol (MCP).'}
-                    </p>
-                  </div>
-
-                  <div className="p-3 rounded-xl bg-white/[0.03] border border-white/5 hover:border-cyan-500/30 transition-all">
-                    <div className="flex items-center justify-between mb-1">
-                      <span className="text-xs font-bold text-cyan-300 flex items-center gap-1.5">
-                        <Layers className="w-3.5 h-3.5 text-cyan-400" />
-                        Healthcare Platform Engineering
-                      </span>
-                      <span className="text-[10px] font-mono text-slate-400">190 issues</span>
-                    </div>
-                    <p className="text-xs text-slate-300 leading-relaxed">
-                      {lang === 'vi'
-                        ? 'Tích hợp BI Sisense, pipeline bảo mật dữ liệu trên Azure Functions và lớp tuân thủ cấp phát thuốc theo luật bang Victoria.'
-                        : 'Sisense BI integration, an Azure Functions data-security pipeline, and a medication-authorisation layer compliant with Victorian legislation.'}
-                    </p>
-                  </div>
-
-                  <div className="p-3 rounded-xl bg-white/[0.03] border border-white/5 hover:border-amber-500/30 transition-all">
-                    <div className="flex items-center justify-between mb-1">
-                      <span className="text-xs font-bold text-amber-300 flex items-center gap-1.5">
-                        <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-                        AWS Serverless & Resilience
-                      </span>
-                      <span className="text-[10px] font-mono text-slate-400">Cost Opt</span>
-                    </div>
-                    <p className="text-xs text-slate-300 leading-relaxed">
-                      {lang === 'vi'
-                        ? 'Kiến trúc Lambda + Aurora PostgreSQL zero-idle cost, thiết kế microservices có khả năng tự phục hồi (resilient).'
-                        : 'AWS Lambda + Aurora PostgreSQL zero-idle infrastructure, fault-tolerant & resilient microservices design.'}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Tech chips footer */}
-                <div className="pt-3 border-t border-white/10 flex flex-wrap gap-1.5">
-                  {['.NET 9', 'C#', 'Java Spring', 'Python', 'Kafka', 'Redis', 'Docker', 'AWS'].map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-2 py-0.5 rounded-md text-[11px] font-mono bg-indigo-500/10 border border-indigo-500/25 text-indigo-200"
-                    >
-                      {tag}
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-mono font-bold bg-emerald-500/15 border border-emerald-500/30 text-emerald-300">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                      ONLINE
                     </span>
-                  ))}
-                </div>
-              </SpotlightCard>
-            </TiltCard3D>
+                  </div>
+
+                  {/* Core Pillars */}
+                  <div className="space-y-3.5 mb-5">
+                    <div className="p-3 rounded-xl bg-white/[0.03] border border-white/5 hover:border-indigo-500/30 transition-all">
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="text-xs font-bold text-indigo-300 flex items-center gap-1.5">
+                          <Cpu className="w-3.5 h-3.5 text-indigo-400" />
+                          TMA AI-First & Autonomous Agents
+                        </span>
+                        <span className="text-[10px] font-mono text-slate-400">Lead</span>
+                      </div>
+                      <p className="text-xs text-slate-300 leading-relaxed">
+                        {lang === 'vi'
+                          ? 'Xây dựng Multi-Agent Orchestration, tích hợp GraphRAG & chuẩn giao thức Model Context Protocol (MCP).'
+                          : 'Architecting Multi-Agent systems, GraphRAG retrieval pipelines, and Model Context Protocol (MCP).'}
+                      </p>
+                    </div>
+
+                    <div className="p-3 rounded-xl bg-white/[0.03] border border-white/5 hover:border-cyan-500/30 transition-all">
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="text-xs font-bold text-cyan-300 flex items-center gap-1.5">
+                          <Layers className="w-3.5 h-3.5 text-cyan-400" />
+                          Healthcare Platform Engineering
+                        </span>
+                        <span className="text-[10px] font-mono text-slate-400">190 issues</span>
+                      </div>
+                      <p className="text-xs text-slate-300 leading-relaxed">
+                        {lang === 'vi'
+                          ? 'Tích hợp BI Sisense, pipeline bảo mật dữ liệu trên Azure Functions và lớp tuân thủ cấp phát thuốc theo luật bang Victoria.'
+                          : 'Sisense BI integration, an Azure Functions data-security pipeline, and a medication-authorisation layer compliant with Victorian legislation.'}
+                      </p>
+                    </div>
+
+                    <div className="p-3 rounded-xl bg-white/[0.03] border border-white/5 hover:border-amber-500/30 transition-all">
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="text-xs font-bold text-amber-300 flex items-center gap-1.5">
+                          <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+                          AWS Serverless & Resilience
+                        </span>
+                        <span className="text-[10px] font-mono text-slate-400">Cost Opt</span>
+                      </div>
+                      <p className="text-xs text-slate-300 leading-relaxed">
+                        {lang === 'vi'
+                          ? 'Kiến trúc Lambda + Aurora PostgreSQL zero-idle cost, thiết kế microservices có khả năng tự phục hồi (resilient).'
+                          : 'AWS Lambda + Aurora PostgreSQL zero-idle infrastructure, fault-tolerant & resilient microservices design.'}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Tech chips footer */}
+                  <div className="pt-3 border-t border-white/10 flex flex-wrap gap-1.5">
+                    {['.NET 9', 'C#', 'Java Spring', 'Python', 'Kafka', 'Redis', 'Docker', 'AWS'].map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-2 py-0.5 rounded-md text-[11px] font-mono bg-indigo-500/10 border border-indigo-500/25 text-indigo-200"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </SpotlightCard>
+              </TiltCard3D>
+            )}
           </div>
         </div>
 

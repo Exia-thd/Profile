@@ -50,7 +50,7 @@ export default function ArchitectureVisualizer() {
       id: 'ai',
       titleEn: 'TMA AI-First Framework & Multi-Agent Engine',
       titleVi: 'Hệ Thống TMA AI-First Framework & Đa Agent Tự Động Hóa',
-      tag: 'Team Lead · AI-First Engineering',
+      tag: 'AI System Architect · AI-First Engineering',
       descriptionEn:
         'An autonomous development engine automating project scaffolding, dynamic code generation, documentation synthesis, and continuous developer wiki updates. Employs GraphRAG memory, Model Context Protocol (MCP), cross-role agents (BE, FE, Mobile, QA, BA), and self-learning harness evaluation.',
       descriptionVi:

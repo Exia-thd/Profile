@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect, KeyboardEvent, ReactNode } from 'react';
 import { Terminal, X, Maximize2, Minimize2, CornerDownLeft, Sparkles } from 'lucide-react';
 import { useLang } from '../../i18n/LangContext';
+import { cyberAudio } from '../../utils/cyberAudio';
 
 interface CommandOutput {
   command: string;
@@ -52,6 +53,7 @@ export default function TerminalCLI({ onClose }: { onClose?: () => void }) {
     const trimmed = cmd.trim().toLowerCase();
     if (!trimmed) return;
 
+    cyberAudio.playPulse();
     setCmdHistory((prev) => [...prev, trimmed]);
     setCmdIndex(-1);
 
@@ -85,10 +87,10 @@ export default function TerminalCLI({ onClose }: { onClose?: () => void }) {
       case 'about':
         result = (
           <div className="space-y-1 text-slate-300 text-xs">
-            <p className="text-white font-bold text-sm">Trần Hữu Đạt · Senior Backend Developer</p>
+            <p className="text-white font-bold text-sm">Trần Hữu Đạt · Senior Backend Developer & AI System Architect</p>
             <p>🎓 HCMC University of Technology (Đại học Bách Khoa TP.HCM)</p>
             <p>📍 TP. Hồ Chí Minh, Việt Nam</p>
-            <p>💼 7+ years on production backends: I own the Sisense BI integration and the medication-authorisation compliance layer of an aged-care platform, built AWS Serverless reporting on Lambda + Cognito + Aurora, and lead TMA's AI-First multi-agent framework on GraphRAG memory + MCP protocol.</p>
+            <p>💼 7+ years on production backends: I own the Sisense BI integration and the medication-authorisation compliance layer of an aged-care platform, built AWS Serverless reporting on Lambda + Cognito + Aurora, and architect TMA's AI-First multi-agent framework on GraphRAG memory + MCP protocol.</p>
           </div>
         );
         break;
@@ -110,7 +112,7 @@ export default function TerminalCLI({ onClose }: { onClose?: () => void }) {
         result = (
           <div className="space-y-1.5 text-xs text-slate-300">
             <p className="text-indigo-400 font-bold">Featured Production & R&D Projects:</p>
-            <p><span className="text-orange-400 font-semibold">[1] TMA AI-First Framework (Team Lead):</span> LLM workflows, GraphRAG memory, MCP protocol, Self-Learning & Harness agents for BE/FE/Mobile/QA/BA</p>
+            <p><span className="text-orange-400 font-semibold">[1] TMA AI-First Framework (AI System Architect):</span> LLM workflows, GraphRAG memory, MCP protocol, Self-Learning & Harness agents for BE/FE/Mobile/QA/BA</p>
             <p><span className="text-cyan-300 font-semibold">[2] BESTMED Platform (aged care):</span> Sisense BI integration, Azure Functions data-security pipeline, Victorian legislation medication compliance, AngularJS → Angular migration</p>
             <p><span className="text-purple-300 font-semibold">[3] HRM System (2,000+ staff):</span> Dynamic multi-step approval workflow, Hangfire, Quartz.NET, Kafka, Redis, FCM real-time alerts</p>
             <p><span className="text-amber-300 font-semibold">[4] AWS Serverless WDR:</span> Lambda + Cognito MFA + Aurora PostgreSQL + CloudWatch/SQS automated reporting</p>
@@ -179,6 +181,7 @@ export default function TerminalCLI({ onClose }: { onClose?: () => void }) {
   };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    cyberAudio.playKey();
     if (e.key === 'Enter') {
       executeCommand(input);
       setInput('');

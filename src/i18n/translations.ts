@@ -49,7 +49,7 @@ export const translations = {
     exp_current: 'Current',
     exp_completed: 'Completed',
     exp_fulltime: 'Full-time',
-    exp_lead: 'Team Lead',
+    exp_lead: 'AI Architect',
     exp_modules: 'Modules & Key Responsibilities',
     exp_techstack: 'Tech Stack',
     exp_achievements: 'Key Achievements',
@@ -63,11 +63,11 @@ export const translations = {
     exp_internal: 'Internal project',
     exp_outsourced: 'Outsourced project',
 
-    // Experience – TMA AI-First Framework Team Lead
-    tma_role: 'AI Team Lead & Senior Backend Developer',
+    // Experience – TMA AI-First Framework
+    tma_role: 'AI System Architect & Senior Backend Developer',
     tma_company: 'TMA Solutions · AI-First Engineering',
     tma_period: '2025 – Present',
-    tma_desc: 'Led a dedicated R&D team building an AI-First Software Development Framework from the ground up: automating project initialization (scaffolding), dynamic code generation, auto-generation of documentation, and continuous developer wiki synthesis across cross-functional engineering roles.',
+    tma_desc: 'Architected and led the core technical design of an AI-First Software Development Framework from the ground up: automating project initialization (scaffolding), dynamic code generation, auto-generation of documentation, and continuous developer wiki synthesis across cross-functional engineering roles.',
     tma_mod1_name: 'Project Scaffolding & Spec Ingestion',
     tma_mod1_detail: 'Engineered automated project initialization: ingesting requirements, Jira stories, and OpenAPI contracts to scaffold production-grade backend, frontend, and mobile projects.',
     tma_mod2_name: 'GraphRAG Memory & Model Context Protocol (MCP)',
@@ -141,7 +141,7 @@ export const translations = {
 
     // Project 1: TMA AI-First Framework
     proj_tma_title: 'AI-First Enterprise Framework',
-    proj_tma_sub: 'R&D Lead · Autonomous Software Engineering Engine',
+    proj_tma_sub: 'AI System Architect · Autonomous Software Engineering Engine',
     proj_tma_desc: 'Proprietary AI-First framework developed at TMA Solutions automating the entire software lifecycle — from Project Initialization & scaffolding, to auto-generating technical documentation and developer wiki. Powered by LLM workflows, skills, GraphRAG memory, MCP protocol, specialized multi-role agents (BE, FE, Mobile, QA, BA), and self-learning harness agents.',
     proj_tma_h1: 'End-to-end lifecycle: Project Init, Scaffolding, Auto Doc & Wiki Gen',
     proj_tma_h2: 'GraphRAG persistent memory & Model Context Protocol (MCP) integration',
@@ -150,7 +150,7 @@ export const translations = {
     proj_tma_h5: 'Automated project scaffolding driven by requirements, Jira stories and OpenAPI contracts',
     proj_tma_h6: 'Automated technical documentation, ERD diagrams and API references synced from codebase commits',
     proj_tma_h7: 'Continuous Confluence/Markdown developer wiki synthesis kept in step with the code',
-    proj_tma_badge: '2025 – Present · Team Lead',
+    proj_tma_badge: '2025 – Present · AI System Architect',
 
     // Project 2: BHS Healthcare
     proj_bhs_title: 'BESTMED Platform',
@@ -317,7 +317,7 @@ export const translations = {
     exp_current: 'Đang làm',
     exp_completed: 'Đã hoàn thành',
     exp_fulltime: 'Full-time',
-    exp_lead: 'Team Lead',
+    exp_lead: 'AI Architect',
     exp_modules: 'Modules & Trách nhiệm chính',
     exp_techstack: 'Tech Stack',
     exp_achievements: 'Thành tựu nổi bật',
@@ -331,11 +331,11 @@ export const translations = {
     exp_internal: 'Dự án nội bộ',
     exp_outsourced: 'Dự án outsource',
 
-    // Experience – TMA AI-First Framework Team Lead
-    tma_role: 'AI Team Lead & Senior Backend Developer',
+    // Experience – TMA AI-First Framework
+    tma_role: 'AI System Architect & Senior Backend Developer',
     tma_company: 'TMA Solutions · AI-First Engineering',
     tma_period: '2025 – Hiện tại',
-    tma_desc: 'Lead một team chuyên trách xây dựng AI-first framework độc quyền cho TMA: từ bước Khởi tạo dự án (Init project scaffolding), tự động sinh tài liệu kỹ thuật (Docs), tự tạo Wiki tri thức, vận hành theo mô hình LLM, workflow, skills, GraphRAG memory và giao thức MCP cho các role từ Backend, Frontend, Mobile đến QA và BA.',
+    tma_desc: 'Thiết kế kiến trúc hệ thống và xây dựng AI-first framework độc quyền cho TMA: từ bước Khởi tạo dự án (Init project scaffolding), tự động sinh tài liệu kỹ thuật (Docs), tự tạo Wiki tri thức, vận hành theo mô hình LLM, workflow, skills, GraphRAG memory và giao thức MCP cho các role từ Backend, Frontend, Mobile đến QA và BA.',
     tma_mod1_name: 'Khởi tạo dự án & Đọc đặc tả tự động',
     tma_mod1_detail: 'Phát triển cơ chế tự động đọc tài liệu nghiệp vụ Jira/specs để scaffold toàn bộ source code chuẩn cho backend, frontend và mobile.',
     tma_mod2_name: 'GraphRAG Memory & Giao thức MCP',
@@ -409,7 +409,7 @@ export const translations = {
 
     // Project 1: TMA AI-First Framework
     proj_tma_title: 'AI-First Enterprise Framework',
-    proj_tma_sub: 'Lead R&D · Nền tảng Kỹ nghệ Phần mềm Tự trị',
+    proj_tma_sub: 'AI System Architect · Nền tảng Kỹ nghệ Phần mềm Tự trị',
     proj_tma_desc: 'Framework kỹ nghệ AI-First độc quyền phát triển tại TMA Solutions tự động hóa toàn bộ vòng đời phần mềm — từ Khởi tạo dự án (Init scaffolding), đến tự động sinh tài liệu kỹ thuật và Wiki tri thức. Vận hành bởi mô hình LLM, workflow, skills, bộ nhớ GraphRAG, giao thức MCP, hệ thống agent theo role (BE, FE, Mobile, QA, BA) và self-learning harness agents.',
     proj_tma_h1: 'Toàn bộ vòng đời: Init dự án, Scaffolding, Tự sinh Docs & Wiki',
     proj_tma_h2: 'Bộ nhớ ngữ cảnh GraphRAG và tích hợp giao thức Model Context Protocol (MCP)',
@@ -418,7 +418,7 @@ export const translations = {
     proj_tma_h5: 'Tự động scaffolding dự án từ requirement, Jira story và hợp đồng OpenAPI',
     proj_tma_h6: 'Tự sinh tài liệu kỹ thuật, sơ đồ ERD và API reference đồng bộ từ commit trong codebase',
     proj_tma_h7: 'Liên tục tổng hợp wiki Confluence/Markdown cho developer, luôn bám sát code',
-    proj_tma_badge: '2025 – Hiện tại · Team Lead',
+    proj_tma_badge: '2025 – Hiện tại · AI System Architect',
 
     // Project 2: BHS Healthcare
     proj_bhs_title: 'BESTMED Platform',

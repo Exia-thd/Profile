@@ -3,6 +3,7 @@ import { motion } from 'motion/react';
 import { useLang } from '../i18n/LangContext';
 import SpotlightCard from './interactive/SpotlightCard';
 import TiltCard3D from './interactive/TiltCard3D';
+import AvatarDisplay from './common/AvatarDisplay';
 
 export default function About() {
   const { t, lang } = useLang();
@@ -105,10 +106,8 @@ export default function About() {
               <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-indigo-500 via-violet-500 to-cyan-400" />
 
               <div>
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center shadow-lg shadow-indigo-500/30">
-                    <Sparkles className="w-6 h-6 text-white" />
-                  </div>
+                <div className="flex items-center gap-4 mb-6">
+                  <AvatarDisplay size="md" showUploadBadge={true} />
                   <div>
                     <span className="text-xs font-mono uppercase tracking-wider text-indigo-400 font-semibold">
                       Engineering Profile

@@ -56,8 +56,8 @@ const SLIDES: SlideSection[] = [
     badge: '04 / 07 · EXPERIENCE',
     titleVi: 'Kinh nghiệm thực chiến & Lộ trình',
     titleEn: 'Work Experience & Timeline',
-    descVi: 'TMA Solutions từ 2021 — AI-First Framework (Team Lead), BESTMED Platform, và các dự án outsource cho khách hàng',
-    descEn: 'TMA Solutions since 2021 — AI-First Framework (Team Lead), BESTMED Platform, and outsourced client projects',
+    descVi: 'TMA Solutions từ 2021 — AI-First Framework (AI System Architect), BESTMED Platform, và các dự án outsource cho khách hàng',
+    descEn: 'TMA Solutions since 2021 — AI-First Framework (AI System Architect), BESTMED Platform, and outsourced client projects',
     iconText: '💼',
   },
   {

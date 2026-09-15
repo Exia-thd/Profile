@@ -1,5 +1,6 @@
 import { ArrowUp, Github, Linkedin, Mail, Heart, Terminal, Sparkles } from 'lucide-react';
 import { useLang } from '../i18n/LangContext';
+import AvatarDisplay from './common/AvatarDisplay';
 
 interface FooterProps {
   onOpenTerminal: () => void;
@@ -18,9 +19,7 @@ export default function Footer({ onOpenTerminal }: FooterProps) {
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-white/5">
           {/* Brand Info */}
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-violet-600 to-cyan-400 flex items-center justify-center text-white text-sm font-extrabold shadow-md shadow-indigo-500/30">
-              ĐT
-            </div>
+            <AvatarDisplay size="sm" showUploadBadge={false} />
             <div>
               <div className="text-white font-bold text-sm">Trần Hữu Đạt</div>
               <div className="text-slate-400 text-xs">

@@ -27,7 +27,7 @@ export default function Projects() {
   const [activeModalProject, setActiveModalProject] = useState<ProjectDetailData | null>(null);
 
   const projects = [
-    // 1. TMA AI-First Framework (Team Lead)
+    // 1. TMA AI-First Framework (AI System Architect)
     {
       category: 'ai',
       title: t('proj_tma_title'),
