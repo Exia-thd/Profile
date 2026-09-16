@@ -3,11 +3,17 @@ import react from '@vitejs/plugin-react';
 import path from 'path';
 import {defineConfig} from 'vite';
 
-export default defineConfig(() => {
+export default defineConfig(({ mode }) => {
+  // If building for GitHub Actions or production, ensure relative base './' or repo path
+  // In AI Studio, BASE_PATH may be set for sandbox routing
+  const isGitHubActions = process.env.GITHUB_ACTIONS === 'true';
+  const basePath = isGitHubActions
+    ? (process.env.GITHUB_REPOSITORY ? `/${process.env.GITHUB_REPOSITORY.split('/')[1]}/` : './')
+    : (process.env.BASE_PATH || './');
+
   return {
     plugins: [react(), tailwindcss()],
-    // Support AI Studio root serving, while allowing BASE_PATH override if needed
-    base: process.env.BASE_PATH || '/',
+    base: basePath,
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),
