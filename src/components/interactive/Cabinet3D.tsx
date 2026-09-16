@@ -195,108 +195,155 @@ export default function Cabinet3D({ onSelectView, onOpenTerminal }: Cabinet3DPro
       {/* =========================================================================
           3D ROOM STAGE (CĂN PHÒNG 3D VỚI CHIỀU SÂU VÀ ÁNH SÁNG)
           ========================================================================= */}
-      <div className="relative rounded-3xl border-2 border-slate-700/80 bg-[#060918] overflow-hidden shadow-[0_30px_90px_rgba(0,0,0,0.9),0_0_60px_rgba(99,102,241,0.2)]">
-        
-        {/* --- 1. ROOM CEILING & VOLUMETRIC SPOTLIGHT BEAMS --- */}
-        <div className="absolute top-0 left-0 right-0 h-44 pointer-events-none z-0 overflow-hidden">
-          {/* Ceiling Grid Panels */}
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:40px_20px]" />
-          
-          {/* Ceiling Dual Light Bars */}
-          <div className="absolute top-0 left-1/4 -translate-x-1/2 w-48 sm:w-72 h-2.5 rounded-full bg-cyan-300 shadow-[0_0_25px_rgba(6,182,212,0.9)]" />
-          <div className="absolute top-0 right-1/4 translate-x-1/2 w-48 sm:w-72 h-2.5 rounded-full bg-indigo-300 shadow-[0_0_25px_rgba(99,102,241,0.9)]" />
-
-          {/* Dual Volumetric Light Cones Projecting onto the Cabinet */}
+      {/* =========================================================================
+          3D ROOM STAGE — a real perspective box, not stacked flat layers.
+          `perspective` lives on the stage; the surfaces below sit in a
+          `preserve-3d` layer and are rotated 90° into place, so the floor,
+          ceiling and side walls actually converge on a vanishing point.
+          ========================================================================= */}
+      <div
+        className="relative rounded-3xl border-2 border-slate-700/80 bg-[#04060f] overflow-hidden shadow-[0_30px_90px_rgba(0,0,0,0.9),0_0_60px_rgba(99,102,241,0.2)]"
+        style={{ perspective: '1200px', perspectiveOrigin: '50% 38%' }}
+      >
+        {/* --- THE ROOM SHELL (floor / ceiling / walls in true 3D) --- */}
+        <div
+          className="absolute inset-0 z-0 pointer-events-none"
+          style={{ transformStyle: 'preserve-3d' }}
+          aria-hidden="true"
+        >
+          {/* BACK WALL — pushed ROOM_DEPTH into the screen, scaled to refill the frame */}
           <div
-            className="absolute top-0 left-1/4 -translate-x-1/2 w-72 sm:w-96 h-96 opacity-40 blur-xl pointer-events-none"
+            className="absolute left-1/2 top-1/2 w-[170%] h-[170%] -translate-x-1/2 -translate-y-1/2"
             style={{
-              background: 'radial-gradient(ellipse at 50% 0%, rgba(6,182,212,0.6) 0%, rgba(6,182,212,0.15) 50%, transparent 80%)',
+              transform: 'translateZ(-700px)',
+              background:
+                'radial-gradient(ellipse at 50% 35%, #131a3a 0%, #0a0e22 45%, #04060f 100%)',
             }}
-          />
-          <div
-            className="absolute top-0 right-1/4 translate-x-1/2 w-72 sm:w-96 h-96 opacity-40 blur-xl pointer-events-none"
-            style={{
-              background: 'radial-gradient(ellipse at 50% 0%, rgba(99,102,241,0.6) 0%, rgba(99,102,241,0.15) 50%, transparent 80%)',
-            }}
-          />
-        </div>
-
-        {/* --- 2. ROOM BACK WALL (TƯỜNG PHÍA SAU) --- */}
-        <div className="absolute inset-x-0 top-0 bottom-36 pointer-events-none z-0">
-          {/* Architectural Wall Matrix Pattern */}
-          <div className="absolute inset-0 opacity-20 bg-[linear-gradient(to_right,#6366f115_1px,transparent_1px),linear-gradient(to_bottom,#6366f115_1px,transparent_1px)] bg-[size:32px_32px]" />
-
-          {/* Left Wall Background Server Blades */}
-          <div className="hidden lg:flex flex-col gap-2 absolute top-12 left-6 w-44 p-3 rounded-2xl bg-black/40 border border-white/5 font-mono text-[10px] text-slate-400">
-            <div className="flex items-center justify-between text-cyan-400 font-bold border-b border-white/5 pb-1">
-              <span>BAY-A // RACK 01</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            </div>
-            <div className="flex items-center justify-between">
-              <span>TMA-GRAPH-RAG</span>
-              <span className="text-emerald-400">SYNC</span>
-            </div>
-            <div className="flex items-center justify-between">
-              <span>MCP-SOCKET</span>
-              <span className="text-cyan-400">ACTIVE</span>
-            </div>
-            <div className="flex items-center justify-between">
-              <span>HARNESS-ENG</span>
-              <span className="text-purple-400">IDLE</span>
-            </div>
-            <div className="w-full bg-slate-800 h-1 rounded-full overflow-hidden mt-1">
-              <div className="bg-cyan-400 h-full w-4/5 animate-pulse" />
+          >
+            <div className="absolute inset-0 opacity-[0.18] bg-[linear-gradient(to_right,#6366f1_1px,transparent_1px),linear-gradient(to_bottom,#6366f1_1px,transparent_1px)] bg-[size:48px_48px]" />
+            {/* Rack silhouettes lined up against the far wall */}
+            <div className="absolute bottom-[32%] left-1/2 -translate-x-1/2 flex items-end gap-5 opacity-45">
+              {[64, 92, 78, 104, 78, 92, 64].map((h, i) => (
+                <div
+                  key={i}
+                  className="w-12 rounded-t-md bg-gradient-to-t from-[#0b1026] to-[#1a2246] border-t border-x border-indigo-500/20"
+                  style={{ height: `${h}px` }}
+                >
+                  <div className="mt-2 mx-auto w-6 h-0.5 rounded bg-cyan-400/60" />
+                  <div className="mt-1.5 mx-auto w-4 h-0.5 rounded bg-emerald-400/50" />
+                </div>
+              ))}
             </div>
           </div>
 
-          {/* Right Wall Background Diagnostic Monitor */}
-          <div className="hidden lg:flex flex-col gap-2 absolute top-12 right-6 w-44 p-3 rounded-2xl bg-black/40 border border-white/5 font-mono text-[10px] text-slate-400">
-            <div className="flex items-center justify-between text-indigo-400 font-bold border-b border-white/5 pb-1">
-              <span>BAY-B // METRICS</span>
-              <Activity className="w-3 h-3 text-emerald-400" />
-            </div>
-            <div className="flex items-center justify-between">
-              <span>CPU LOAD</span>
-              <span className="text-slate-200">14.2%</span>
-            </div>
-            <div className="flex items-center justify-between">
-              <span>UPTIME</span>
-              <span className="text-emerald-400">99.99%</span>
-            </div>
-            <div className="flex items-center justify-between">
-              <span>CLUSTER</span>
-              <span className="text-cyan-400">5 AGENTS</span>
-            </div>
-            <div className="w-full bg-slate-800 h-1 rounded-full overflow-hidden mt-1">
-              <div className="bg-indigo-500 h-full w-2/3" />
+          {/* FLOOR — hinged at the bottom edge of the stage, laid back into the room */}
+          <div
+            className="absolute left-1/2 bottom-0 w-[190%] h-[700px] -translate-x-1/2 room-floor"
+            style={{ transformOrigin: '50% 100%', transform: 'rotateX(90deg)' }}
+          >
+            <div className="absolute inset-0 bg-[#060a18]" />
+            <div className="absolute inset-0 room-grid room-grid-scroll opacity-70" />
+            {/* Light pooling on the floor in front of the cabinet */}
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[46%] h-full bg-gradient-to-t from-indigo-500/25 via-cyan-500/10 to-transparent" />
+          </div>
+
+          {/* CEILING — mirror of the floor, hinged at the top edge */}
+          <div
+            className="absolute left-1/2 top-0 w-[190%] h-[700px] -translate-x-1/2"
+            style={{ transformOrigin: '50% 0%', transform: 'rotateX(-90deg)' }}
+          >
+            <div className="absolute inset-0 bg-[#080c1c]" />
+            <div className="absolute inset-0 room-grid opacity-40" />
+            {/* Two recessed light bars running the length of the ceiling */}
+            <div className="absolute top-[14%] left-[30%] w-2.5 h-[62%] rounded-full bg-cyan-200 shadow-[0_0_40px_12px_rgba(34,211,238,0.55)]" />
+            <div className="absolute top-[14%] right-[30%] w-2.5 h-[62%] rounded-full bg-indigo-200 shadow-[0_0_40px_12px_rgba(99,102,241,0.55)]" />
+          </div>
+
+          {/* LEFT WALL — hinged on the left edge, running back into the room */}
+          <div
+            className="absolute left-0 top-0 h-full w-[700px]"
+            style={{ transformOrigin: '0% 50%', transform: 'rotateY(90deg)' }}
+          >
+            <div className="absolute inset-0" style={{ background: 'linear-gradient(90deg, #04060f 0%, #0c1130 100%)' }} />
+            <div className="absolute inset-0 room-grid opacity-40" />
+            {/* Wall-mounted bay panel */}
+            <div className="absolute top-[22%] left-[14%] w-56 p-3 rounded-xl bg-black/70 border border-cyan-500/25 font-mono text-[10px] text-slate-400 shadow-[0_0_30px_rgba(6,182,212,0.15)]">
+              <div className="flex items-center justify-between text-cyan-400 font-bold border-b border-white/10 pb-1">
+                <span>BAY-A // RACK 01</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              </div>
+              <div className="flex items-center justify-between mt-1.5">
+                <span>TMA-GRAPH-RAG</span>
+                <span className="text-emerald-400">SYNC</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span>MCP-SOCKET</span>
+                <span className="text-cyan-400">ACTIVE</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span>HARNESS-ENG</span>
+                <span className="text-purple-400">IDLE</span>
+              </div>
+              <div className="w-full bg-slate-800 h-1 rounded-full overflow-hidden mt-1.5">
+                <div className="bg-cyan-400 h-full w-4/5 animate-pulse" />
+              </div>
             </div>
           </div>
 
-          {/* Horizontal Wall Cyber Laser Line */}
-          <div className="absolute top-28 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-indigo-500/40 to-transparent" />
+          {/* RIGHT WALL — hinged on the right edge */}
+          <div
+            className="absolute right-0 top-0 h-full w-[700px]"
+            style={{
+              transformOrigin: '100% 50%',
+              transform: 'rotateY(-90deg)',
+              background: 'linear-gradient(270deg, #04060f 0%, #0c1130 100%)',
+            }}
+          >
+            <div className="absolute inset-0 room-grid opacity-40" />
+            {/* Wall-mounted diagnostics panel */}
+            <div className="absolute top-[22%] right-[14%] w-56 p-3 rounded-xl bg-black/70 border border-indigo-500/25 font-mono text-[10px] text-slate-400 shadow-[0_0_30px_rgba(99,102,241,0.15)]">
+              <div className="flex items-center justify-between text-indigo-400 font-bold border-b border-white/10 pb-1">
+                <span>BAY-B // METRICS</span>
+                <Activity className="w-3 h-3 text-emerald-400" />
+              </div>
+              <div className="flex items-center justify-between mt-1.5">
+                <span>CPU LOAD</span>
+                <span className="text-slate-200">14.2%</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span>UPTIME</span>
+                <span className="text-emerald-400">99.99%</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span>CLUSTER</span>
+                <span className="text-cyan-400">5 AGENTS</span>
+              </div>
+              <div className="w-full bg-slate-800 h-1 rounded-full overflow-hidden mt-1.5">
+                <div className="bg-indigo-500 h-full w-2/3" />
+              </div>
+            </div>
+          </div>
         </div>
 
-        {/* --- 3. ROOM 3D PERSPECTIVE FLOOR (SÀN PHÒNG 3D) --- */}
-        <div className="absolute bottom-0 inset-x-0 h-44 pointer-events-none z-0 overflow-hidden">
-          {/* Floor Laser Grid Plane */}
+        {/* --- VOLUMETRIC LIGHT & DEPTH HAZE (flat overlay, sits between room and cabinet) --- */}
+        <div className="absolute inset-0 z-[1] pointer-events-none overflow-hidden">
+          <div
+            className="absolute -top-10 left-[30%] -translate-x-1/2 w-72 sm:w-96 h-[70%] opacity-40 blur-2xl"
+            style={{
+              background: 'radial-gradient(ellipse at 50% 0%, rgba(34,211,238,0.55) 0%, rgba(34,211,238,0.12) 45%, transparent 78%)',
+            }}
+          />
+          <div
+            className="absolute -top-10 right-[30%] translate-x-1/2 w-72 sm:w-96 h-[70%] opacity-40 blur-2xl"
+            style={{
+              background: 'radial-gradient(ellipse at 50% 0%, rgba(99,102,241,0.55) 0%, rgba(99,102,241,0.12) 45%, transparent 78%)',
+            }}
+          />
+          {/* Distance haze so the far wall reads as far away */}
           <div
             className="absolute inset-0"
             style={{
-              background:
-                'linear-gradient(180deg, rgba(6,9,24,0) 0%, rgba(15,23,42,0.95) 40%, rgba(2,6,23,1) 100%)',
-            }}
-          />
-          {/* High-Tech Floor Runway Strip directly to Cabinet */}
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 sm:w-1/2 h-full bg-gradient-to-t from-indigo-500/10 via-cyan-500/5 to-transparent border-x border-indigo-500/20" />
-          
-          {/* Floor Reflection Gradient under Cabinet */}
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-4/5 sm:w-3/5 h-20 bg-indigo-500/10 blur-2xl rounded-full" />
-
-          {/* Cabinet Shadow Cast on Floor */}
-          <div
-            className="absolute bottom-2 left-1/2 -translate-x-1/2 w-11/12 max-w-3xl h-10 blur-md rounded-full"
-            style={{
-              background: 'radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0.95) 0%, rgba(6,182,212,0.2) 40%, transparent 75%)',
+              background: 'radial-gradient(ellipse at 50% 42%, rgba(10,14,34,0.55) 0%, transparent 55%)',
             }}
           />
         </div>
@@ -305,7 +352,15 @@ export default function Cabinet3D({ onSelectView, onOpenTerminal }: Cabinet3DPro
             --- 4. THE 3D CABINET (TỦ KỸ THUẬT ĐỨNG VỮNG CHÃI Ở GIỮA PHÒNG) ---
             Completely stable, upright, NO mouse tilt / wobbling
             ========================================================================= */}
-        <div className="relative z-10 py-10 px-3 sm:px-8 max-w-4xl mx-auto">
+        <div className="relative z-10 pt-20 pb-28 sm:pt-24 sm:pb-32 px-3 sm:px-10 max-w-3xl lg:max-w-4xl mx-auto">
+          {/* Contact shadow the cabinet drops on the room floor */}
+          <div
+            className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-[92%] h-16 blur-xl rounded-[50%] pointer-events-none"
+            style={{
+              background: 'radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0.95) 0%, rgba(6,182,212,0.18) 45%, transparent 75%)',
+            }}
+          />
+
           {/* Cabinet Top Roof Cap (Nắp trên của tủ với góc nhìn 3D) */}
           <div className="relative rounded-t-3xl border-t-2 border-x-2 border-slate-600/80 bg-gradient-to-b from-[#1a2345] via-[#101730] to-[#0a0f24] px-6 py-4 shadow-xl">
             {/* Ventilation Louvers & Status LEDs */}

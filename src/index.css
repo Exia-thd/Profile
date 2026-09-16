@@ -206,3 +206,51 @@
 .animate-laser {
   animation: laser-flow 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
+
+/* =========================================================================
+   3D SERVER ROOM SURFACES
+   The room in Cabinet3D is a real perspective box: the floor, ceiling and
+   side walls are rotated 90deg inside a `preserve-3d` layer, so a plain
+   square grid drawn here converges on the vanishing point on its own.
+   ========================================================================= */
+.room-grid {
+  background-image:
+    linear-gradient(to right, rgba(99, 102, 241, 0.32) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(99, 102, 241, 0.32) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* Floor grid drifting toward the viewer, so the room reads as a space you
+   are standing in rather than a static backdrop. */
+.room-grid-scroll {
+  animation: room-grid-drift 6s linear infinite;
+}
+
+@keyframes room-grid-drift {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 0 60px;
+  }
+}
+
+.room-floor::after {
+  /* Wet-floor sheen picking up the ceiling lights */
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(99, 102, 241, 0.18) 0%,
+    rgba(6, 182, 212, 0.06) 35%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .room-grid-scroll {
+    animation: none;
+  }
+}

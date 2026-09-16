@@ -108,19 +108,21 @@ export default function PresentationMode({
   const SLIDE_DURATION = 7000; // 7 seconds per slide
 
   const scrollToSection = (sectionId: string) => {
-    if (onEnsureContinuousMode) {
-      onEnsureContinuousMode();
-    }
+    // Switches display mode only — it must not schedule a scroll of its own, or the two
+    // smooth scrolls race and the later one wins, landing on the wrong section.
+    onEnsureContinuousMode?.();
+
+    const targetId = sectionId === 'overview' ? 'home' : sectionId;
     const tryScroll = (attempts = 0) => {
-      const targetId = sectionId === 'overview' ? 'home' : sectionId;
       const el = document.getElementById(targetId);
       if (el) {
         el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      } else if (attempts < 6) {
-        setTimeout(() => tryScroll(attempts + 1), 70);
+      } else if (attempts < 12) {
+        // Section not mounted yet (mode switch still rendering) — wait a frame and retry.
+        setTimeout(() => tryScroll(attempts + 1), 80);
       }
     };
-    tryScroll();
+    requestAnimationFrame(() => tryScroll());
   };
 
   const goToSlide = (index: number) => {
@@ -135,33 +137,41 @@ export default function PresentationMode({
 
   // Auto-play timer
   useEffect(() => {
-    if (!isPlaying) {
+    if (!isOpen || !isPlaying) {
       setProgress(0);
       return;
     }
 
     const interval = 100; // update progress every 100ms
     const step = (interval / SLIDE_DURATION) * 100;
+    let elapsed = 0;
 
     const timer = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          nextSlide();
-          return 0;
-        }
-        return prev + step;
-      });
+      elapsed += step;
+      if (elapsed >= 100) {
+        setProgress(100);
+        // Advance here, never inside a setState updater: React invokes updaters twice
+        // in StrictMode, which would skip a slide and fire two scrolls per tick.
+        nextSlide();
+      } else {
+        setProgress(elapsed);
+      }
     }, interval);
 
     return () => clearInterval(timer);
-  }, [isPlaying, currentSlide]);
+  }, [isOpen, isPlaying, currentSlide]);
 
   // Keyboard navigation when in presentation mode
   useEffect(() => {
     if (!isOpen) return;
 
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowRight' || e.key === 'Space') {
+      const target = e.target as HTMLElement | null;
+      if (target && (target.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName))) {
+        return;
+      }
+
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Spacebar') {
         e.preventDefault();
         nextSlide();
       } else if (e.key === 'ArrowLeft') {
@@ -192,12 +202,7 @@ export default function PresentationMode({
             onClick={() => {
               setIsOpen(true);
               setIsPlaying(true);
-              if (onEnsureContinuousMode) {
-                onEnsureContinuousMode();
-              }
-              setTimeout(() => {
-                scrollToSection(SLIDES[currentSlide].id);
-              }, 100);
+              scrollToSection(SLIDES[currentSlide].id);
             }}
             className="group flex items-center gap-2.5 px-4 py-2.5 rounded-2xl bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white font-semibold text-xs shadow-xl shadow-indigo-600/40 border border-indigo-400/40 backdrop-blur-xl transition-all hover:scale-105 hover:-translate-y-0.5"
             title="Bật chế độ lướt trang trình chiếu (Slide Presentation)"

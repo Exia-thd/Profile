@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { LangProvider } from './i18n/LangContext';
+import { LangProvider, useLang } from './i18n/LangContext';
 import { AvatarProvider } from './context/AvatarContext';
 import InteractiveCanvas from './components/interactive/InteractiveCanvas';
 import Navbar from './components/Navbar';
@@ -22,6 +22,36 @@ import CyberHUDOverlay from './components/interactive/CyberHUDOverlay';
 import { cyberAudio } from './utils/cyberAudio';
 import { Terminal as TerminalIcon, Box, LayoutGrid } from 'lucide-react';
 import { AppView, ViewDisplayMode } from './types/navigation';
+
+/**
+ * Switcher back to the cabinet, shown throughout continuous mode.
+ *
+ * Fixed rather than sticky on purpose: the App root sets `overflow-x-hidden`, which
+ * makes it the scroll container a sticky child would resolve against, so a sticky bar
+ * scrolls away with the page and the way back to the cabinet disappears.
+ */
+function ContinuousModeBar({ onBackToCabinet }: { onBackToCabinet: () => void }) {
+  const { lang } = useLang();
+
+  return (
+    <div className="fixed top-[72px] left-1/2 -translate-x-1/2 z-30 w-[94%] max-w-md px-1">
+      <div className="flex items-center justify-between p-2 rounded-2xl bg-slate-900/90 border border-indigo-500/40 backdrop-blur-xl shadow-2xl text-xs font-mono">
+        <div className="flex items-center gap-2 text-slate-300 ml-2">
+          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+          <span>{lang === 'vi' ? 'Chế độ cuộn toàn bộ' : 'Continuous scroll mode'}</span>
+        </div>
+        <button
+          onClick={onBackToCabinet}
+          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white font-bold transition-all shadow-md shadow-indigo-600/30 active:scale-95"
+          title={lang === 'vi' ? 'Quay lại chế độ Tủ 3D' : 'Back to 3D cabinet mode'}
+        >
+          <Box className="w-3.5 h-3.5" />
+          <span>{lang === 'vi' ? 'Mở lại Tủ 3D' : 'Back to 3D Cabinet'}</span>
+        </button>
+      </div>
+    </div>
+  );
+}
 
 export default function App() {
   const [currentView, setCurrentView] = useState<AppView>('overview');
@@ -59,7 +89,9 @@ export default function App() {
     cyberAudio.playClick();
     setCurrentView(view);
     try {
-      window.location.hash = view === 'overview' ? '#overview' : `#${view}`;
+      // replaceState, not `location.hash = ...`: assigning the hash makes the browser
+      // jump to the element instantly, which fights the smooth scroll below.
+      window.history.replaceState(null, '', `#${view}`);
     } catch {
       // ignore
     }
@@ -79,6 +111,12 @@ export default function App() {
         window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
       }
     }
+  };
+
+  // Used by the slide tour: switch mode only. No sound, no competing scroll —
+  // the tour drives the scrolling itself.
+  const ensureContinuousMode = () => {
+    setDisplayMode((mode) => (mode === 'continuous' ? mode : 'continuous'));
   };
 
   const handleSwitchToContinuous = (targetView?: AppView) => {
@@ -181,22 +219,10 @@ export default function App() {
             ) : (
               /* === CONTINUOUS ALL-IN-ONE VIEW (FOR SCROLL & SLIDE TOUR) === */
               <div>
-                {/* Floating Switcher Bar back to Cabinet */}
-                <div className="sticky top-20 z-30 max-w-md mx-auto px-4 pt-2">
-                  <div className="flex items-center justify-between p-2 rounded-2xl bg-slate-900/90 border border-indigo-500/40 backdrop-blur-xl shadow-2xl text-xs font-mono">
-                    <div className="flex items-center gap-2 text-slate-300 ml-2">
-                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                      <span>Chế độ cuộn toàn bộ</span>
-                    </div>
-                    <button
-                      onClick={() => handleSwitchToCabinet()}
-                      className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white font-bold transition-all shadow-md shadow-indigo-600/30 active:scale-95"
-                    >
-                      <Box className="w-3.5 h-3.5" />
-                      <span>Mở lại Tủ 3D</span>
-                    </button>
-                  </div>
-                </div>
+                <ContinuousModeBar onBackToCabinet={() => handleSwitchToCabinet()} />
+
+                {/* Spacer so the fixed bar never covers the top of the hero */}
+                <div className="h-14" aria-hidden="true" />
 
                 <Hero
                   onOpenTerminal={() => setTerminalOpen(true)}
@@ -257,7 +283,7 @@ export default function App() {
           {/* Presentation Slide Tour Mode */}
           <PresentationMode
             displayMode={displayMode}
-            onEnsureContinuousMode={() => handleSwitchToContinuous()}
+            onEnsureContinuousMode={ensureContinuousMode}
           />
 
           {/* Toast Alerts */}
