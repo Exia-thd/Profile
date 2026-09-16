@@ -21,7 +21,6 @@ interface SubPageContainerProps {
   currentView: AppView;
   onNavigate: (view: AppView) => void;
   onBackToCabinet: () => void;
-  onToggleContinuous?: () => void;
   children: React.ReactNode;
 }
 
@@ -47,7 +46,6 @@ export default function SubPageContainer({
   currentView,
   onNavigate,
   onBackToCabinet,
-  onToggleContinuous,
   children,
 }: SubPageContainerProps) {
   const { lang } = useLang();
@@ -145,17 +143,6 @@ export default function SubPageContainer({
                 </button>
               );
             })}
-
-            {onToggleContinuous && (
-              <button
-                onClick={onToggleContinuous}
-                className="hidden lg:flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-white/[0.03] hover:bg-white/[0.08] text-slate-400 hover:text-white border border-white/10 text-xs font-mono transition-all ml-1"
-                title={lang === 'vi' ? 'Xem toàn bộ dạng cuộn' : 'Continuous View'}
-              >
-                <LayoutGrid className="w-3.5 h-3.5 text-cyan-400" />
-                <span>{lang === 'vi' ? 'Cuộn hết' : 'All-in-one'}</span>
-              </button>
-            )}
           </div>
         </div>
       </div>

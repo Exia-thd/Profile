@@ -20,12 +20,11 @@ import ToastNotification from './components/interactive/ToastNotification';
 import PresentationMode from './components/interactive/PresentationMode';
 import CyberHUDOverlay from './components/interactive/CyberHUDOverlay';
 import { cyberAudio } from './utils/cyberAudio';
-import { Terminal as TerminalIcon, Box, LayoutGrid } from 'lucide-react';
-import { AppView, ViewDisplayMode } from './types/navigation';
+import { Terminal as TerminalIcon } from 'lucide-react';
+import { AppView } from './types/navigation';
 
 export default function App() {
   const [currentView, setCurrentView] = useState<AppView>('overview');
-  const [displayMode, setDisplayMode] = useState<ViewDisplayMode>('cabinet');
   const [terminalOpen, setTerminalOpen] = useState(false);
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
@@ -98,74 +97,9 @@ export default function App() {
 
           {/* Main Content Router */}
           <main className="relative z-10">
-            {displayMode === 'cabinet' ? (
-              currentView === 'overview' ? (
-                /* === OVERVIEW HUB (HERO + TECH MARQUEE + 3D MODULAR CABINET) === */
-                <div>
-                  <Hero
-                    onOpenTerminal={() => setTerminalOpen(true)}
-                    onOpenCommandPalette={() => setCommandPaletteOpen(true)}
-                    onCopyEmail={copyEmail}
-                    onNavigateView={handleNavigateView}
-                  />
-                  <TechMarquee />
-
-                  {/* The 3D Modular Server Rack Cabinet with Pulling Drawers */}
-                  <Cabinet3D
-                    onSelectView={handleNavigateView}
-                    onOpenTerminal={() => setTerminalOpen(true)}
-                  />
-
-                  {/* Mode switcher banner at bottom of overview */}
-                  <div className="text-center pb-12 pt-4">
-                    <button
-                      onClick={() => {
-                        cyberAudio.playClick();
-                        setDisplayMode('continuous');
-                      }}
-                      className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-cyan-500/30 text-slate-400 hover:text-white text-xs font-mono transition-all"
-                    >
-                      <LayoutGrid className="w-3.5 h-3.5 text-cyan-400" />
-                      <span>Chuyển sang chế độ cuộn toàn bộ (Continuous View)</span>
-                    </button>
-                  </div>
-                </div>
-              ) : (
-                /* === DEDICATED SUB-PAGE VIEW (EXPANDED DRAWER) === */
-                <SubPageContainer
-                  currentView={currentView}
-                  onNavigate={handleNavigateView}
-                  onBackToCabinet={() => handleNavigateView('overview')}
-                  onToggleContinuous={() => setDisplayMode('continuous')}
-                >
-                  {currentView === 'architecture' && <ArchitectureSection />}
-                  {currentView === 'experience' && <Experience />}
-                  {currentView === 'projects' && <Projects />}
-                  {currentView === 'skills' && <Skills />}
-                  {currentView === 'contact' && <Contact onNotify={showToast} />}
-                  {currentView === 'about' && <About />}
-                </SubPageContainer>
-              )
-            ) : (
-              /* === CONTINUOUS ALL-IN-ONE VIEW (FOR SCROLL ENTHUSIASTS) === */
+            {currentView === 'overview' ? (
+              /* === OVERVIEW HUB (HERO + TECH MARQUEE + 3D SERVER ROOM WITH CABINET) === */
               <div>
-                {/* Floating Switcher Bar back to Cabinet */}
-                <div className="sticky top-20 z-30 max-w-md mx-auto px-4 pt-2">
-                  <div className="flex items-center justify-between p-2.5 rounded-2xl bg-slate-900/90 border border-indigo-500/40 backdrop-blur-xl shadow-2xl text-xs font-mono">
-                    <span className="text-slate-300 ml-2">Chế độ xem toàn bộ</span>
-                    <button
-                      onClick={() => {
-                        cyberAudio.playClick();
-                        setDisplayMode('cabinet');
-                      }}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold transition-all shadow-md"
-                    >
-                      <Box className="w-3.5 h-3.5" />
-                      <span>Mở Tủ 3D</span>
-                    </button>
-                  </div>
-                </div>
-
                 <Hero
                   onOpenTerminal={() => setTerminalOpen(true)}
                   onOpenCommandPalette={() => setCommandPaletteOpen(true)}
@@ -173,17 +107,27 @@ export default function App() {
                   onNavigateView={handleNavigateView}
                 />
                 <TechMarquee />
+
+                {/* 3D Server Room with Interactive Cabinet */}
                 <Cabinet3D
                   onSelectView={handleNavigateView}
                   onOpenTerminal={() => setTerminalOpen(true)}
                 />
-                <About />
-                <ArchitectureSection />
-                <Experience />
-                <Projects />
-                <Skills />
-                <Contact onNotify={showToast} />
               </div>
+            ) : (
+              /* === DEDICATED SUB-PAGE VIEW (EXPANDED CONTENT) === */
+              <SubPageContainer
+                currentView={currentView}
+                onNavigate={handleNavigateView}
+                onBackToCabinet={() => handleNavigateView('overview')}
+              >
+                {currentView === 'architecture' && <ArchitectureSection />}
+                {currentView === 'experience' && <Experience />}
+                {currentView === 'projects' && <Projects />}
+                {currentView === 'skills' && <Skills />}
+                {currentView === 'contact' && <Contact onNotify={showToast} />}
+                {currentView === 'about' && <About />}
+              </SubPageContainer>
             )}
           </main>
 
