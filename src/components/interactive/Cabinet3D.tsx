@@ -150,23 +150,23 @@ export default function Cabinet3D({ onSelectView, onOpenTerminal }: Cabinet3DPro
       <div className="text-center mb-12 relative z-10">
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-mono font-bold tracking-widest uppercase mb-3 shadow-[0_0_15px_rgba(6,182,212,0.2)]">
           <Server className="w-3.5 h-3.5 text-cyan-400" />
-          <span>{lang === 'vi' ? 'PHÒNG KỸ THUẬT & TỦ SERVER 3D' : '3D SERVER ROOM & MODULAR CABINET'}</span>
+          <span>{lang === 'vi' ? 'KHÁM PHÁ HỒ SƠ NĂNG LỰC' : 'EXPLORE THE PORTFOLIO'}</span>
         </div>
         <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
           {lang === 'vi' ? (
             <>
-              Không Gian Phòng <span className="gradient-text">Tủ Kỹ Thuật 3D</span>
+              Toàn bộ <span className="gradient-text">Hồ sơ năng lực</span>
             </>
           ) : (
             <>
-              Engineering Room <span className="gradient-text">& 3D Cabinet</span>
+              The Complete <span className="gradient-text">Portfolio</span>
             </>
           )}
         </h2>
         <p className="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto mt-3">
           {lang === 'vi'
-            ? 'Mỗi ngăn kéo của tủ server đại diện cho một trang con chuyên sâu. Nhấp vào bất kỳ ngăn nào để chuyển ngay sang trang nội dung đầy đủ.'
-            : 'Each drawer in the 3D server rack houses a dedicated sub-page. Click any drawer to navigate directly into the full technical page.'}
+            ? 'Kiến trúc hệ thống, kinh nghiệm, dự án, kỹ năng và liên hệ — chọn một ngăn bất kỳ để mở trang đầy đủ của phần đó.'
+            : 'System architecture, experience, projects, skills and contact — open any rack unit to read the full page behind it.'}
         </p>
 
         {/* Quick actions above the room */}
@@ -176,7 +176,7 @@ export default function Cabinet3D({ onSelectView, onOpenTerminal }: Cabinet3DPro
             className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-purple-500/15 hover:bg-purple-500/25 border border-purple-500/30 text-purple-200 hover:text-white transition-all shadow-sm"
           >
             <UserCheck className="w-3.5 h-3.5 text-purple-400" />
-            <span>{lang === 'vi' ? 'Ngăn 00: Hồ sơ & Triết lý' : 'Drawer 00: About & Philosophy'}</span>
+            <span>{lang === 'vi' ? 'Giới thiệu & Triết lý kỹ thuật' : 'About & Engineering Philosophy'}</span>
             <ArrowUpRight className="w-3 h-3 text-purple-300" />
           </button>
 
