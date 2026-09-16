@@ -14,7 +14,7 @@ interface AvatarContextType {
   toastMsg: string | null;
 }
 
-const DEFAULT_AVATAR = '/avatar.jpg';
+export const DEFAULT_AVATAR = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/avatar.jpg`;
 const STORAGE_KEY = 'exia_portfolio_avatar_custom';
 const MONOGRAM_KEY = 'exia_portfolio_avatar_monogram';
 
@@ -30,7 +30,12 @@ export function AvatarProvider({ children }: { children: ReactNode }) {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) {
-        setAvatarUrlState(saved);
+        // If saved avatar was a hardcoded root path, migrate to current base URL
+        if (saved === '/avatar.jpg' || saved.endsWith('/avatar.jpg')) {
+          setAvatarUrlState(DEFAULT_AVATAR);
+        } else {
+          setAvatarUrlState(saved);
+        }
       }
       const savedMonogram = localStorage.getItem(MONOGRAM_KEY);
       if (savedMonogram === 'true') {

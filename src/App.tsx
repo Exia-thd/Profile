@@ -20,11 +20,12 @@ import ToastNotification from './components/interactive/ToastNotification';
 import PresentationMode from './components/interactive/PresentationMode';
 import CyberHUDOverlay from './components/interactive/CyberHUDOverlay';
 import { cyberAudio } from './utils/cyberAudio';
-import { Terminal as TerminalIcon } from 'lucide-react';
-import { AppView } from './types/navigation';
+import { Terminal as TerminalIcon, Box, LayoutGrid } from 'lucide-react';
+import { AppView, ViewDisplayMode } from './types/navigation';
 
 export default function App() {
   const [currentView, setCurrentView] = useState<AppView>('overview');
+  const [displayMode, setDisplayMode] = useState<ViewDisplayMode>('cabinet');
   const [terminalOpen, setTerminalOpen] = useState(false);
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
@@ -55,13 +56,48 @@ export default function App() {
   }, []);
 
   const handleNavigateView = (view: AppView) => {
+    cyberAudio.playClick();
     setCurrentView(view);
     try {
       window.location.hash = view === 'overview' ? '#overview' : `#${view}`;
     } catch {
       // ignore
     }
-    // Instant scroll to top ensures the user sees the start of the subpage immediately
+
+    if (displayMode === 'cabinet') {
+      // In cabinet mode, immediately scroll to top so subpage is fully in view
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    } else {
+      // In continuous mode, smoothly scroll directly to the matching section!
+      const targetId = view === 'overview' ? 'home' : view;
+      const targetEl = document.getElementById(targetId);
+      if (targetEl) {
+        targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else if (view === 'overview') {
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+      }
+    }
+  };
+
+  const handleSwitchToContinuous = (targetView?: AppView) => {
+    cyberAudio.playClick();
+    setDisplayMode('continuous');
+    const viewToScroll = targetView || currentView;
+    setTimeout(() => {
+      const targetId = viewToScroll === 'overview' ? 'cabinet' : viewToScroll;
+      const targetEl = document.getElementById(targetId);
+      if (targetEl) {
+        targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 60);
+  };
+
+  const handleSwitchToCabinet = (targetView: AppView = 'overview') => {
+    cyberAudio.playClick();
+    setDisplayMode('cabinet');
+    setCurrentView(targetView);
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
     document.documentElement.scrollTop = 0;
     document.body.scrollTop = 0;
@@ -97,9 +133,71 @@ export default function App() {
 
           {/* Main Content Router */}
           <main className="relative z-10">
-            {currentView === 'overview' ? (
-              /* === OVERVIEW HUB (HERO + TECH MARQUEE + 3D SERVER ROOM WITH CABINET) === */
+            {displayMode === 'cabinet' ? (
+              currentView === 'overview' ? (
+                /* === OVERVIEW HUB (HERO + TECH MARQUEE + 3D SERVER ROOM WITH CABINET) === */
+                <div>
+                  <Hero
+                    onOpenTerminal={() => setTerminalOpen(true)}
+                    onOpenCommandPalette={() => setCommandPaletteOpen(true)}
+                    onCopyEmail={copyEmail}
+                    onNavigateView={handleNavigateView}
+                  />
+                  <TechMarquee />
+
+                  {/* 3D Server Room with Interactive Cabinet */}
+                  <Cabinet3D
+                    onSelectView={handleNavigateView}
+                    onOpenTerminal={() => setTerminalOpen(true)}
+                  />
+
+                  {/* Mode switcher banner at bottom of overview */}
+                  <div className="text-center pb-16 pt-6">
+                    <button
+                      onClick={() => handleSwitchToContinuous()}
+                      className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-cyan-500/40 text-slate-300 hover:text-white text-xs font-mono transition-all shadow-lg active:scale-95"
+                    >
+                      <LayoutGrid className="w-4 h-4 text-cyan-400 group-hover:scale-110 transition-transform" />
+                      <span>Chuyển sang chế độ cuộn toàn bộ (Continuous View)</span>
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                /* === DEDICATED SUB-PAGE VIEW (EXPANDED CONTENT) === */
+                <SubPageContainer
+                  currentView={currentView}
+                  onNavigate={handleNavigateView}
+                  onBackToCabinet={() => handleNavigateView('overview')}
+                  onToggleContinuous={() => handleSwitchToContinuous(currentView)}
+                >
+                  {currentView === 'architecture' && <ArchitectureSection />}
+                  {currentView === 'experience' && <Experience />}
+                  {currentView === 'projects' && <Projects />}
+                  {currentView === 'skills' && <Skills />}
+                  {currentView === 'contact' && <Contact onNotify={showToast} />}
+                  {currentView === 'about' && <About />}
+                </SubPageContainer>
+              )
+            ) : (
+              /* === CONTINUOUS ALL-IN-ONE VIEW (FOR SCROLL & SLIDE TOUR) === */
               <div>
+                {/* Floating Switcher Bar back to Cabinet */}
+                <div className="sticky top-20 z-30 max-w-md mx-auto px-4 pt-2">
+                  <div className="flex items-center justify-between p-2 rounded-2xl bg-slate-900/90 border border-indigo-500/40 backdrop-blur-xl shadow-2xl text-xs font-mono">
+                    <div className="flex items-center gap-2 text-slate-300 ml-2">
+                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                      <span>Chế độ cuộn toàn bộ</span>
+                    </div>
+                    <button
+                      onClick={() => handleSwitchToCabinet()}
+                      className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white font-bold transition-all shadow-md shadow-indigo-600/30 active:scale-95"
+                    >
+                      <Box className="w-3.5 h-3.5" />
+                      <span>Mở lại Tủ 3D</span>
+                    </button>
+                  </div>
+                </div>
+
                 <Hero
                   onOpenTerminal={() => setTerminalOpen(true)}
                   onOpenCommandPalette={() => setCommandPaletteOpen(true)}
@@ -107,27 +205,17 @@ export default function App() {
                   onNavigateView={handleNavigateView}
                 />
                 <TechMarquee />
-
-                {/* 3D Server Room with Interactive Cabinet */}
                 <Cabinet3D
                   onSelectView={handleNavigateView}
                   onOpenTerminal={() => setTerminalOpen(true)}
                 />
+                <About />
+                <ArchitectureSection />
+                <Experience />
+                <Projects />
+                <Skills />
+                <Contact onNotify={showToast} />
               </div>
-            ) : (
-              /* === DEDICATED SUB-PAGE VIEW (EXPANDED CONTENT) === */
-              <SubPageContainer
-                currentView={currentView}
-                onNavigate={handleNavigateView}
-                onBackToCabinet={() => handleNavigateView('overview')}
-              >
-                {currentView === 'architecture' && <ArchitectureSection />}
-                {currentView === 'experience' && <Experience />}
-                {currentView === 'projects' && <Projects />}
-                {currentView === 'skills' && <Skills />}
-                {currentView === 'contact' && <Contact onNotify={showToast} />}
-                {currentView === 'about' && <About />}
-              </SubPageContainer>
             )}
           </main>
 
@@ -167,7 +255,10 @@ export default function App() {
           />
 
           {/* Presentation Slide Tour Mode */}
-          <PresentationMode />
+          <PresentationMode
+            displayMode={displayMode}
+            onEnsureContinuousMode={() => handleSwitchToContinuous()}
+          />
 
           {/* Toast Alerts */}
           <ToastNotification message={toastMessage} />

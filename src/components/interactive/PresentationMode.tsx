@@ -12,6 +12,7 @@ import {
   ArrowRight,
 } from 'lucide-react';
 import { useLang } from '../../i18n/LangContext';
+import { ViewDisplayMode } from '../../types/navigation';
 
 export interface SlideSection {
   id: string;
@@ -89,7 +90,15 @@ const SLIDES: SlideSection[] = [
   },
 ];
 
-export default function PresentationMode() {
+interface PresentationModeProps {
+  displayMode?: ViewDisplayMode;
+  onEnsureContinuousMode?: () => void;
+}
+
+export default function PresentationMode({
+  displayMode,
+  onEnsureContinuousMode,
+}: PresentationModeProps) {
   const { lang } = useLang();
   const [isOpen, setIsOpen] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -99,10 +108,19 @@ export default function PresentationMode() {
   const SLIDE_DURATION = 7000; // 7 seconds per slide
 
   const scrollToSection = (sectionId: string) => {
-    const el = document.getElementById(sectionId);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (onEnsureContinuousMode) {
+      onEnsureContinuousMode();
     }
+    const tryScroll = (attempts = 0) => {
+      const targetId = sectionId === 'overview' ? 'home' : sectionId;
+      const el = document.getElementById(targetId);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else if (attempts < 6) {
+        setTimeout(() => tryScroll(attempts + 1), 70);
+      }
+    };
+    tryScroll();
   };
 
   const goToSlide = (index: number) => {
@@ -174,7 +192,12 @@ export default function PresentationMode() {
             onClick={() => {
               setIsOpen(true);
               setIsPlaying(true);
-              scrollToSection(SLIDES[currentSlide].id);
+              if (onEnsureContinuousMode) {
+                onEnsureContinuousMode();
+              }
+              setTimeout(() => {
+                scrollToSection(SLIDES[currentSlide].id);
+              }, 100);
             }}
             className="group flex items-center gap-2.5 px-4 py-2.5 rounded-2xl bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white font-semibold text-xs shadow-xl shadow-indigo-600/40 border border-indigo-400/40 backdrop-blur-xl transition-all hover:scale-105 hover:-translate-y-0.5"
             title="Bật chế độ lướt trang trình chiếu (Slide Presentation)"

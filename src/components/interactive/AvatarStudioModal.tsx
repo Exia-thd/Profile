@@ -13,7 +13,7 @@ import {
   Sliders,
   ExternalLink,
 } from 'lucide-react';
-import { useAvatar } from '../../context/AvatarContext';
+import { useAvatar, DEFAULT_AVATAR } from '../../context/AvatarContext';
 import { cyberAudio } from '../../utils/cyberAudio';
 import { useLang } from '../../i18n/LangContext';
 
@@ -147,8 +147,8 @@ export default function AvatarStudioModal() {
                       referrerPolicy="no-referrer"
                       className="w-full h-full object-cover object-center"
                       onError={(e) => {
-                        // Fallback to monogram if image fails
-                        (e.target as HTMLImageElement).src = '/avatar.jpg';
+                        // Fallback to default avatar if image fails
+                        (e.target as HTMLImageElement).src = DEFAULT_AVATAR;
                       }}
                     />
                   </div>

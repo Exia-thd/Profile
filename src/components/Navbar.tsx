@@ -31,13 +31,25 @@ export default function Navbar({
   const { t, lang, setLang } = useLang();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState<string | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
+
+      // Scroll spy for continuous mode sections
+      const sections = ['contact', 'skills', 'projects', 'experience', 'architecture', 'about', 'home'];
+      const scrollPos = window.scrollY + 220;
+      for (const sec of sections) {
+        const el = document.getElementById(sec);
+        if (el && el.offsetTop <= scrollPos) {
+          setActiveSection(sec === 'home' ? 'overview' : sec);
+          break;
+        }
+      }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -91,7 +103,8 @@ export default function Navbar({
           {/* Desktop Nav Links */}
           <div className="hidden lg:flex items-center gap-1 bg-white/[0.03] border border-white/5 rounded-full p-1.5 backdrop-blur-md">
             {navLinks.map((link) => {
-              const isActive = currentView === link.id || (link.id === 'overview' && currentView === 'overview');
+              const activeId = activeSection || currentView;
+              const isActive = activeId === link.id || (link.id === 'overview' && activeId === 'overview');
               return (
                 <a
                   key={link.href}
@@ -178,7 +191,8 @@ export default function Navbar({
         {isOpen && (
           <div className="lg:hidden mt-3 p-4 bg-slate-900/95 border border-white/10 rounded-2xl backdrop-blur-xl shadow-2xl space-y-1.5">
             {navLinks.map((link) => {
-              const isActive = currentView === link.id || (link.id === 'overview' && currentView === 'overview');
+              const activeId = activeSection || currentView;
+              const isActive = activeId === link.id || (link.id === 'overview' && activeId === 'overview');
               return (
                 <a
                   key={link.href}
