@@ -28,17 +28,20 @@ import TiltCard3D from './interactive/TiltCard3D';
 import CyberHoloCore3D from './interactive/CyberHoloCore3D';
 import AvatarDisplay from './common/AvatarDisplay';
 import { cyberAudio } from '../utils/cyberAudio';
+import { AppView } from '../types/navigation';
 
 interface HeroProps {
   onOpenTerminal: () => void;
   onOpenCommandPalette: () => void;
   onCopyEmail: () => void;
+  onNavigateView?: (view: AppView) => void;
 }
 
 export default function Hero({
   onOpenTerminal,
   onOpenCommandPalette,
   onCopyEmail,
+  onNavigateView,
 }: HeroProps) {
   const { t, lang } = useLang();
   const [ping, setPing] = useState(14);
@@ -230,13 +233,32 @@ export default function Hero({
               transition={{ duration: 0.5, delay: 0.3 }}
               className="flex flex-wrap items-center justify-center lg:justify-start gap-3 mb-6"
             >
-              <a
-                href="#contact"
+              <button
+                onClick={() => {
+                  cyberAudio.playClick();
+                  if (onNavigateView) {
+                    onNavigateView('contact');
+                  } else {
+                    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
                 className="inline-flex items-center gap-2 text-white px-6 sm:px-7 py-3 rounded-xl font-semibold text-sm transition-all hover:-translate-y-1 hover:shadow-indigo-500/50 shadow-xl shadow-indigo-600/30 bg-gradient-to-r from-indigo-600 via-violet-600 to-indigo-600 bg-[length:200%_auto] hover:bg-[position:right_center] duration-300"
               >
                 <Mail className="w-4 h-4" />
                 <span>{t('hero_contact_btn')}</span>
-              </a>
+              </button>
+
+              {/* Jump to 3D Cabinet */}
+              <button
+                onClick={() => {
+                  cyberAudio.playClick();
+                  document.getElementById('cabinet')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold text-cyan-200 hover:text-white bg-cyan-950/40 hover:bg-cyan-900/60 border border-cyan-500/40 hover:border-cyan-400 transition-all shadow-md group hover:-translate-y-0.5"
+              >
+                <Box className="w-4 h-4 text-cyan-400 group-hover:rotate-12 transition-transform" />
+                <span>{lang === 'vi' ? 'Khám phá Tủ 3D' : 'Explore 3D Cabinet'}</span>
+              </button>
 
               {/* Open Terminal Trigger */}
               <button
@@ -524,7 +546,7 @@ export default function Hero({
         {/* Scroll down indicator */}
         <div className="text-center">
           <a
-            href="#about"
+            href="#cabinet"
             className="inline-flex flex-col items-center gap-2 text-slate-300 hover:text-white transition-colors group"
           >
             <span className="text-xs uppercase tracking-widest font-mono group-hover:text-cyan-300 transition-colors font-semibold">

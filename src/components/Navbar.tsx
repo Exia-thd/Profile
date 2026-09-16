@@ -7,39 +7,34 @@ import {
   Command,
   ChevronDown,
   Sparkles,
+  Layers,
 } from 'lucide-react';
 import { useLang } from '../i18n/LangContext';
 import NavIcon3D from './nav/NavIcon3D';
 import AvatarDisplay from './common/AvatarDisplay';
 import { cyberAudio } from '../utils/cyberAudio';
+import { AppView } from '../types/navigation';
 
 interface NavbarProps {
+  currentView?: AppView;
+  onNavigateView?: (view: AppView) => void;
   onOpenTerminal: () => void;
   onOpenCommandPalette: () => void;
 }
 
-export default function Navbar({ onOpenTerminal, onOpenCommandPalette }: NavbarProps) {
+export default function Navbar({
+  currentView = 'overview',
+  onNavigateView,
+  onOpenTerminal,
+  onOpenCommandPalette,
+}: NavbarProps) {
   const { t, lang, setLang } = useLang();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
-
-      // Simple active section detection
-      const sections = ['home', 'about', 'architecture', 'experience', 'projects', 'skills', 'contact'];
-      for (const s of sections) {
-        const el = document.getElementById(s);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= 200 && rect.bottom >= 200) {
-            setActiveSection(s);
-            break;
-          }
-        }
-      }
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -47,7 +42,7 @@ export default function Navbar({ onOpenTerminal, onOpenCommandPalette }: NavbarP
   }, []);
 
   const navLinks = [
-    { href: '#home', label: t('nav_home'), id: 'home', icon: 'home' },
+    { href: '#overview', label: t('nav_home'), id: 'overview', icon: 'home' },
     { href: '#about', label: t('nav_about'), id: 'about', icon: 'about' },
     { href: '#architecture', label: lang === 'vi' ? 'Kiến trúc' : 'Architecture', id: 'architecture', icon: 'architecture' },
     { href: '#experience', label: t('nav_experience'), id: 'experience', icon: 'experience' },
@@ -55,6 +50,15 @@ export default function Navbar({ onOpenTerminal, onOpenCommandPalette }: NavbarP
     { href: '#skills', label: t('nav_skills'), id: 'skills', icon: 'skills' },
     { href: '#contact', label: t('nav_contact'), id: 'contact', icon: 'contact' },
   ];
+
+  const handleLinkClick = (e: React.MouseEvent, viewId: string) => {
+    cyberAudio.playClick();
+    if (onNavigateView) {
+      e.preventDefault();
+      onNavigateView(viewId as AppView);
+      setIsOpen(false);
+    }
+  };
 
   return (
     <nav
@@ -70,9 +74,10 @@ export default function Navbar({ onOpenTerminal, onOpenCommandPalette }: NavbarP
           <div className="flex items-center gap-3">
             <AvatarDisplay size="sm" showUploadBadge={false} />
             <a
-              href="#home"
+              href="#overview"
+              onClick={(e) => handleLinkClick(e, 'overview')}
               onMouseEnter={() => cyberAudio.playHover()}
-              className="flex flex-col group text-left"
+              className="flex flex-col group text-left cursor-pointer"
             >
               <span className="text-sm font-extrabold tracking-tight text-white group-hover:text-cyan-300 transition-colors leading-tight">
                 Trần Hữu Đạt
@@ -86,14 +91,14 @@ export default function Navbar({ onOpenTerminal, onOpenCommandPalette }: NavbarP
           {/* Desktop Nav Links */}
           <div className="hidden lg:flex items-center gap-1 bg-white/[0.03] border border-white/5 rounded-full p-1.5 backdrop-blur-md">
             {navLinks.map((link) => {
-              const isActive = activeSection === link.id;
+              const isActive = currentView === link.id || (link.id === 'overview' && currentView === 'overview');
               return (
                 <a
                   key={link.href}
                   href={link.href}
                   onMouseEnter={() => cyberAudio.playHover()}
-                  onClick={() => cyberAudio.playClick()}
-                  className={`flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all ${
+                  onClick={(e) => handleLinkClick(e, link.id)}
+                  className={`flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer ${
                     isActive
                       ? 'bg-gradient-to-r from-indigo-600 to-violet-600 text-white shadow-sm'
                       : 'text-slate-400 hover:text-slate-200 hover:bg-white/5'
@@ -172,21 +177,24 @@ export default function Navbar({ onOpenTerminal, onOpenCommandPalette }: NavbarP
         {/* Mobile Dropdown Menu */}
         {isOpen && (
           <div className="lg:hidden mt-3 p-4 bg-slate-900/95 border border-white/10 rounded-2xl backdrop-blur-xl shadow-2xl space-y-1.5">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={() => setIsOpen(false)}
-                className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
-                  activeSection === link.id
-                    ? 'bg-indigo-600/30 text-white'
-                    : 'text-slate-300 hover:bg-white/5 hover:text-white'
-                }`}
-              >
-                <NavIcon3D type={link.icon} active={activeSection === link.id} />
-                <span>{link.label}</span>
-              </a>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = currentView === link.id || (link.id === 'overview' && currentView === 'overview');
+              return (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={(e) => handleLinkClick(e, link.id)}
+                  className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
+                    isActive
+                      ? 'bg-indigo-600/30 text-white border border-indigo-500/40'
+                      : 'text-slate-300 hover:bg-white/5 hover:text-white'
+                  }`}
+                >
+                  <NavIcon3D type={link.icon} active={isActive} />
+                  <span>{link.label}</span>
+                </a>
+              );
+            })}
 
             <div className="pt-3 border-t border-white/10 grid grid-cols-2 gap-2">
               <button

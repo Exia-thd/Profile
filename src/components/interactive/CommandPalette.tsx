@@ -16,12 +16,14 @@ import {
   ArrowRight,
 } from 'lucide-react';
 import { useLang } from '../../i18n/LangContext';
+import { AppView } from '../../types/navigation';
 
 interface CommandPaletteProps {
   isOpen: boolean;
   onClose: () => void;
   onOpenTerminal: () => void;
   onCopyEmail: () => void;
+  onNavigateView?: (view: AppView) => void;
 }
 
 export default function CommandPalette({
@@ -29,6 +31,7 @@ export default function CommandPalette({
   onClose,
   onOpenTerminal,
   onCopyEmail,
+  onNavigateView,
 }: CommandPaletteProps) {
   const { lang, setLang } = useLang();
   const [query, setQuery] = useState('');
@@ -47,51 +50,51 @@ export default function CommandPalette({
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, onClose]);
 
+  const handleNav = (viewId: AppView) => {
+    if (onNavigateView) {
+      onNavigateView(viewId);
+    } else {
+      document.getElementById(viewId)?.scrollIntoView({ behavior: 'smooth' });
+    }
+    onClose();
+  };
+
   const actions = [
     {
       id: 'about',
       label: lang === 'vi' ? 'Về tôi (About Me)' : 'About Overview',
       icon: User,
-      action: () => {
-        document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
-        onClose();
-      },
+      action: () => handleNav('about'),
     },
     {
       id: 'architecture',
       label: lang === 'vi' ? 'Kiến trúc hệ thống (Architecture Simulator)' : 'System Architecture Visualizer',
       icon: Layers,
-      action: () => {
-        document.getElementById('architecture')?.scrollIntoView({ behavior: 'smooth' });
-        onClose();
-      },
+      action: () => handleNav('architecture'),
     },
     {
       id: 'experience',
       label: lang === 'vi' ? 'Kinh nghiệm làm việc (Experience)' : 'Career Experience',
       icon: Briefcase,
-      action: () => {
-        document.getElementById('experience')?.scrollIntoView({ behavior: 'smooth' });
-        onClose();
-      },
+      action: () => handleNav('experience'),
     },
     {
       id: 'projects',
       label: lang === 'vi' ? 'Dự án thực chiến (Projects)' : 'Projects Showcase',
       icon: Layers,
-      action: () => {
-        document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
-        onClose();
-      },
+      action: () => handleNav('projects'),
     },
     {
       id: 'skills',
       label: lang === 'vi' ? 'Kỹ năng công nghệ (Tech Stack)' : 'Tech Skills Matrix',
       icon: Wrench,
-      action: () => {
-        document.getElementById('skills')?.scrollIntoView({ behavior: 'smooth' });
-        onClose();
-      },
+      action: () => handleNav('skills'),
+    },
+    {
+      id: 'contact',
+      label: lang === 'vi' ? 'Liên hệ & Tư vấn (Contact)' : 'Contact & Advisory',
+      icon: Mail,
+      action: () => handleNav('contact'),
     },
     {
       id: 'terminal',
