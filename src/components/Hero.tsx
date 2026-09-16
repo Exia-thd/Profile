@@ -49,7 +49,7 @@ export default function Hero({
 
   const roles = [
     { title: 'Senior Backend Developer', sub: '.NET Core · Java · Python · Distributed Systems', color: '#818cf8' },
-    { title: 'AI System Architect @ TMA Solutions', sub: 'Autonomous Agents · GraphRAG · MCP Protocol', color: '#fb923c' },
+    { title: 'AI System Architect @ TMA Solutions', sub: 'Autonomous Agents · GraphRAG · MCP · Workflow Harness · Self-Learning', color: '#fb923c' },
     { title: 'Healthcare Platform Engineer', sub: 'Aged-Care Medication · Sisense BI · Azure Functions', color: '#2dd4bf' },
     { title: 'AWS Serverless Architect', sub: 'Zero-Idle Cost · Lambda · Aurora PostgreSQL', color: '#f59e0b' },
   ];
@@ -214,11 +214,11 @@ export default function Hero({
             >
               {lang === 'vi' ? (
                 <>
-                  Kỹ sư Backend <strong className="text-white font-semibold">7+ năm</strong> với các hệ thống chạy thật: sở hữu toàn bộ mảng <strong className="text-cyan-300 font-semibold">tích hợp BI Sisense</strong> và lớp <strong className="text-cyan-300 font-semibold">tuân thủ pháp lý cho quy trình cấp phát thuốc</strong> của nền tảng chăm sóc người cao tuổi BESTMED, xây hệ thống báo cáo <strong className="text-indigo-300 font-semibold">AWS Serverless</strong> trên Lambda + Cognito + Aurora, và — với vai trò <strong className="text-orange-300 font-semibold">AI System Architect tại TMA Solutions</strong> — thiết kế kiến trúc framework AI-First multi-agent trên nền <strong className="text-violet-300 font-semibold">bộ nhớ GraphRAG</strong> và <strong className="text-violet-300 font-semibold">giao thức MCP</strong>.
+                  Kỹ sư Backend <strong className="text-white font-semibold">7+ năm</strong> với các hệ thống chạy thật: sở hữu toàn bộ mảng <strong className="text-cyan-300 font-semibold">tích hợp BI Sisense</strong> và lớp <strong className="text-cyan-300 font-semibold">tuân thủ pháp lý cho quy trình cấp phát thuốc</strong> của nền tảng chăm sóc người cao tuổi BESTMED, xây hệ thống báo cáo <strong className="text-indigo-300 font-semibold">AWS Serverless</strong> trên Lambda + Cognito + Aurora, và — với vai trò <strong className="text-orange-300 font-semibold">AI System Architect tại TMA Solutions</strong> — thiết kế kiến trúc framework AI-First multi-agent trên nền <strong className="text-violet-300 font-semibold">bộ nhớ GraphRAG</strong>, <strong className="text-violet-300 font-semibold">giao thức MCP</strong>, hệ thống <strong className="text-amber-300 font-semibold">skill & workflow harness</strong> và các <strong className="text-emerald-300 font-semibold">Self-learning Agent</strong>.
                 </>
               ) : (
                 <>
-                  Backend Developer with <strong className="text-white font-semibold">7+ years</strong> on production systems: I own the <strong className="text-cyan-300 font-semibold">Sisense BI integration</strong> and the <strong className="text-cyan-300 font-semibold">medication-authorisation compliance layer</strong> of the BESTMED aged-care platform, built <strong className="text-indigo-300 font-semibold">AWS Serverless reporting</strong> on Lambda + Cognito + Aurora, and — as <strong className="text-orange-300 font-semibold">AI System Architect at TMA Solutions</strong> — architect an AI-First multi-agent framework built on <strong className="text-violet-300 font-semibold">GraphRAG memory</strong> and the <strong className="text-violet-300 font-semibold">Model Context Protocol (MCP)</strong>.
+                  Backend Developer with <strong className="text-white font-semibold">7+ years</strong> on production systems: I own the <strong className="text-cyan-300 font-semibold">Sisense BI integration</strong> and the <strong className="text-cyan-300 font-semibold">medication-authorisation compliance layer</strong> of the BESTMED aged-care platform, built <strong className="text-indigo-300 font-semibold">AWS Serverless reporting</strong> on Lambda + Cognito + Aurora, and — as <strong className="text-orange-300 font-semibold">AI System Architect at TMA Solutions</strong> — architect an AI-First multi-agent framework built on <strong className="text-violet-300 font-semibold">GraphRAG memory</strong>, the <strong className="text-violet-300 font-semibold">Model Context Protocol (MCP)</strong>, <strong className="text-amber-300 font-semibold">skills & workflow harness</strong>, and <strong className="text-emerald-300 font-semibold">Self-learning Agents</strong>.
                 </>
               )}
             </motion.p>
@@ -396,12 +396,12 @@ export default function Hero({
                           <Cpu className="w-3.5 h-3.5 text-indigo-400" />
                           TMA AI-First & Autonomous Agents
                         </span>
-                        <span className="text-[10px] font-mono text-slate-400">Lead</span>
+                        <span className="text-[10px] font-mono text-slate-400">Architect</span>
                       </div>
                       <p className="text-xs text-slate-300 leading-relaxed">
                         {lang === 'vi'
-                          ? 'Xây dựng Multi-Agent Orchestration, tích hợp GraphRAG & chuẩn giao thức Model Context Protocol (MCP).'
-                          : 'Architecting Multi-Agent systems, GraphRAG retrieval pipelines, and Model Context Protocol (MCP).'}
+                          ? 'Thiết kế Multi-Agent Orchestration, tích hợp GraphRAG, giao thức MCP, skill, workflow harness và Self-learning Agent.'
+                          : 'Architecting Multi-Agent systems with GraphRAG memory, Model Context Protocol (MCP), skills, workflow harness, and Self-learning Agents.'}
                       </p>
                     </div>
 
@@ -514,9 +514,9 @@ export default function Hero({
                 </div>
               </div>
               <div className="text-sm text-white mt-2 font-bold">
-                {lang === 'vi' ? 'TMA AI-First Lead' : 'TMA AI-First Lead'}
+                {lang === 'vi' ? 'TMA AI Architect' : 'TMA AI Architect'}
               </div>
-              <div className="text-xs text-slate-400 mt-1">LLM Agents + GraphRAG + MCP</div>
+              <div className="text-xs text-slate-400 mt-1">GraphRAG · MCP · Harness · Self-Learning</div>
             </SpotlightCard>
           </TiltCard3D>
         </motion.div>

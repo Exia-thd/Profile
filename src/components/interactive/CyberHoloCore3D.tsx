@@ -17,12 +17,12 @@ interface SystemNodeData {
 const SYSTEM_NODES: SystemNodeData[] = [
   {
     id: 'tma-agent',
-    name: 'TMA Autonomous Agent Lead',
+    name: 'TMA Autonomous Agent Architect',
     category: 'AI-First Multi-Agent Engine',
     status: 'OPTIMAL',
     color: 0x38bdf8,
     hex: '#38bdf8',
-    metric: 'GraphRAG + MCP Protocol',
+    metric: 'GraphRAG · MCP · Harness · Self-Learning',
     position: [2.6, 1.2, 0.8],
   },
   {
