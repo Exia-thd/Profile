@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, CheckCircle2, Cpu, ExternalLink, Github, Zap, Shield, Activity, Layers } from 'lucide-react';
 import { useLang } from '../../i18n/LangContext';
@@ -27,10 +28,27 @@ interface ProjectModalProps {
 export default function ProjectModal({ project, onClose }: ProjectModalProps) {
   const { lang } = useLang();
 
+  // Escape closes the modal. Without this the key fell through to whatever else was
+  // listening — on a sub-page that meant leaving the page entirely.
+  useEffect(() => {
+    if (!project) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [project, onClose]);
+
   return (
     <AnimatePresence>
       {project && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+        <div
+          data-overlay-open="true"
+          role="dialog"
+          aria-modal="true"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto"
+        >
           {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}

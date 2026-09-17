@@ -6,9 +6,14 @@ class CyberAudioManager {
   private enabled: boolean = false;
 
   constructor() {
-    if (typeof window !== 'undefined') {
-      const stored = localStorage.getItem('exia_cyber_audio');
-      this.enabled = stored === 'true';
+    try {
+      if (typeof window !== 'undefined') {
+        const stored = localStorage.getItem('exia_cyber_audio');
+        this.enabled = stored === 'true';
+      }
+    } catch {
+      // Storage blocked (private mode, blocked site data) — stay silent by default.
+      // This runs at module scope, so an uncaught throw here would break the whole app.
     }
   }
 
@@ -30,8 +35,12 @@ class CyberAudioManager {
 
   public setEnabled(val: boolean) {
     this.enabled = val;
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('exia_cyber_audio', val ? 'true' : 'false');
+    try {
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('exia_cyber_audio', val ? 'true' : 'false');
+      }
+    } catch {
+      // Preference just will not persist for this visitor.
     }
     if (val) {
       this.initContext();

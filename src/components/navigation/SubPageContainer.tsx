@@ -19,6 +19,8 @@ import { cyberAudio } from '../../utils/cyberAudio';
 
 interface SubPageContainerProps {
   currentView: AppView;
+  /** An overlay (terminal, command palette) is open and owns the Escape key. */
+  overlayOpen?: boolean;
   onNavigate: (view: AppView) => void;
   onBackToCabinet: () => void;
   onToggleContinuous?: () => void;
@@ -45,6 +47,7 @@ const DRAWER_ORDER: DrawerMeta[] = [
 
 export default function SubPageContainer({
   currentView,
+  overlayOpen = false,
   onNavigate,
   onBackToCabinet,
   onToggleContinuous,
@@ -59,17 +62,22 @@ export default function SubPageContainer({
     document.body.scrollTop = 0;
   }, [currentView]);
 
-  // ESC key to return to cabinet
+  // ESC key to return to cabinet — but only when nothing else owns Escape. Without
+  // this, closing the command palette also threw the visitor out of the sub-page.
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        cyberAudio.playClick();
-        onBackToCabinet();
-      }
+      if (e.key !== 'Escape') return;
+      if (overlayOpen) return;
+      // Project modal and friends mark themselves; they are still in the DOM at this
+      // point, so their own Escape handler gets to close them first.
+      if (document.querySelector('[data-overlay-open="true"]')) return;
+
+      cyberAudio.playClick();
+      onBackToCabinet();
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [onBackToCabinet]);
+  }, [onBackToCabinet, overlayOpen]);
 
   const currentIndex = DRAWER_ORDER.findIndex((d) => d.id === currentView);
   const currentDrawer = DRAWER_ORDER[currentIndex] || DRAWER_ORDER[0];

@@ -36,15 +36,13 @@ export default function CommandPalette({
   const { lang, setLang } = useLang();
   const [query, setQuery] = useState('');
 
-  // Keyboard shortcut listener
+  // Escape closes the palette. Cmd/Ctrl+K toggling lives in App, which owns the state —
+  // this component could only ever close, so the advertised shortcut never opened it.
   useEffect(() => {
+    if (!isOpen) return;
+
     const handleKeyDown = (e: globalThis.KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-        e.preventDefault();
-        if (isOpen) onClose();
-      } else if (e.key === 'Escape' && isOpen) {
-        onClose();
-      }
+      if (e.key === 'Escape') onClose();
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);

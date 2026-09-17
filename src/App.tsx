@@ -85,6 +85,18 @@ export default function App() {
     return () => window.removeEventListener('hashchange', parseHash);
   }, []);
 
+  // Cmd/Ctrl+K toggles the command palette, the shortcut the navbar advertises.
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        setCommandPaletteOpen((open) => !open);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   const handleNavigateView = (view: AppView) => {
     cyberAudio.playClick();
     setCurrentView(view);
@@ -154,7 +166,7 @@ export default function App() {
   return (
     <LangProvider>
       <AvatarProvider>
-        <div className="min-h-screen bg-transparent text-slate-100 selection:bg-indigo-500/30 selection:text-indigo-200 relative overflow-x-hidden font-sans">
+        <div className="min-h-screen bg-transparent text-slate-100 selection:bg-indigo-500/30 selection:text-indigo-200 relative overflow-x-clip font-sans">
           {/* Dynamic Interactive Particle Grid Canvas */}
           <InteractiveCanvas />
 
@@ -204,6 +216,7 @@ export default function App() {
                 /* === DEDICATED SUB-PAGE VIEW (EXPANDED CONTENT) === */
                 <SubPageContainer
                   currentView={currentView}
+                  overlayOpen={terminalOpen || commandPaletteOpen}
                   onNavigate={handleNavigateView}
                   onBackToCabinet={() => handleNavigateView('overview')}
                   onToggleContinuous={() => handleSwitchToContinuous(currentView)}
