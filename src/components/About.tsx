@@ -107,7 +107,7 @@ export default function About() {
 
               <div>
                 <div className="flex items-center gap-4 mb-6">
-                  <AvatarDisplay size="md" showUploadBadge={true} />
+                  <AvatarDisplay size="md" />
                   <div>
                     <span className="text-xs font-mono uppercase tracking-wider text-indigo-400 font-semibold">
                       Engineering Profile

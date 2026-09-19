@@ -84,7 +84,7 @@ export default function Navbar({
         <div className="flex items-center justify-between">
           {/* Brand Avatar & Logo */}
           <div className="flex items-center gap-3">
-            <AvatarDisplay size="sm" showUploadBadge={false} />
+            <AvatarDisplay size="sm" />
             <a
               href="#overview"
               onClick={(e) => handleLinkClick(e, 'overview')}

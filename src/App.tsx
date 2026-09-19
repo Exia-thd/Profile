@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { LangProvider, useLang } from './i18n/LangContext';
-import { AvatarProvider } from './context/AvatarContext';
 import InteractiveCanvas from './components/interactive/InteractiveCanvas';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -165,78 +164,27 @@ export default function App() {
 
   return (
     <LangProvider>
-      <AvatarProvider>
-        <div className="min-h-screen bg-transparent text-slate-100 selection:bg-indigo-500/30 selection:text-indigo-200 relative overflow-x-clip font-sans">
-          {/* Dynamic Interactive Particle Grid Canvas */}
-          <InteractiveCanvas />
+      <div className="min-h-screen bg-transparent text-slate-100 selection:bg-indigo-500/30 selection:text-indigo-200 relative overflow-x-clip font-sans">
+        {/* Dynamic Interactive Particle Grid Canvas */}
+        <InteractiveCanvas />
 
-          {/* Global Navigation Header - Always available */}
-          <Navbar
-            currentView={currentView}
-            onNavigateView={handleNavigateView}
-            onOpenTerminal={() => setTerminalOpen(true)}
-            onOpenCommandPalette={() => setCommandPaletteOpen(true)}
-          />
+        {/* Global Navigation Header - Always available */}
+        <Navbar
+          currentView={currentView}
+          onNavigateView={handleNavigateView}
+          onOpenTerminal={() => setTerminalOpen(true)}
+          onOpenCommandPalette={() => setCommandPaletteOpen(true)}
+        />
 
-          {/* Futuristic Cyber Telemetry HUD & Scanlines Layer */}
-          <CyberHUDOverlay onOpenTerminal={() => setTerminalOpen(true)} />
+        {/* Futuristic Cyber Telemetry HUD & Scanlines Layer */}
+        <CyberHUDOverlay onOpenTerminal={() => setTerminalOpen(true)} />
 
-          {/* Main Content Router */}
-          <main className="relative z-10">
-            {displayMode === 'cabinet' ? (
-              currentView === 'overview' ? (
-                /* === OVERVIEW HUB (HERO + TECH MARQUEE + 3D SERVER ROOM WITH CABINET) === */
-                <div>
-                  <Hero
-                    onOpenTerminal={() => setTerminalOpen(true)}
-                    onOpenCommandPalette={() => setCommandPaletteOpen(true)}
-                    onCopyEmail={copyEmail}
-                    onNavigateView={handleNavigateView}
-                  />
-                  <TechMarquee />
-
-                  {/* 3D Server Room with Interactive Cabinet */}
-                  <Cabinet3D
-                    onSelectView={handleNavigateView}
-                    onOpenTerminal={() => setTerminalOpen(true)}
-                  />
-
-                  {/* Mode switcher banner at bottom of overview */}
-                  <div className="text-center pb-16 pt-6">
-                    <button
-                      onClick={() => handleSwitchToContinuous()}
-                      className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-cyan-500/40 text-slate-300 hover:text-white text-xs font-mono transition-all shadow-lg active:scale-95"
-                    >
-                      <LayoutGrid className="w-4 h-4 text-cyan-400 group-hover:scale-110 transition-transform" />
-                      <span>Chuyển sang chế độ cuộn toàn bộ (Continuous View)</span>
-                    </button>
-                  </div>
-                </div>
-              ) : (
-                /* === DEDICATED SUB-PAGE VIEW (EXPANDED CONTENT) === */
-                <SubPageContainer
-                  currentView={currentView}
-                  overlayOpen={terminalOpen || commandPaletteOpen}
-                  onNavigate={handleNavigateView}
-                  onBackToCabinet={() => handleNavigateView('overview')}
-                  onToggleContinuous={() => handleSwitchToContinuous(currentView)}
-                >
-                  {currentView === 'architecture' && <ArchitectureSection />}
-                  {currentView === 'experience' && <Experience />}
-                  {currentView === 'projects' && <Projects />}
-                  {currentView === 'skills' && <Skills />}
-                  {currentView === 'contact' && <Contact onNotify={showToast} />}
-                  {currentView === 'about' && <About />}
-                </SubPageContainer>
-              )
-            ) : (
-              /* === CONTINUOUS ALL-IN-ONE VIEW (FOR SCROLL & SLIDE TOUR) === */
+        {/* Main Content Router */}
+        <main className="relative z-10">
+          {displayMode === 'cabinet' ? (
+            currentView === 'overview' ? (
+              /* === OVERVIEW HUB (HERO + TECH MARQUEE + 3D SERVER ROOM WITH CABINET) === */
               <div>
-                <ContinuousModeBar onBackToCabinet={() => handleSwitchToCabinet()} />
-
-                {/* Spacer so the fixed bar never covers the top of the hero */}
-                <div className="h-14" aria-hidden="true" />
-
                 <Hero
                   onOpenTerminal={() => setTerminalOpen(true)}
                   onOpenCommandPalette={() => setCommandPaletteOpen(true)}
@@ -244,65 +192,114 @@ export default function App() {
                   onNavigateView={handleNavigateView}
                 />
                 <TechMarquee />
+
+                {/* 3D Server Room with Interactive Cabinet */}
                 <Cabinet3D
                   onSelectView={handleNavigateView}
                   onOpenTerminal={() => setTerminalOpen(true)}
                 />
-                <About />
-                <ArchitectureSection />
-                <Experience />
-                <Projects />
-                <Skills />
-                <Contact onNotify={showToast} />
+
+                {/* Mode switcher banner at bottom of overview */}
+                <div className="text-center pb-16 pt-6">
+                  <button
+                    onClick={() => handleSwitchToContinuous()}
+                    className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-cyan-500/40 text-slate-300 hover:text-white text-xs font-mono transition-all shadow-lg active:scale-95"
+                  >
+                    <LayoutGrid className="w-4 h-4 text-cyan-400 group-hover:scale-110 transition-transform" />
+                    <span>Chuyển sang chế độ cuộn toàn bộ (Continuous View)</span>
+                  </button>
+                </div>
               </div>
-            )}
-          </main>
+            ) : (
+              /* === DEDICATED SUB-PAGE VIEW (EXPANDED CONTENT) === */
+              <SubPageContainer
+                currentView={currentView}
+                overlayOpen={terminalOpen || commandPaletteOpen}
+                onNavigate={handleNavigateView}
+                onBackToCabinet={() => handleNavigateView('overview')}
+                onToggleContinuous={() => handleSwitchToContinuous(currentView)}
+              >
+                {currentView === 'architecture' && <ArchitectureSection />}
+                {currentView === 'experience' && <Experience />}
+                {currentView === 'projects' && <Projects />}
+                {currentView === 'skills' && <Skills />}
+                {currentView === 'contact' && <Contact onNotify={showToast} />}
+                {currentView === 'about' && <About />}
+              </SubPageContainer>
+            )
+          ) : (
+            /* === CONTINUOUS ALL-IN-ONE VIEW (FOR SCROLL & SLIDE TOUR) === */
+            <div>
+              <ContinuousModeBar onBackToCabinet={() => handleSwitchToCabinet()} />
 
-          {/* Global Footer */}
-          <Footer onOpenTerminal={() => setTerminalOpen(true)} />
+              {/* Spacer so the fixed bar never covers the top of the hero */}
+              <div className="h-14" aria-hidden="true" />
 
-          {/* Floating Quick Terminal Launcher Button */}
-          <div className="fixed bottom-6 left-6 z-40">
-            <button
-              onClick={() => {
-                cyberAudio.playClick();
-                setTerminalOpen(!terminalOpen);
-              }}
-              className="group flex items-center gap-2 px-3.5 py-2.5 rounded-2xl bg-slate-900/90 border border-white/10 hover:border-indigo-500/50 shadow-2xl backdrop-blur-xl text-slate-300 hover:text-white transition-all hover:scale-105"
-              title="Toggle Developer Terminal (CLI)"
-            >
-              <div className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
-              <TerminalIcon className="w-4 h-4 text-emerald-400 group-hover:rotate-12 transition-transform" />
-              <span className="text-xs font-mono font-semibold hidden sm:inline">exia-cli</span>
-            </button>
-          </div>
-
-          {/* Floating Terminal Drawer / Window */}
-          {terminalOpen && (
-            <div className="fixed bottom-20 left-4 sm:left-6 z-50 w-[calc(100vw-2rem)] sm:w-[540px] max-w-full drop-shadow-2xl">
-              <TerminalCLI onClose={() => setTerminalOpen(false)} />
+              <Hero
+                onOpenTerminal={() => setTerminalOpen(true)}
+                onOpenCommandPalette={() => setCommandPaletteOpen(true)}
+                onCopyEmail={copyEmail}
+                onNavigateView={handleNavigateView}
+              />
+              <TechMarquee />
+              <Cabinet3D
+                onSelectView={handleNavigateView}
+                onOpenTerminal={() => setTerminalOpen(true)}
+              />
+              <About />
+              <ArchitectureSection />
+              <Experience />
+              <Projects />
+              <Skills />
+              <Contact onNotify={showToast} />
             </div>
           )}
+        </main>
 
-          {/* Command Palette (Cmd + K) */}
-          <CommandPalette
-            isOpen={commandPaletteOpen}
-            onClose={() => setCommandPaletteOpen(false)}
-            onOpenTerminal={() => setTerminalOpen(true)}
-            onCopyEmail={copyEmail}
-            onNavigateView={handleNavigateView}
-          />
+        {/* Global Footer */}
+        <Footer onOpenTerminal={() => setTerminalOpen(true)} />
 
-          {/* Presentation Slide Tour Mode */}
-          <PresentationMode
-            displayMode={displayMode}
-            onEnsureContinuousMode={ensureContinuousMode}
-          />
-
-          {/* Toast Alerts */}
-          <ToastNotification message={toastMessage} />
+        {/* Floating Quick Terminal Launcher Button */}
+        <div className="fixed bottom-6 left-6 z-40">
+          <button
+            onClick={() => {
+              cyberAudio.playClick();
+              setTerminalOpen(!terminalOpen);
+            }}
+            className="group flex items-center gap-2 px-3.5 py-2.5 rounded-2xl bg-slate-900/90 border border-white/10 hover:border-indigo-500/50 shadow-2xl backdrop-blur-xl text-slate-300 hover:text-white transition-all hover:scale-105"
+            title="Toggle Developer Terminal (CLI)"
+          >
+            <div className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
+            <TerminalIcon className="w-4 h-4 text-emerald-400 group-hover:rotate-12 transition-transform" />
+            <span className="text-xs font-mono font-semibold hidden sm:inline">exia-cli</span>
+          </button>
         </div>
-      </AvatarProvider>
+
+        {/* Floating Terminal Drawer / Window */}
+        {terminalOpen && (
+          <div className="fixed bottom-20 left-4 sm:left-6 z-50 w-[calc(100vw-2rem)] sm:w-[540px] max-w-full drop-shadow-2xl">
+            <TerminalCLI onClose={() => setTerminalOpen(false)} />
+          </div>
+        )}
+
+        {/* Command Palette (Cmd + K) */}
+        <CommandPalette
+          isOpen={commandPaletteOpen}
+          onClose={() => setCommandPaletteOpen(false)}
+          onOpenTerminal={() => setTerminalOpen(true)}
+          onCopyEmail={copyEmail}
+          onNavigateView={handleNavigateView}
+        />
+
+        {/* Presentation Slide Tour Mode */}
+        <PresentationMode
+          displayMode={displayMode}
+          onEnsureContinuousMode={ensureContinuousMode}
+        />
+
+        {/* Toast Alerts */}
+        <ToastNotification message={toastMessage} />
+      </div>
     </LangProvider>
   );
 }

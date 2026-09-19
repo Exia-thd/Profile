@@ -1,74 +1,63 @@
 import { useState } from 'react';
-import { ShieldCheck } from 'lucide-react';
-import { useAvatar } from '../../context/AvatarContext';
 import { cyberAudio } from '../../utils/cyberAudio';
+
+/**
+ * Avatar served straight from GitHub, so it always matches the profile picture on
+ * github.com/Exia-thd — changing it there changes it here, with nothing to redeploy.
+ * The id-based URL is the one GitHub redirects `github.com/exia-thd.png` to, so using
+ * it directly saves a redirect on every render.
+ */
+const GITHUB_AVATAR = 'https://avatars.githubusercontent.com/u/81846720?v=4&s=256';
+
+/** Bundled copy, used only if GitHub cannot be reached. */
+const LOCAL_AVATAR = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/avatar.jpg`;
+
+type AvatarSource = 'github' | 'local' | 'monogram';
 
 interface AvatarDisplayProps {
   size?: 'sm' | 'md' | 'lg';
-  showUploadBadge?: boolean;
   className?: string;
   onClick?: () => void;
 }
 
 export default function AvatarDisplay({
   size = 'lg',
-  showUploadBadge = false,
   className = '',
   onClick,
 }: AvatarDisplayProps) {
-  const { avatarUrl, isMonogram } = useAvatar();
   const [isHovered, setIsHovered] = useState(false);
-  const [imgError, setImgError] = useState(false);
+  // GitHub first, the bundled copy if that fails, initials if both do.
+  const [source, setSource] = useState<AvatarSource>('github');
 
-  const handleClick = () => {
-    cyberAudio.playClick();
-    if (onClick) {
-      onClick();
-    }
+  const handleImageError = () => {
+    setSource((current) => (current === 'github' ? 'local' : 'monogram'));
   };
 
-  // Dimensions configuration
   const sizeMap = {
-    sm: {
-      container: 'w-9 h-9',
-      text: 'text-sm',
-      ringInset: '-3px',
-      ringBorder: 'border',
-      dot: 'w-2.5 h-2.5',
-      badge: 'w-4 h-4 -bottom-1 -right-1',
-      badgeIcon: 'w-2.5 h-2.5',
-    },
-    md: {
-      container: 'w-16 h-16 sm:w-20 sm:h-20',
-      text: 'text-2xl',
-      ringInset: '-6px',
-      ringBorder: 'border-2',
-      dot: 'w-3.5 h-3.5',
-      badge: 'w-6 h-6 bottom-0 right-0',
-      badgeIcon: 'w-3.5 h-3.5',
-    },
-    lg: {
-      container: 'w-28 h-28 sm:w-32 sm:h-32',
-      text: 'text-4xl sm:text-5xl',
-      ringInset: '-10px',
-      ringBorder: 'border-2',
-      dot: 'w-4 h-4',
-      badge: 'w-8 h-8 bottom-0 right-0',
-      badgeIcon: 'w-4 h-4',
-    },
+    sm: { container: 'w-9 h-9', text: 'text-sm', ringInset: '-3px', ringBorder: 'border', dot: 'w-2.5 h-2.5' },
+    md: { container: 'w-16 h-16 sm:w-20 sm:h-20', text: 'text-2xl', ringInset: '-6px', ringBorder: 'border-2', dot: 'w-3.5 h-3.5' },
+    lg: { container: 'w-28 h-28 sm:w-32 sm:h-32', text: 'text-4xl sm:text-5xl', ringInset: '-10px', ringBorder: 'border-2', dot: 'w-4 h-4' },
   };
 
   const currentSize = sizeMap[size];
+  const isInteractive = Boolean(onClick);
 
   return (
     <div
-      onClick={handleClick}
+      onClick={
+        isInteractive
+          ? () => {
+              cyberAudio.playClick();
+              onClick?.();
+            }
+          : undefined
+      }
       onMouseEnter={() => {
         setIsHovered(true);
-        cyberAudio.playHover();
+        if (isInteractive) cyberAudio.playHover();
       }}
       onMouseLeave={() => setIsHovered(false)}
-      className={`relative group select-none inline-block ${className}`}
+      className={`relative group select-none inline-block ${isInteractive ? 'cursor-pointer' : ''} ${className}`}
       title="Trần Hữu Đạt - Senior Backend Developer & AI System Architect"
     >
       {/* Outer spinning dashed cyber ring */}
@@ -98,21 +87,22 @@ export default function AvatarDisplay({
           isHovered ? 'border-cyan-300' : 'border-white/20'
         } bg-slate-950`}
         style={{
-          boxShadow: isHovered
-            ? '0 0 40px rgba(6,182,212,0.7)'
-            : '0 0 30px rgba(99,102,241,0.5)',
+          boxShadow: isHovered ? '0 0 40px rgba(6,182,212,0.7)' : '0 0 30px rgba(99,102,241,0.5)',
         }}
       >
-        {isMonogram || imgError ? (
+        {source === 'monogram' ? (
           <div className="w-full h-full bg-gradient-to-br from-indigo-500 via-violet-600 to-cyan-400 flex items-center justify-center text-white">
             <span className={currentSize.text}>ĐT</span>
           </div>
         ) : (
           <img
-            src={avatarUrl}
+            key={source}
+            src={source === 'github' ? GITHUB_AVATAR : LOCAL_AVATAR}
             alt="Trần Hữu Đạt - Senior Backend Developer & AI System Architect"
+            loading="lazy"
+            decoding="async"
             referrerPolicy="no-referrer"
-            onError={() => setImgError(true)}
+            onError={handleImageError}
             className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
           />
         )}

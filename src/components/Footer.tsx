@@ -19,7 +19,7 @@ export default function Footer({ onOpenTerminal }: FooterProps) {
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-white/5">
           {/* Brand Info */}
           <div className="flex items-center gap-3">
-            <AvatarDisplay size="sm" showUploadBadge={false} />
+            <AvatarDisplay size="sm" />
             <div>
               <div className="text-white font-bold text-sm">Trần Hữu Đạt</div>
               <div className="text-slate-400 text-xs">

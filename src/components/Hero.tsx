@@ -143,7 +143,7 @@ export default function Hero({
             <div className="flex flex-col sm:flex-row items-center lg:items-start gap-5 mb-5 justify-center lg:justify-start">
               {/* Avatar with 3D Tilt & Cybernetic Ring */}
               <TiltCard3D maxTilt={15} scale={1.05} className="cursor-pointer">
-                <AvatarDisplay size="lg" showUploadBadge={true} />
+                <AvatarDisplay size="lg" />
               </TiltCard3D>
 
               {/* Developer Name & Header */}
