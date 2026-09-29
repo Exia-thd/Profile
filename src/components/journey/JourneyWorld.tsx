@@ -1,6 +1,12 @@
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
+import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js';
+import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass.js';
 import { terrainHeight } from './noise';
+import { buildProps, type PropsHandle } from './journeyProps';
 import { ATMOSPHERE, PACE, type AtmosphereKey } from './journeyChapters';
 
 /**
@@ -161,13 +167,13 @@ const SNOW_FRAG = /* glsl */ `
 `;
 
 const POST_FRAG = /* glsl */ `
-  uniform sampler2D uScene;
+  uniform sampler2D tDiffuse;
   uniform float uTime;
   uniform float uGrain;
   varying vec2 vUv;
 
   void main() {
-    vec3 col = texture2D(uScene, vUv).rgb;
+    vec3 col = texture2D(tDiffuse, vUv).rgb;
 
     // Vignette
     vec2 d = vUv - 0.5;
@@ -186,13 +192,17 @@ const POST_FRAG = /* glsl */ `
 interface JourneyWorldProps {
   /** 0 → 1 scroll progress through the journey. */
   progressRef: React.RefObject<number>;
+  /** Boot progress, 0 → 1, while the world is being built. */
+  onBootProgress?: (t: number) => void;
   onReady?: () => void;
 }
 
-export default function JourneyWorld({ progressRef, onReady }: JourneyWorldProps) {
+export default function JourneyWorld({ progressRef, onBootProgress, onReady }: JourneyWorldProps) {
   const mount = useRef<HTMLDivElement>(null);
   const readyRef = useRef(onReady);
   readyRef.current = onReady;
+  const bootRef = useRef(onBootProgress);
+  bootRef.current = onBootProgress;
 
   useEffect(() => {
     const container = mount.current;
@@ -253,32 +263,43 @@ export default function JourneyWorld({ progressRef, onReady }: JourneyWorldProps
 
     const pos = terrainGeo.attributes.position as THREE.BufferAttribute;
     const colors = new Float32Array(pos.count * 3);
-    const rock = new THREE.Color('#3d4657');
-    const snowCol = new THREE.Color('#e9f1fb');
-    const scree = new THREE.Color('#6b6f7d');
+    const rock = new THREE.Color('#8d9ab1');
+    const snowCol = new THREE.Color('#f2f7ff');
+    const scree = new THREE.Color('#b3bdcd');
     const tmp = new THREE.Color();
 
-    for (let i = 0; i < pos.count; i++) {
-      const x = pos.getX(i);
-      const z = pos.getZ(i);
-      const y = terrainHeight(x, z);
-      pos.setY(i, y);
+    // 320x320 segments is ~103k vertices. Doing them in one pass locks the tab for a
+    // visible beat, so the boot queue below walks the buffer a slice at a time.
+    const TERRAIN_SLICES = 10;
+    const sliceSize = Math.ceil(pos.count / TERRAIN_SLICES);
+    const buildTerrainSlice = (slice: number) => {
+      const from = slice * sliceSize;
+      const to = Math.min(pos.count, from + sliceSize);
+      for (let i = from; i < to; i++) {
+        const x = pos.getX(i);
+        const z = pos.getZ(i);
+        const y = terrainHeight(x, z);
+        pos.setY(i, y);
 
-      // Snow line rises with altitude; scree in the middle band.
-      const t = THREE.MathUtils.clamp((y + 40) / 420, 0, 1);
-      tmp.copy(rock).lerp(scree, THREE.MathUtils.smoothstep(t, 0.1, 0.5));
-      tmp.lerp(snowCol, THREE.MathUtils.smoothstep(t, 0.42, 0.88));
-      tmp.convertSRGBToLinear();
-      colors[i * 3] = tmp.r;
-      colors[i * 3 + 1] = tmp.g;
-      colors[i * 3 + 2] = tmp.b;
-    }
-    terrainGeo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-    terrainGeo.computeVertexNormals();
+        // Snow line rises with altitude; scree in the middle band.
+        const t = THREE.MathUtils.clamp((y + 40) / 700, 0, 1);
+        tmp.copy(rock).lerp(scree, THREE.MathUtils.smoothstep(t, 0.04, 0.34));
+        tmp.lerp(snowCol, THREE.MathUtils.smoothstep(t, 0.24, 0.72));
+        tmp.convertSRGBToLinear();
+        colors[i * 3] = tmp.r;
+        colors[i * 3 + 1] = tmp.g;
+        colors[i * 3 + 2] = tmp.b;
+      }
+    };
+    const finishTerrain = () => {
+      terrainGeo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+      terrainGeo.computeVertexNormals();
+      pos.needsUpdate = true;
+    };
 
     const terrain = new THREE.Mesh(
       terrainGeo,
-      new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.95, metalness: 0.02, flatShading: false }),
+      new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.82, metalness: 0.0, flatShading: false }),
     );
     scene.add(terrain);
 
@@ -299,9 +320,16 @@ export default function JourneyWorld({ progressRef, onReady }: JourneyWorldProps
     route.updateArcLengths();
 
     /* -------------------------------------------------- lights */
-    const hemi = new THREE.HemisphereLight(0xcfe3ff, 0x2b2f3d, 0.75);
+    const hemi = new THREE.HemisphereLight(0xe8f3ff, 0x8d97aa, 1.8);
     scene.add(hemi);
-    const sun = new THREE.DirectionalLight(0xffd9a0, 1.6);
+
+    // Fill from the opposite side, so shaded faces keep some shape.
+    const fill = new THREE.DirectionalLight(0xbcd4f2, 0.6);
+    fill.position.set(-700, 380, 900);
+    scene.add(fill);
+
+    scene.add(new THREE.AmbientLight(0xa8bcd6, 0.9));
+    const sun = new THREE.DirectionalLight(0xffd9a0, 2.1);
     sun.position.set(900, 700, -1600);
     scene.add(sun);
 
@@ -348,26 +376,40 @@ export default function JourneyWorld({ progressRef, onReady }: JourneyWorldProps
     }
 
     /* -------------------------------------------------- post */
-    const rt = new THREE.WebGLRenderTarget(1, 1, { minFilter: THREE.LinearFilter, magFilter: THREE.LinearFilter });
-    const postScene = new THREE.Scene();
-    const postCam = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-    const postUniforms = {
-      uScene: { value: rt.texture },
-      uTime: { value: 0 },
-      uGrain: { value: lowPower ? 0.03 : 0.055 },
-    };
-    postScene.add(
-      new THREE.Mesh(
-        new THREE.PlaneGeometry(2, 2),
-        new THREE.ShaderMaterial({
-          uniforms: postUniforms,
-          vertexShader: 'varying vec2 vUv; void main(){ vUv = uv; gl_Position = vec4(position.xy, 0.0, 1.0); }',
-          fragmentShader: POST_FRAG,
-          depthTest: false,
-          depthWrite: false,
-        }),
-      ),
+    // HalfFloat targets so bloom has real headroom above 1.0 to pick up — the sun,
+    // the snow catching light and the cairn caps are all meant to bleed.
+    const composer = new EffectComposer(
+      renderer,
+      new THREE.WebGLRenderTarget(1, 1, {
+        type: THREE.HalfFloatType,
+        minFilter: THREE.LinearFilter,
+        magFilter: THREE.LinearFilter,
+      }),
     );
+    composer.addPass(new RenderPass(scene, camera));
+
+    const bloom = new UnrealBloomPass(
+      new THREE.Vector2(1, 1),
+      lowPower ? 0.38 : 0.62, // strength
+      0.85, // radius
+      0.72, // threshold — only genuinely bright things bloom
+    );
+    composer.addPass(bloom);
+
+    const grainPass = new ShaderPass({
+      uniforms: {
+        tDiffuse: { value: null },
+        uTime: { value: 0 },
+        uGrain: { value: lowPower ? 0.03 : 0.055 },
+      },
+      vertexShader: 'varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }',
+      fragmentShader: POST_FRAG,
+    });
+    composer.addPass(grainPass);
+
+    // Tone mapping and the sRGB conversion happen last, on the composited image.
+    composer.addPass(new OutputPass());
+    const postUniforms = grainPass.uniforms;
 
     /* -------------------------------------------------- sizing */
     const resize = () => {
@@ -375,7 +417,9 @@ export default function JourneyWorld({ progressRef, onReady }: JourneyWorldProps
       height = container.clientHeight;
       if (!width || !height) return;
       renderer.setSize(width, height);
-      rt.setSize(Math.floor(width * pixelRatio), Math.floor(height * pixelRatio));
+      composer.setSize(width, height);
+      composer.setPixelRatio(pixelRatio);
+      bloom.setSize(width, height);
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
     };
@@ -397,6 +441,9 @@ export default function JourneyWorld({ progressRef, onReady }: JourneyWorldProps
     };
     if (!reduced) window.addEventListener('pointermove', onPointerMove, { passive: true });
 
+    /* -------------------------------------------------- props (built by the boot queue) */
+    let props: PropsHandle | null = null;
+
     /* -------------------------------------------------- loop */
     const camPos = new THREE.Vector3();
     const lookTarget = new THREE.Vector3();
@@ -405,7 +452,7 @@ export default function JourneyWorld({ progressRef, onReady }: JourneyWorldProps
     let last = performance.now();
     let frameAvg = 16;
     let raf = 0;
-    let announced = false;
+    let announced = false; // set once the boot queue drains
 
     const tick = () => {
       raf = requestAnimationFrame(tick);
@@ -441,8 +488,9 @@ export default function JourneyWorld({ progressRef, onReady }: JourneyWorldProps
       skyUniforms.uSunIntensity.value = atm.sunIntensity;
       skyUniforms.uNight.value = atm.night;
       sun.color.set(atm.sunColor);
-      sun.intensity = atm.sunIntensity * 1.7;
-      hemi.intensity = 0.35 + (1 - atm.night) * 0.55;
+      sun.intensity = atm.sunIntensity * 2.2;
+      hemi.intensity = 0.95 + (1 - atm.night) * 1.0;
+      fill.intensity = 0.28 + (1 - atm.night) * 0.45;
       sky.position.copy(camera.position);
 
       if (snow) {
@@ -452,27 +500,56 @@ export default function JourneyWorld({ progressRef, onReady }: JourneyWorldProps
         snowUniforms.uCamPos.value.copy(camera.position);
         snow.position.copy(camera.position).setY(0);
       }
+      props?.update(time, gust);
       postUniforms.uTime.value = time;
 
-      renderer.setRenderTarget(rt);
-      renderer.render(scene, camera);
-      renderer.setRenderTarget(null);
-      renderer.render(postScene, postCam);
+      composer.render();
 
       // Adaptive quality: drop resolution rather than drop frames.
-      if (frameAvg > 22 && pixelRatio > 0.85) {
-        pixelRatio = Math.max(0.85, pixelRatio - 0.15);
+      if (frameAvg > 22 && pixelRatio > 0.8) {
+        pixelRatio = Math.max(0.8, pixelRatio - 0.15);
         renderer.setPixelRatio(pixelRatio);
-        rt.setSize(Math.floor(width * pixelRatio), Math.floor(height * pixelRatio));
+        composer.setPixelRatio(pixelRatio);
         frameAvg = 16;
       }
 
-      if (!announced) {
-        announced = true;
-        readyRef.current?.();
-      }
     };
-    raf = requestAnimationFrame(tick);
+
+    /* -------------------------------------------------- boot queue
+       Heavy work is split into jobs run one per frame. Doing it in a single pass
+       locks the tab for long enough to be visible, and there is a loading screen
+       waiting on this progress anyway. */
+    const jobs: (() => void)[] = [];
+    for (let i = 0; i < TERRAIN_SLICES; i++) jobs.push(() => buildTerrainSlice(i));
+    jobs.push(finishTerrain);
+    jobs.push(() => {
+      props = buildProps(route, lowPower);
+      scene.add(props.group);
+    });
+    jobs.push(() => {
+      // Compile shaders before the first frame, so the reveal is not a stutter.
+      renderer.compile(scene, camera);
+    });
+
+    let job = 0;
+    const runJobs = () => {
+      const started = performance.now();
+      // Spend at most ~12ms per frame so the loading screen keeps animating.
+      while (job < jobs.length && performance.now() - started < 12) {
+        jobs[job++]();
+      }
+      bootRef.current?.(job / jobs.length);
+
+      if (job < jobs.length) {
+        raf = requestAnimationFrame(runJobs);
+        return;
+      }
+      announced = true;
+      readyRef.current?.();
+      last = performance.now();
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(runJobs);
 
     /* -------------------------------------------------- teardown */
     return () => {
@@ -486,12 +563,9 @@ export default function JourneyWorld({ progressRef, onReady }: JourneyWorldProps
         if (Array.isArray(mat)) mat.forEach((x) => x.dispose());
         else mat?.dispose();
       });
-      postScene.traverse((o) => {
-        const m = o as THREE.Mesh;
-        m.geometry?.dispose();
-        (m.material as THREE.Material)?.dispose();
-      });
-      rt.dispose();
+      props?.dispose();
+      bloom.dispose();
+      composer.dispose();
       renderer.dispose();
       if (renderer.domElement.parentNode === container) container.removeChild(renderer.domElement);
     };

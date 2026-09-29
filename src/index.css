@@ -264,7 +264,8 @@
    ========================================================================= */
 .journey-body section {
   background-color: transparent !important;
-  padding-top: 0 !important;
+  /* Clears the fixed chapter bar at the top of the viewport. */
+  padding-top: 4.5rem !important;
   padding-bottom: 3rem !important;
 }
 
@@ -299,4 +300,32 @@
    on top of that makes the damping fight the browser. */
 .journey-root {
   scroll-behavior: auto;
+}
+
+/* Chapter stages snap gently into place so a title card lands square on the
+   viewport instead of stopping halfway. Proximity, not mandatory: free scrolling
+   through a long section body must stay free. */
+.journey-root {
+  scroll-snap-type: y proximity;
+}
+.journey-stage {
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
+}
+
+/* The narrow-screen chapter strip scrolls sideways; its own scrollbar would sit
+   across the terrain. */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* The chapter menu sits over the top of every section body on small screens. */
+@media (max-width: 1023px) {
+  .journey-body section {
+    padding-top: 7rem !important;
+  }
 }

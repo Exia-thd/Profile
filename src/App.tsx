@@ -59,20 +59,38 @@ function ContinuousModeBar({ onBackToCabinet }: { onBackToCabinet: () => void })
   );
 }
 
+/** Prominent invitation into the 3D journey, shown on the classic layout. */
+function JourneySwitchButton({ onSwitch }: { onSwitch: () => void }) {
+  const { lang } = useLang();
+
+  return (
+    <button
+      onClick={onSwitch}
+      className="group flex items-center gap-2.5 sm:gap-3 px-5 sm:px-7 py-3 sm:py-3.5 rounded-2xl bg-gradient-to-r from-cyan-600 via-sky-600 to-indigo-600 hover:from-cyan-500 hover:via-sky-500 hover:to-indigo-500 border border-cyan-300/40 shadow-2xl shadow-cyan-900/50 text-white font-bold text-sm sm:text-base transition-all hover:-translate-y-1 hover:shadow-cyan-700/60 active:scale-95"
+      title="Switch to the 3D scroll journey"
+    >
+      <Mountain className="w-5 h-5 sm:w-6 sm:h-6 group-hover:scale-110 transition-transform" />
+      <span>{lang === 'vi' ? 'Xem bản 3D' : '3D Journey'}</span>
+      <span className="w-2 h-2 rounded-full bg-emerald-300 animate-pulse" />
+    </button>
+  );
+}
+
 export default function App() {
   const [currentView, setCurrentView] = useState<AppView>('overview');
   const [displayMode, setDisplayMode] = useState<ViewDisplayMode>('cabinet');
   const [terminalOpen, setTerminalOpen] = useState(false);
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
-  const [styleMode, setStyleMode] = useState<StyleMode>('classic');
+  // The scroll journey is the front door; the classic layout is the opt-out.
+  const [styleMode, setStyleMode] = useState<StyleMode>('journey');
 
   // Remember the chosen style across visits.
   useEffect(() => {
     try {
-      if (localStorage.getItem(STYLE_KEY) === 'journey') setStyleMode('journey');
+      if (localStorage.getItem(STYLE_KEY) === 'classic') setStyleMode('classic');
     } catch {
-      // Storage blocked — the classic layout is the default either way.
+      // Storage blocked — the journey is the default either way.
     }
   }, []);
 
@@ -206,6 +224,8 @@ export default function App() {
           <ScrollJourney
             onExit={() => switchStyle('classic')}
             onOpenTerminal={() => setTerminalOpen(true)}
+            onOpenCommandPalette={() => setCommandPaletteOpen(true)}
+            onCopyEmail={copyEmail}
             onNotify={showToast}
           />
         </Suspense>
@@ -307,16 +327,7 @@ export default function App() {
 
         {/* Style switcher: classic layout ⇄ scroll journey */}
         <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40">
-          <button
-            onClick={() => switchStyle('journey')}
-            className="group flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-slate-900/85 hover:bg-slate-800/90 border border-cyan-500/30 hover:border-cyan-400/60 shadow-2xl backdrop-blur-xl text-slate-300 hover:text-white text-xs font-mono transition-all hover:-translate-y-0.5"
-            title="Switch to the scroll journey"
-          >
-            <Mountain className="w-4 h-4 text-cyan-400 group-hover:scale-110 transition-transform" />
-            <span className="hidden sm:inline">Scroll Journey</span>
-            <span className="sm:hidden">3D</span>
-            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
-          </button>
+          <JourneySwitchButton onSwitch={() => switchStyle('journey')} />
         </div>
 
         {/* Floating Quick Terminal Launcher Button */}

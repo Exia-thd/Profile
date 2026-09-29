@@ -37,6 +37,9 @@ export interface Chapter {
   titleVi: string;
   kickerEn: string;
   kickerVi: string;
+  /** Short label for the nav bar; the full titles are too long for a menu. */
+  navEn: string;
+  navVi: string;
   accent: string;
 }
 
@@ -51,6 +54,8 @@ export const CHAPTERS: Chapter[] = [
     titleVi: 'Trần Hữu Đạt',
     kickerEn: 'Senior Backend Developer · AI System Architect',
     kickerVi: 'Senior Backend Developer · AI System Architect',
+    navEn: 'Home',
+    navVi: 'Trang chủ',
     accent: '#38bdf8',
   },
   {
@@ -62,6 +67,8 @@ export const CHAPTERS: Chapter[] = [
     titleVi: 'Giới thiệu & Triết lý kỹ thuật',
     kickerEn: 'How the systems get built, and why',
     kickerVi: 'Hệ thống được xây như thế nào, và vì sao',
+    navEn: 'About',
+    navVi: 'Giới thiệu',
     accent: '#a855f7',
   },
   {
@@ -73,6 +80,8 @@ export const CHAPTERS: Chapter[] = [
     titleVi: 'Kiến trúc hệ thống',
     kickerEn: 'Live diagrams of the pipelines behind the work',
     kickerVi: 'Sơ đồ trực quan các luồng dữ liệu phía sau',
+    navEn: 'Architecture',
+    navVi: 'Kiến trúc',
     accent: '#f97316',
   },
   {
@@ -84,6 +93,8 @@ export const CHAPTERS: Chapter[] = [
     titleVi: 'Kinh nghiệm làm việc',
     kickerEn: 'TMA Solutions, 2021 to now',
     kickerVi: 'TMA Solutions, từ 2021 đến nay',
+    navEn: 'Experience',
+    navVi: 'Kinh nghiệm',
     accent: '#10b981',
   },
   {
@@ -95,6 +106,8 @@ export const CHAPTERS: Chapter[] = [
     titleVi: 'Dự án trọng điểm',
     kickerEn: 'Seven production systems',
     kickerVi: 'Bảy hệ thống chạy thật',
+    navEn: 'Projects',
+    navVi: 'Dự án',
     accent: '#6366f1',
   },
   {
@@ -106,6 +119,8 @@ export const CHAPTERS: Chapter[] = [
     titleVi: 'Kỹ năng công nghệ',
     kickerEn: 'Languages, cloud, data, AI',
     kickerVi: 'Ngôn ngữ, cloud, dữ liệu, AI',
+    navEn: 'Skills',
+    navVi: 'Kỹ năng',
     accent: '#06b6d4',
   },
   {
@@ -117,6 +132,8 @@ export const CHAPTERS: Chapter[] = [
     titleVi: 'Kết nối & Hợp tác',
     kickerEn: 'Open to architecture and senior backend work',
     kickerVi: 'Sẵn sàng cho cơ hội kiến trúc & backend',
+    navEn: 'Contact',
+    navVi: 'Liên hệ',
     accent: '#f43f5e',
   },
 ];
