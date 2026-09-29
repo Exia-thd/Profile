@@ -19,7 +19,7 @@ const JourneyWorld = lazy(() => import('./JourneyWorld'));
  * only the cinematic intro, and the chapter's real content follows it — a long stage
  * means scrolling through empty space to reach anything.
  */
-const VH_PER_CHAPTER = 1.2;
+const VH_PER_CHAPTER = 1;
 
 function smoothstep(edge0: number, edge1: number, x: number) {
   const t = Math.min(1, Math.max(0, (x - edge0) / (edge1 - edge0)));
@@ -77,16 +77,13 @@ export default function ScrollJourney({
         if (!el) continue;
 
         const rect = el.getBoundingClientRect();
-        const travel = Math.max(1, el.offsetHeight - vh);
-        const local = Math.min(1, Math.max(0, -rect.top / travel));
+        const local = Math.min(1, Math.max(0, -rect.top / Math.max(1, rect.height)));
 
-        // Fade the card in as the stage pins, out before the section below arrives.
-        // The fade-in is deliberately quick: a slower one left the card invisible at the
-        // top of its own stage, so landing there showed an empty screen.
-        const inn = i === 0 ? 1 : smoothstep(0, 0.06, local);
-        const out = 1 - smoothstep(0.62, 0.95, local);
+        // The card is only in the document for its own stage, so it starts fully visible
+        // and just fades out as the section below comes up. Fading it in as well left it
+        // invisible at the top of its own stage, which read as a broken jump.
         const card = cards.current[i];
-        if (card) card.style.opacity = String(Math.min(inn, out));
+        if (card) card.style.opacity = String(1 - smoothstep(0.45, 0.82, local));
 
         if (rect.top <= vh * 0.5) {
           idx = i;

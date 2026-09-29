@@ -313,6 +313,22 @@
   scroll-snap-stop: normal;
 }
 
+/* Content snaps to the top of the viewport too, so scrolling out of a title card
+   settles with the section flush under the chapter bar rather than stranded
+   halfway down the screen. */
+.journey-body {
+  scroll-snap-align: start;
+  scroll-margin-top: 78px;
+}
+
+/* The hero reserves a full screen and centres itself vertically. That is right for
+   the classic layout, but inside a chapter it opened a tall empty band above the
+   content — the section is laid out from the top here. */
+.journey-body section#home {
+  min-height: 0 !important;
+  align-items: flex-start !important;
+}
+
 /* The narrow-screen chapter strip scrolls sideways; its own scrollbar would sit
    across the terrain. */
 .no-scrollbar {
@@ -327,5 +343,8 @@
 @media (max-width: 1023px) {
   .journey-body section {
     padding-top: 7rem !important;
+  }
+  .journey-body {
+    scroll-margin-top: 118px;
   }
 }
