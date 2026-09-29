@@ -150,7 +150,7 @@ const SNOW_VERT = /* glsl */ `
     vec4 mv = modelViewMatrix * vec4(world, 1.0);
     float dist = -mv.z;
     vAlpha = smoothstep(uBox * 0.5, uBox * 0.12, dist) * 0.85;
-    gl_PointSize = (aScale * 26.0 + 5.0) * (220.0 / max(dist, 1.0));
+    gl_PointSize = clamp((aScale * 9.0 + 2.5) * (110.0 / max(dist, 1.0)), 1.0, 26.0);
     gl_Position = projectionMatrix * mv;
   }
 `;
@@ -390,7 +390,7 @@ export default function JourneyWorld({ progressRef, onBootProgress, onReady }: J
 
     const bloom = new UnrealBloomPass(
       new THREE.Vector2(1, 1),
-      lowPower ? 0.38 : 0.62, // strength
+      lowPower ? 0.3 : 0.45, // strength
       0.85, // radius
       0.72, // threshold — only genuinely bright things bloom
     );
@@ -475,7 +475,10 @@ export default function JourneyWorld({ progressRef, onBootProgress, onReady }: J
       // Keep the camera above the ground it is flying over.
       const ground = terrainHeight(camPos.x, camPos.z) + 12;
       camera.position.set(camPos.x, Math.max(camPos.y, ground), camPos.z);
-      lookTarget.y = Math.max(lookTarget.y, terrainHeight(lookTarget.x, lookTarget.z) + 12) + 26;
+      // The look-ahead point is only ~60 units down the route, so a large upward bias
+      // here tilted the camera about 23 degrees into the sky and pushed the route —
+      // and everything standing beside it — out of the bottom of the frame.
+      lookTarget.y = Math.max(lookTarget.y, terrainHeight(lookTarget.x, lookTarget.z) + 12) + 5;
       camera.lookAt(lookTarget);
 
       // Atmosphere

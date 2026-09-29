@@ -84,7 +84,7 @@ export default function ScrollJourney({
         // and just fades out as the section below comes up. Fading it in as well left it
         // invisible at the top of its own stage, which read as a broken jump.
         const card = cards.current[i];
-        if (card) card.style.opacity = String(1 - smoothstep(0.45, 0.82, local));
+        if (card) card.style.opacity = String(1 - smoothstep(0.2, 0.62, local));
 
         if (rect.top <= vh * 0.5) {
           idx = i;
@@ -360,7 +360,7 @@ export default function ScrollJourney({
                 className="journey-stage relative"
                 style={{ height: `${VH_PER_CHAPTER * 100}vh` }}
               >
-                <div className="sticky top-0 h-screen flex items-center pointer-events-none">
+                <div className="sticky top-0 h-screen flex items-center pt-24 pointer-events-none">
                   <div
                     ref={(el) => {
                       cards.current[i] = el;
