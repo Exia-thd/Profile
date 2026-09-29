@@ -28,6 +28,7 @@ import TiltCard3D from './interactive/TiltCard3D';
 // Pulls in three.js, and only renders on the 3D tab — load it when that tab is picked.
 const CyberHoloCore3D = lazy(() => import('./interactive/CyberHoloCore3D'));
 import AvatarDisplay from './common/AvatarDisplay';
+import HeroSummary from './HeroSummary';
 import { cyberAudio } from '../utils/cyberAudio';
 import { AppView } from '../types/navigation';
 
@@ -210,22 +211,14 @@ export default function Hero({
             </motion.div>
 
             {/* Summary Bio */}
-            <motion.p
+            <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.25 }}
               className="text-slate-200 text-sm sm:text-base leading-relaxed mb-6 max-w-2xl mx-auto lg:mx-0"
             >
-              {lang === 'vi' ? (
-                <>
-                  Kỹ sư Backend <strong className="text-white font-semibold">7+ năm</strong> với các hệ thống chạy thật: sở hữu toàn bộ mảng <strong className="text-cyan-300 font-semibold">tích hợp BI Sisense</strong> và lớp <strong className="text-cyan-300 font-semibold">tuân thủ pháp lý cho quy trình cấp phát thuốc</strong> của nền tảng chăm sóc người cao tuổi BESTMED, xây hệ thống báo cáo <strong className="text-indigo-300 font-semibold">AWS Serverless</strong> trên Lambda + Cognito + Aurora, và — với vai trò <strong className="text-orange-300 font-semibold">AI System Architect tại TMA Solutions</strong> — thiết kế kiến trúc framework AI-First multi-agent trên nền <strong className="text-violet-300 font-semibold">bộ nhớ GraphRAG</strong>, <strong className="text-violet-300 font-semibold">giao thức MCP</strong>, hệ thống <strong className="text-amber-300 font-semibold">skill & workflow harness</strong> và các <strong className="text-emerald-300 font-semibold">Self-learning Agent</strong>.
-                </>
-              ) : (
-                <>
-                  Backend Developer with <strong className="text-white font-semibold">7+ years</strong> on production systems: I own the <strong className="text-cyan-300 font-semibold">Sisense BI integration</strong> and the <strong className="text-cyan-300 font-semibold">medication-authorisation compliance layer</strong> of the BESTMED aged-care platform, built <strong className="text-indigo-300 font-semibold">AWS Serverless reporting</strong> on Lambda + Cognito + Aurora, and — as <strong className="text-orange-300 font-semibold">AI System Architect at TMA Solutions</strong> — architect an AI-First multi-agent framework built on <strong className="text-violet-300 font-semibold">GraphRAG memory</strong>, the <strong className="text-violet-300 font-semibold">Model Context Protocol (MCP)</strong>, <strong className="text-amber-300 font-semibold">skills & workflow harness</strong>, and <strong className="text-emerald-300 font-semibold">Self-learning Agents</strong>.
-                </>
-              )}
-            </motion.p>
+              <HeroSummary />
+            </motion.div>
 
             {/* Action CTAs */}
             <motion.div

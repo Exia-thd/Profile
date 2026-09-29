@@ -254,3 +254,49 @@
     animation: none;
   }
 }
+
+/* =========================================================================
+   SCROLL JOURNEY (style mode 2)
+   The journey reuses the classic layout's section components as its chapter
+   bodies, so the two modes cannot drift apart. Those sections paint their own
+   opaque background, which would hide the WebGL world behind them — strip it
+   here rather than forking the components.
+   ========================================================================= */
+.journey-body section {
+  background-color: transparent !important;
+  padding-top: 0 !important;
+  padding-bottom: 3rem !important;
+}
+
+/* Their decorative blur blobs and grid overlays fight the terrain behind. */
+.journey-body section > .absolute.inset-0 {
+  opacity: 0.25;
+}
+
+/* A scrim behind each chapter body, so text keeps contrast over bright terrain. */
+.journey-body {
+  background: linear-gradient(
+    to bottom,
+    rgba(5, 7, 15, 0) 0%,
+    rgba(5, 7, 15, 0.82) 7%,
+    rgba(5, 7, 15, 0.88) 93%,
+    rgba(5, 7, 15, 0) 100%
+  );
+}
+
+/* Cards need more weight to stay readable over bright snow. */
+.journey-body .rounded-2xl,
+.journey-body .rounded-3xl {
+  backdrop-filter: blur(14px);
+}
+
+@keyframes journey-sweep {
+  0% { transform: translateX(-120%); }
+  100% { transform: translateX(320%); }
+}
+
+/* The journey drives its own camera from scroll; smooth-scrolling the document
+   on top of that makes the damping fight the browser. */
+.journey-root {
+  scroll-behavior: auto;
+}

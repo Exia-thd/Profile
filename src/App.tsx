@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import { LangProvider, useLang } from './i18n/LangContext';
 import InteractiveCanvas from './components/interactive/InteractiveCanvas';
 import Navbar from './components/Navbar';
@@ -19,7 +19,14 @@ import ToastNotification from './components/interactive/ToastNotification';
 import PresentationMode from './components/interactive/PresentationMode';
 import CyberHUDOverlay from './components/interactive/CyberHUDOverlay';
 import { cyberAudio } from './utils/cyberAudio';
-import { Terminal as TerminalIcon, Box, LayoutGrid } from 'lucide-react';
+import { Terminal as TerminalIcon, Box, LayoutGrid, Mountain } from 'lucide-react';
+
+// Style mode 2: heavy (three.js terrain), and most visitors stay on the classic
+// layout, so it is only fetched when they switch.
+const ScrollJourney = lazy(() => import('./components/journey/ScrollJourney'));
+
+type StyleMode = 'classic' | 'journey';
+const STYLE_KEY = 'exia_portfolio_style_mode';
 import { AppView, ViewDisplayMode } from './types/navigation';
 
 /**
@@ -58,6 +65,27 @@ export default function App() {
   const [terminalOpen, setTerminalOpen] = useState(false);
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const [styleMode, setStyleMode] = useState<StyleMode>('classic');
+
+  // Remember the chosen style across visits.
+  useEffect(() => {
+    try {
+      if (localStorage.getItem(STYLE_KEY) === 'journey') setStyleMode('journey');
+    } catch {
+      // Storage blocked — the classic layout is the default either way.
+    }
+  }, []);
+
+  const switchStyle = (mode: StyleMode) => {
+    cyberAudio.playClick();
+    setStyleMode(mode);
+    try {
+      localStorage.setItem(STYLE_KEY, mode);
+    } catch {
+      // Preference just will not persist for this visitor.
+    }
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
+  };
 
   // Sync with URL hash on mount & hashchange
   useEffect(() => {
@@ -164,6 +192,24 @@ export default function App() {
 
   return (
     <LangProvider>
+      {styleMode === 'journey' ? (
+        <Suspense
+          fallback={
+            <div className="min-h-screen bg-[#05070f] flex items-center justify-center">
+              <div className="flex items-center gap-2.5 text-xs font-mono text-slate-400">
+                <Mountain className="w-4 h-4 text-cyan-400 animate-pulse" />
+                <span>Loading journey…</span>
+              </div>
+            </div>
+          }
+        >
+          <ScrollJourney
+            onExit={() => switchStyle('classic')}
+            onOpenTerminal={() => setTerminalOpen(true)}
+            onNotify={showToast}
+          />
+        </Suspense>
+      ) : (
       <div className="min-h-screen bg-transparent text-slate-100 selection:bg-indigo-500/30 selection:text-indigo-200 relative overflow-x-clip font-sans">
         {/* Dynamic Interactive Particle Grid Canvas */}
         <InteractiveCanvas />
@@ -259,6 +305,20 @@ export default function App() {
         {/* Global Footer */}
         <Footer onOpenTerminal={() => setTerminalOpen(true)} />
 
+        {/* Style switcher: classic layout ⇄ scroll journey */}
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40">
+          <button
+            onClick={() => switchStyle('journey')}
+            className="group flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-slate-900/85 hover:bg-slate-800/90 border border-cyan-500/30 hover:border-cyan-400/60 shadow-2xl backdrop-blur-xl text-slate-300 hover:text-white text-xs font-mono transition-all hover:-translate-y-0.5"
+            title="Switch to the scroll journey"
+          >
+            <Mountain className="w-4 h-4 text-cyan-400 group-hover:scale-110 transition-transform" />
+            <span className="hidden sm:inline">Scroll Journey</span>
+            <span className="sm:hidden">3D</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+          </button>
+        </div>
+
         {/* Floating Quick Terminal Launcher Button */}
         <div className="fixed bottom-6 left-6 z-40">
           <button
@@ -275,13 +335,6 @@ export default function App() {
           </button>
         </div>
 
-        {/* Floating Terminal Drawer / Window */}
-        {terminalOpen && (
-          <div className="fixed bottom-20 left-4 sm:left-6 z-50 w-[calc(100vw-2rem)] sm:w-[540px] max-w-full drop-shadow-2xl">
-            <TerminalCLI onClose={() => setTerminalOpen(false)} />
-          </div>
-        )}
-
         {/* Command Palette (Cmd + K) */}
         <CommandPalette
           isOpen={commandPaletteOpen}
@@ -297,9 +350,17 @@ export default function App() {
           onEnsureContinuousMode={ensureContinuousMode}
         />
 
-        {/* Toast Alerts */}
-        <ToastNotification message={toastMessage} />
       </div>
+      )}
+
+      {/* Terminal and toasts belong to both styles, so they live outside the switch. */}
+      {terminalOpen && (
+        <div className="fixed bottom-20 left-4 sm:left-6 z-[60] w-[calc(100vw-2rem)] sm:w-[540px] max-w-full drop-shadow-2xl">
+          <TerminalCLI onClose={() => setTerminalOpen(false)} />
+        </div>
+      )}
+
+      <ToastNotification message={toastMessage} />
     </LangProvider>
   );
 }
