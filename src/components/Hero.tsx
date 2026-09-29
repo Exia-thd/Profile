@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   GraduationCap,
@@ -25,7 +25,8 @@ import {
 import { useLang } from '../i18n/LangContext';
 import SpotlightCard from './interactive/SpotlightCard';
 import TiltCard3D from './interactive/TiltCard3D';
-import CyberHoloCore3D from './interactive/CyberHoloCore3D';
+// Pulls in three.js, and only renders on the 3D tab — load it when that tab is picked.
+const CyberHoloCore3D = lazy(() => import('./interactive/CyberHoloCore3D'));
 import AvatarDisplay from './common/AvatarDisplay';
 import { cyberAudio } from '../utils/cyberAudio';
 import { AppView } from '../types/navigation';
@@ -384,7 +385,18 @@ export default function Hero({
             </div>
 
             {heroTab === '3d' ? (
-              <CyberHoloCore3D />
+              <Suspense
+                fallback={
+                  <div className="w-full h-[420px] rounded-3xl border border-indigo-500/25 bg-slate-900/60 backdrop-blur-xl flex items-center justify-center">
+                    <div className="flex items-center gap-2.5 text-xs font-mono text-slate-400">
+                      <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+                      <span>{lang === 'vi' ? 'Đang khởi tạo cảnh 3D…' : 'Booting 3D scene…'}</span>
+                    </div>
+                  </div>
+                }
+              >
+                <CyberHoloCore3D />
+              </Suspense>
             ) : (
               <TiltCard3D maxTilt={7} scale={1.01} className="w-full">
                 <SpotlightCard

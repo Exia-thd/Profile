@@ -13,6 +13,21 @@ export default defineConfig(({ mode }) => {
 
   return {
     plugins: [react(), tailwindcss()],
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            // three.js and React Three Fiber are only reachable from lazily loaded
+            // scenes; giving them their own chunk keeps them out of the entry bundle
+            // and lets both scenes share one copy.
+            if (id.includes('node_modules/three/') || id.includes('node_modules/@react-three/')) {
+              return 'three-vendor';
+            }
+            return undefined;
+          },
+        },
+      },
+    },
     base: basePath,
     resolve: {
       alias: {

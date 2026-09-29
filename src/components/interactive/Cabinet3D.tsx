@@ -18,6 +18,7 @@ import {
 import { useLang } from '../../i18n/LangContext';
 import { AppView, CabinetDrawerInfo } from '../../types/navigation';
 import { cyberAudio } from '../../utils/cyberAudio';
+import DeveloperStage from '../three/DeveloperStage';
 
 interface Cabinet3DProps {
   onSelectView: (view: AppView) => void;
@@ -325,6 +326,9 @@ export default function Cabinet3D({ onSelectView, onOpenTerminal }: Cabinet3DPro
           </div>
         </div>
 
+        {/* --- THE DEVELOPER, STANDING ON THE ROOM FLOOR BESIDE THE RACK --- */}
+        <DeveloperStage className="hidden lg:block absolute left-0 bottom-0 w-[28%] h-[78%] z-[2] pointer-events-none" />
+
         {/* --- VOLUMETRIC LIGHT & DEPTH HAZE (flat overlay, sits between room and cabinet) --- */}
         <div className="absolute inset-0 z-[1] pointer-events-none overflow-hidden">
           <div
@@ -352,7 +356,12 @@ export default function Cabinet3D({ onSelectView, onOpenTerminal }: Cabinet3DPro
             --- 4. THE 3D CABINET (TỦ KỸ THUẬT ĐỨNG VỮNG CHÃI Ở GIỮA PHÒNG) ---
             Completely stable, upright, NO mouse tilt / wobbling
             ========================================================================= */}
-        <div className="relative z-10 pt-20 pb-28 sm:pt-24 sm:pb-32 px-3 sm:px-10 max-w-3xl lg:max-w-4xl mx-auto">
+        <div className="relative z-10 pt-20 pb-28 sm:pt-24 sm:pb-32 px-3 sm:px-10 max-w-3xl lg:max-w-none mx-auto lg:flex lg:items-end lg:gap-6 lg:max-w-6xl">
+          {/* Floor space the developer stands in; he is rendered into it by the
+              absolutely positioned canvas below, so this only reserves the width. */}
+          <div className="hidden lg:block w-[26%] shrink-0" aria-hidden="true" />
+
+          <div className="lg:flex-1 lg:min-w-0">
           {/* Contact shadow the cabinet drops on the room floor */}
           <div
             className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-[92%] h-16 blur-xl rounded-[50%] pointer-events-none"
@@ -550,6 +559,7 @@ export default function Cabinet3D({ onSelectView, onOpenTerminal }: Cabinet3DPro
               <span>POWER: NOMINAL</span>
               <div className="w-8 h-2.5 rounded bg-slate-800 border border-slate-600 shadow-inner" />
             </div>
+          </div>
           </div>
         </div>
       </div>
