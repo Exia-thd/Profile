@@ -1,6 +1,7 @@
 import { lazy, Suspense, useCallback, useEffect, useRef, useState } from 'react';
-import { Mountain, ChevronDown, Terminal as TerminalIcon, LayoutGrid } from 'lucide-react';
+import { Mountain, ChevronDown, Terminal as TerminalIcon, LayoutGrid, Globe } from 'lucide-react';
 import { useLang } from '../../i18n/LangContext';
+import { cyberAudio } from '../../utils/cyberAudio';
 import { CHAPTERS, type Chapter } from './journeyChapters';
 import Hero from '../Hero';
 import TechMarquee from '../interactive/TechMarquee';
@@ -41,7 +42,7 @@ export default function ScrollJourney({
   onCopyEmail,
   onNotify,
 }: ScrollJourneyProps) {
-  const { lang } = useLang();
+  const { lang, setLang } = useLang();
   const progress = useRef(0);
   const stages = useRef<(HTMLDivElement | null)[]>([]);
   const cards = useRef<(HTMLDivElement | null)[]>([]);
@@ -234,6 +235,22 @@ export default function ScrollJourney({
           </nav>
 
           <div className="flex items-center gap-2 pointer-events-auto shrink-0">
+            {/* Language switch, same as the classic layout's — the journey had none,
+                so there was no way to read it in the other language. */}
+            <button
+              onClick={() => {
+                cyberAudio.playClick();
+                setLang(lang === 'vi' ? 'en' : 'vi');
+              }}
+              onMouseEnter={() => cyberAudio.playHover()}
+              className="inline-flex items-center gap-1.5 px-3 py-2.5 rounded-xl bg-slate-900/70 hover:bg-slate-800/80 border border-white/10 text-xs font-semibold text-slate-300 hover:text-white backdrop-blur-xl transition-all"
+              title={lang === 'vi' ? 'Switch to English' : 'Chuyển sang tiếng Việt'}
+              aria-label={lang === 'vi' ? 'Switch to English' : 'Chuyển sang tiếng Việt'}
+            >
+              <Globe className="w-3.5 h-3.5 text-cyan-400" />
+              <span>{lang === 'vi' ? 'EN' : 'VI'}</span>
+            </button>
+
             <button
               onClick={onOpenTerminal}
               className="hidden sm:inline-flex items-center gap-1.5 px-3 py-2.5 rounded-xl bg-slate-900/70 hover:bg-slate-800/80 border border-white/10 text-xs font-mono text-slate-300 hover:text-white backdrop-blur-xl transition-all"
