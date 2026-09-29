@@ -45,6 +45,7 @@ export default function ScrollJourney({
   const progress = useRef(0);
   const stages = useRef<(HTMLDivElement | null)[]>([]);
   const cards = useRef<(HTMLDivElement | null)[]>([]);
+  const bodies = useRef<(HTMLDivElement | null)[]>([]);
   const bar = useRef<HTMLDivElement>(null);
 
   // Only the active chapter is React state, and it changes a handful of times per
@@ -80,8 +81,9 @@ export default function ScrollJourney({
         const local = Math.min(1, Math.max(0, -rect.top / travel));
 
         // Fade the card in as the stage pins, out before the section below arrives.
-        // The first chapter opens already visible — there is nothing to scroll past yet.
-        const inn = i === 0 ? 1 : smoothstep(0, 0.2, local);
+        // The fade-in is deliberately quick: a slower one left the card invisible at the
+        // top of its own stage, so landing there showed an empty screen.
+        const inn = i === 0 ? 1 : smoothstep(0, 0.06, local);
         const out = 1 - smoothstep(0.62, 0.95, local);
         const card = cards.current[i];
         if (card) card.style.opacity = String(Math.min(inn, out));
@@ -119,9 +121,22 @@ export default function ScrollJourney({
 
   const active: Chapter = CHAPTERS[chapterIdx] ?? CHAPTERS[0];
 
+  /**
+   * Land on the chapter's content, not on its title stage.
+   *
+   * Targeting the stage put the viewport at a point where the title card had not faded
+   * in and the section was still below the fold — a menu click showed an empty screen.
+   * Somebody who clicks "Projects" wants the projects, so that is what they get; the
+   * chapter is still named in the bar above.
+   */
   const jumpTo = useCallback((i: number) => {
-    const el = stages.current[i];
-    if (el) window.scrollTo({ top: window.scrollY + el.getBoundingClientRect().top + 4, behavior: 'smooth' });
+    // Height of the fixed chapter bar, which content must clear.
+    const hud = window.innerWidth >= 1024 ? 78 : 120;
+    const target = bodies.current[i] ?? stages.current[i];
+    if (!target) return;
+
+    const top = i === 0 ? 0 : window.scrollY + target.getBoundingClientRect().top - hud;
+    window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
   }, []);
 
   /**
@@ -299,7 +314,7 @@ export default function ScrollJourney({
       {chapterIdx < CHAPTERS.length - 1 && (
         <button
           onClick={() => jumpTo(chapterIdx + 1)}
-          className="fixed bottom-5 left-1/2 -translate-x-1/2 z-30 group inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-slate-900/80 hover:bg-slate-800/90 border border-white/10 hover:border-cyan-400/50 backdrop-blur-xl text-xs font-mono text-slate-300 hover:text-white transition-all"
+          className="fixed bottom-6 right-6 z-30 group inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-slate-900/85 hover:bg-slate-800/90 border border-white/10 hover:border-cyan-400/50 backdrop-blur-xl text-xs font-mono text-slate-300 hover:text-white transition-all shadow-xl"
           title={lang === 'vi' ? 'Tới chương tiếp theo' : 'Jump to the next chapter'}
         >
           <span>
@@ -367,7 +382,12 @@ export default function ScrollJourney({
               </div>
 
               {content && (
-                <div className="journey-body relative pb-16">
+                <div
+                  ref={(el) => {
+                    bodies.current[i] = el;
+                  }}
+                  className="journey-body relative pb-16"
+                >
                   <div className="max-w-7xl mx-auto">{content}</div>
                 </div>
               )}
