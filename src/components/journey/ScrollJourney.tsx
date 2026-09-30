@@ -12,6 +12,7 @@ import Projects from '../Projects';
 import Skills from '../Skills';
 import Contact from '../Contact';
 import Footer from '../Footer';
+import AvatarDisplay from '../common/AvatarDisplay';
 
 const JourneyWorld = lazy(() => import('./JourneyWorld'));
 
@@ -361,13 +362,15 @@ export default function ScrollJourney({
                 style={{ height: `${VH_PER_CHAPTER * 100}vh` }}
               >
                 <div className="sticky top-0 h-screen flex items-center pt-24 pointer-events-none">
+                  {/* The card and the portrait fade together, so the ref wraps both. */}
                   <div
                     ref={(el) => {
                       cards.current[i] = el;
                     }}
-                    className="max-w-2xl ml-6 sm:ml-10 lg:ml-16 mr-6 rounded-3xl px-6 sm:px-9 py-7 sm:py-9 bg-[#05070f]/72 backdrop-blur-md border border-white/10 shadow-2xl"
+                    className="w-full flex items-center"
                     style={{ opacity: i === 0 ? 1 : 0 }}
                   >
+                  <div className="max-w-2xl ml-6 sm:ml-10 lg:ml-16 mr-6 rounded-3xl px-6 sm:px-9 py-7 sm:py-9 bg-[#05070f]/72 backdrop-blur-md border border-white/10 shadow-2xl">
                     <div className="flex items-center gap-3 mb-4">
                       <span className="text-[11px] font-mono tracking-[0.35em]" style={{ color: c.accent }}>
                         {c.index}
@@ -391,6 +394,30 @@ export default function ScrollJourney({
                         <span>{lang === 'vi' ? 'Cuộn để bắt đầu hành trình' : 'Scroll to begin the ascent'}</span>
                       </div>
                     )}
+                  </div>
+
+                  {/* Portrait balancing the opening screen, which was card on the left
+                      and empty terrain across the whole right half. */}
+                  {i === 0 && (
+                    <div className="hidden lg:flex ml-auto mr-24 xl:mr-32 flex-col items-center gap-6 relative">
+                      <div
+                        className="absolute -z-10 w-72 h-72 rounded-full blur-3xl"
+                        style={{ background: `${c.accent}1f` }}
+                        aria-hidden="true"
+                      />
+                      <AvatarDisplay size="lg" className="scale-[1.7] xl:scale-[1.95]" />
+                      {/* The caption sits on bare terrain, which can be bright snow further
+                          up the route, so it carries its own scrim like the card does. */}
+                      <div className="mt-8 xl:mt-12 text-center rounded-2xl px-5 py-3 bg-[#05070f]/70 backdrop-blur-md border border-white/10">
+                        <div className="text-[10px] font-mono tracking-[0.3em] uppercase" style={{ color: c.accent }}>
+                          {lang === 'vi' ? 'Sẵn sàng hợp tác' : 'Open to work'}
+                        </div>
+                        <div className="mt-1.5 text-xs font-mono text-slate-300">
+                          {lang === 'vi' ? 'TP. Hồ Chí Minh, Việt Nam' : 'Ho Chi Minh City, Vietnam'}
+                        </div>
+                      </div>
+                    </div>
+                  )}
                   </div>
                 </div>
               </div>
